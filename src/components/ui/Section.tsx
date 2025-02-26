@@ -39,9 +39,10 @@ interface SectionProps {
   containerClassName?: string;
   animate?: boolean;
   bgColor?: string;
-  asElement?: keyof JSX.IntrinsicElements;
+  asElement?: React.ElementType;
   bgImage?: string;
   customVariants?: Variants;
+  animateOnScroll?: boolean;
 }
 
 export default function Section({
@@ -55,7 +56,8 @@ export default function Section({
   bgColor,
   asElement: Element = 'section',
   bgImage,
-  customVariants
+  customVariants,
+  animateOnScroll = false
 }: SectionProps) {
   
   // Dynamic styles based on props
@@ -90,8 +92,10 @@ export default function Section({
       <motion.div 
         className={containerClasses}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        {...(animateOnScroll 
+          ? { whileInView: "visible", viewport: { once: true, amount: 0.2 } }
+          : { animate: "visible" }
+        )}
         variants={customVariants || sectionVariants}
       >
         {React.Children.map(children, (child, i) => {

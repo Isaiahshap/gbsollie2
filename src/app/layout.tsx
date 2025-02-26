@@ -54,7 +54,7 @@ export default function RootLayout({
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >
         <Header />
-        <main className="flex-grow pt-[var(--header-height)]">
+        <main className="flex-grow">
           {children}
         </main>
         <Footer />

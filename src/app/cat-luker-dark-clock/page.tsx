@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, ShoppingBag } from 'lucide-react';
+import { ArrowRight, BookOpen, ShoppingBag, Download, Gift } from 'lucide-react';
 
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
@@ -89,7 +89,7 @@ export default function CatLukerDarkClockPage() {
             >
               <div className="relative w-[300px] h-[450px] mx-auto drop-shadow-2xl">
                 <Image 
-                  src="/images/book-cover.jpg" 
+                  src="/images/Catlukercover.png" 
                   alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
                   fill
                   className="object-cover rounded-lg"
@@ -100,6 +100,60 @@ export default function CatLukerDarkClockPage() {
           </div>
         </div>
       </div>
+
+      {/* Foreword */}
+      <Section 
+        className="bg-white"
+        id="foreword"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-primary mb-4">FOREWORD</h2>
+          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        </div>
+        
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-gray-50 p-8 rounded-whimsical shadow-lg border border-gray-100">
+            <div className="prose prose-lg text-black">
+              <p>
+                When I was approached about the possibility of
+                narrating The Swamp Witch Chronicles, of course,
+                I was honored to be considered for the task. But
+                as I hadn&apos;t yet read the book, I prepared myself for the (almost)
+                inevitable let-down. You see, after three decades of helping artists
+                and bands bring their stories to life through the music they create
+                and engaging in all of the &quot;art-meets-commerce&quot; battles along the
+                way, it&apos;s hard to emerge from those experiences without baggage.
+              </p>
+              <p>
+                I can be cynical and jaded. I remained hopeful that there might
+                be something inspiring out there to throw myself into, but more
+                often than not—you get it. So, proceeding cautiously with all the
+                mechanisms in place to protect myself from disappointment and
+                armed with questions like, &quot;What if there&apos;s nothing there? What
+                if I have nothing to bring to the project?&quot; I waded in.
+              </p>
+              <p>
+                In my process, I first look for the story. Whether it&apos;s music,
+                a book, or a painting—anything, really—there&apos;s always a story.
+                In the case of The Swamp Witch Chronicles—box checked. It&apos;s an
+                adventure/fantasy involving three kids from rural 1930s Alabama,
+                enthralled in an epic battle of good vs. evil. As I read, my mind was
+                filled with images of classics like The Chronicles of Narnia mixed
+                with the folksiness of The Adventures of Tom Sawyer. Everything a
+                middle-grade reader could ask for. But, as with any great surface
+                story, there&apos;s also something more profound, something bigger,
+                lurking underneath.
+              </p>
+              <br/>
+              
+              <p className="font-bold text-right">
+                Monroe Jones<br/>
+                Grammy Award-winning Producer
+              </p>
+            </div>
+          </div>
+        </div>
+      </Section>
 
       {/* Book Overview */}
       <Section 
@@ -114,22 +168,19 @@ export default function CatLukerDarkClockPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="md:hidden relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
             <Image 
-              src="/images/book-cover.jpg" 
+              src="/images/Catlukercover.png" 
               alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
               fill
               className="object-cover"
             />
           </div>
           
-          <div className="prose prose-lg max-w-none">
+          <div className="prose prose-lg max-w-none text-black">
             <p>
-              Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends—Cat, Little Preacher, and Jane Alice—as they band together to confront the mysterious Swamp Witch.
+              At the bottom of the Great Depression in 1930s rural Alabama, three young friends- Cat, Little Preacher, and Jane Alice- form a secret alliance to do battle with the Swamp Witch. After a dare from her brothers, Cat comes face-to-face with the mysterious witch and barely escapes her clutches. Afraid of what she has found, she enlists her two friends on a mission to save their small town from the evil lurking in the swamp.
             </p>
             <p>
-              When strange occurrences begin happening in their small town of Aimwell, the children&apos;s curiosity leads them into the heart of the swamp, where local legend claims a witch has lived for generations. Despite warnings from their parents and the fear gripping their community, the children&apos;s faith and determination drive them forward.
-            </p>
-            <p>
-              This coming-of-age story tests their courage, strengthens their faith, and teaches valuable lessons about friendship, bravery, and trust in God.
+              This is a coming-of-age morality tale that tests their courage and builds their faith. As the plot thickens, they call on God for deliverance.
             </p>
             <div className="not-prose mt-6">
               <h3 className="text-primary font-bold text-xl mb-4">Perfect For:</h3>
@@ -156,7 +207,7 @@ export default function CatLukerDarkClockPage() {
           
           <div className="hidden md:block relative h-[500px] w-full rounded-whimsical overflow-hidden shadow-xl">
             <Image 
-              src="/images/alabama-1930s.jpg" 
+              src="/images/alabama.jpg" 
               alt="Rural Alabama in the 1930s" 
               fill
               className="object-cover"
@@ -186,20 +237,58 @@ export default function CatLukerDarkClockPage() {
           <div className="bg-white p-8 rounded-whimsical shadow-lg border border-gray-100">
             <h3 className="font-display text-2xl text-primary mb-6">Chapter One: The Whispers</h3>
             
-            <div className="prose prose-lg">
+            <div className="prose prose-lg text-black">
               <p>
-                A long time ago, at the bottom of the Great Depression, Cat Luker lived in the backwoods of Alabama, down a red dirt road on the edge of a little town called Aimwell...
+                A long time ago, at the bottom of the Great Depression, Cat
+                Luker lived in the backwoods of Alabama, down a red dirt road on
+                the edge of a little town called Aimwell. She had six brothers and
+                a momma named Gertrude Leafy Flowers. Her daddy, Johnny
+                Luker, was a farmer and worked for the county doing roadwork
+                from time to time. The family lived in an old house that wasn&apos;t
+                painted and needed work. Her daddy called it a shotgun. It had an
+                open breezeway in the middle where Cat liked to read, daydream,
+                and draw pictures for hours on end. She was only ten years old
+                but was already a talented, natural artist with a vivid imagination.
               </p>
               <p>
-                She had six brothers and a momma named Gertrude Leafy Flowers. Her daddy, Johnny Luker, was a farmer and worked for the county doing roadwork from time to time. The family lived in an old house that wasn&apos;t painted and needed work. Her daddy called it a shotgun. It had an open breezeway in the middle where Cat liked to read, daydream, and draw pictures for hours on end.
+                Her brothers—Otto, Cecil, Raymond, John, James, and
+                Curtis—called her Sister but all her friends called her Cat. She
+                had long, wavy, black hair and green eyes, and her nickname fit
+                her to a tee.
               </p>
               <p>
-                The first time Cat heard about the Swamp Witch was on a sticky summer evening when the cicadas were singing so loud she could barely hear herself think. Her brother Buddy came running into the yard, his eyes wide as dinner plates.
+                Cat liked to climb trees and talk to the birds and squirrels,
+                and she could run like the wind. Her brothers loved her dearly
+                but thought she was crazy. After all, she had learned to fight just
+                so she could get by in a house full of mean ol&apos; boys who enjoyed
+                picking on her. She was like a wildcat when she got mad, and
+                if she got angry enough, she would punch them in the nose—
+                not too hard, mind you—and then take off running. Anyone who
+                saw her flying by with her brothers in hot pursuit would laugh,
+                knowing that they were wasting their time trying to catch her.
               </p>
               <p>
-                &quot;Cat!&quot; he hollered, nearly tripping over the old hound dog sleeping by the porch steps. &quot;Little Preacher says he saw smoke coming from the witch&apos;s cabin!&quot;
+                For most of the summer, Cat wore a white flour-sack dress
+                and went barefoot. She laughed as she ran, making her brothers
+                all the madder. She found trails through the woods that no one
+                else knew about and had secret hiding places, some that were
+                close to the swamp, where her brothers were too afraid to go.
               </p>
-              <p>...</p>
+              <p>
+                On this sunny morning, Cat had run away from her
+                troublesome brothers in the usual way. Out of sight of them, she
+                darted up the trunk and into the safety of some huge branches
+                of an old oak tree that stood off the main path from the house.
+                Her favorite tree, the Big Oak, had a knotty stool that sat in the
+                fork of its two twisted limbs, high above the ground and out of
+                sight of anyone passing by. As she settled into her seat, she heard
+                her brothers rush by, whooping and hollering, still thinking they
+                might catch her this time. She smiled and thought she&apos;d give
+                them time to cool off before she headed home. She reached down,
+                gathered a handful of acorns, and made a chirping sound, as she
+                called her friend Tubby the Squirrel over for a visit. They had not
+                talked for a while.
+              </p>
             </div>
             
             <div className="mt-8 text-center">
@@ -211,86 +300,76 @@ export default function CatLukerDarkClockPage() {
         </div>
       </Section>
 
-      {/* Reviews */}
-      <Section 
-        className="bg-primary text-white"
-        id="reviews"
-      >
-        <div className="text-center mb-12">
-          <h2 className="text-white mb-4">What Readers Are Saying</h2>
-          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-whimsical">
-            <div className="flex text-yellow-400 mb-4">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <p className="text-white/90 italic mb-4">
-              &quot;As a middle school teacher, I&apos;m always looking for books that engage students while teaching important values. Cat Luker does both beautifully. My students can&apos;t get enough of this adventure!&quot;
-            </p>
-            <div className="text-secondary font-bold">
-              — Mrs. Johnson, 5th Grade Teacher
-            </div>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-whimsical">
-            <div className="flex text-yellow-400 mb-4">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <p className="text-white/90 italic mb-4">
-              &quot;My children love reading about Cat, Little Preacher, and Jane Alice. The historical setting provides wonderful opportunities to discuss what life was like during the Great Depression, and the themes of courage and faith resonate with our family values.&quot;
-            </p>
-            <div className="text-secondary font-bold">
-              — Michael T., Parent of two
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-10 text-center">
-          <Button href="https://amazon.com" variant="primary">
-            See All Reviews on Amazon
-          </Button>
-        </div>
-      </Section>
-
       {/* Purchase CTA */}
       <Section 
-        className="bg-secondary"
+        className="bg-gradient-to-br from-secondary to-secondary/80"
         id="purchase-cta"
       >
-        <div className="text-center">
-          <h2 className="text-primary-dark mb-4">Begin Your Adventure Today</h2>
-          <p className="text-primary-dark text-xl mb-8 max-w-2xl mx-auto">
-            Join Cat Luker and friends on an unforgettable journey of courage, faith, and friendship.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Button 
-              href="https://amazon.com"
-              variant="secondary"
-              size="lg"
-              className="shadow-lg"
-            >
-              Buy on Amazon
-            </Button>
-            <Button 
-              href="/contact"
-              variant="outline"
-              size="lg"
-            >
-              Request Signed Copy
-            </Button>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left">
+              <h2 className="text-primary-dark text-3xl md:text-4xl font-display mb-6">Begin Your Adventure Today</h2>
+              <p className="text-primary-dark text-lg mb-8">
+                Join Cat Luker and friends on an unforgettable journey of courage, faith, and friendship that will inspire young readers and families alike.
+              </p>
+              
+              <div className="space-y-4">
+                <a 
+                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
+                  className="group flex items-center bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 p-4 rounded-whimsical shadow-lg border-2 border-primary/20"
+                >
+                  <div className="bg-primary text-white p-3 rounded-full mr-4 group-hover:bg-white group-hover:text-primary transition-all">
+                    <ShoppingBag size={24} />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-lg">Purchase on Amazon</h3>
+                    <p className="text-sm opacity-80">Available in hardcover, paperback, and Kindle</p>
+                  </div>
+                  <ArrowRight className="ml-auto transition-transform group-hover:translate-x-1" size={20} />
+                </a>
+                
+                <a 
+                  href="/contact" 
+                  className="group flex items-center bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 p-4 rounded-whimsical shadow-lg border-2 border-primary/20"
+                >
+                  <div className="bg-primary text-white p-3 rounded-full mr-4 group-hover:bg-white group-hover:text-primary transition-all">
+                    <Gift size={24} />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-lg">Request a Signed Copy</h3>
+                    <p className="text-sm opacity-80">The perfect gift for young readers</p>
+                  </div>
+                  <ArrowRight className="ml-auto transition-transform group-hover:translate-x-1" size={20} />
+                </a>
+                
+                <a 
+                  href="/audio-book" 
+                  className="group flex items-center bg-white text-primary hover:bg-primary hover:text-white transition-all duration-300 p-4 rounded-whimsical shadow-lg border-2 border-primary/20"
+                >
+                  <div className="bg-primary text-white p-3 rounded-full mr-4 group-hover:bg-white group-hover:text-primary transition-all">
+                    <Download size={24} />
+                  </div>
+                  <div className="text-left">
+                    <h3 className="font-bold text-lg">Audio Book</h3>
+                  </div>
+                  <ArrowRight className="ml-auto transition-transform group-hover:translate-x-1" size={20} />
+                </a>
+              </div>
+            </div>
+            
+            <div className="hidden md:block">
+              <div className="relative w-[250px] h-[375px] mx-auto transform rotate-6 transition-all hover:rotate-0 duration-300">
+                <Image 
+                  src="/images/Catlukercover.png" 
+                  alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
+                  fill
+                  className="object-cover rounded-lg shadow-2xl"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </Section>
     </>
   );
-} 
+}

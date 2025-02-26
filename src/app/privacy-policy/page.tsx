@@ -9,85 +9,58 @@ export default function PrivacyPolicyPage() {
         id="privacy-hero"
       >
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-display mb-6">Privacy Policy</h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">Privacy Policy</h1>
           <p className="text-xl max-w-2xl mx-auto text-white/90">
-            How we collect, use, and protect your information
+            How we handle and protect your personal information
           </p>
         </div>
       </Section>
 
-      <Section 
+      <Section
         className="bg-white"
         id="privacy-content"
       >
-        <div className="max-w-4xl mx-auto prose prose-lg">
-          <p className="lead text-xl">
-            Last Updated: August 1, 2023
-          </p>
+        <div className="prose prose-lg max-w-4xl mx-auto text-black">
+          <h2>Privacy Policy for G.B. Sollie</h2>
+          <p className="text-black">Last Updated: {new Date().toLocaleDateString()}</p>
           
-          <h2>Introduction</h2>
-          <p>
-            G.B. Sollie (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) respects your privacy and is committed to protecting it through our compliance with this policy. This Privacy Policy describes the types of information we may collect from you or that you may provide when you visit our website (gbsollie.com) and our practices for collecting, using, maintaining, protecting, and disclosing that information.
+          <p className="text-black">
+            Thank you for visiting G.B. Sollie&apos;s website. We are committed to protecting your privacy and 
+            providing a safe online experience. This Privacy Policy outlines how we collect, use, and safeguard 
+            your personal information.
           </p>
-          
-          <h2>Information We Collect</h2>
-          <p>
-            We may collect several types of information from and about users of our website, including:
+
+          <h3>Information We Collect</h3>
+          <p className="text-black">
+            We collect information that you voluntarily provide when subscribing to our newsletter, 
+            contacting us, or making purchases. This may include your name, email address, 
+            mailing address, and phone number.
           </p>
+
+          <h3>How We Use Your Information</h3>
+          <p className="text-black">We use your information to:</p>
           <ul>
-            <li>Personal information (such as your name, email address, mailing address, and phone number) that you voluntarily provide to us when subscribing to our newsletter, filling out contact forms, or ordering products</li>
-            <li>Information about your internet connection, the equipment you use to access our website, and usage details</li>
-            <li>Non-personal information about your interactions with our website, collected through cookies and similar technologies</li>
+            <li className="text-black">Send newsletters and updates about new books and events</li>
+            <li className="text-black">Respond to your inquiries</li>
+            <li className="text-black">Process and fulfill orders</li>
+            <li className="text-black">Improve our website and services</li>
           </ul>
-          
-          <h2>How We Use Your Information</h2>
-          <p>
-            We use information that we collect about you or that you provide to us:
+
+          <h3>Cookie Policy</h3>
+          <p className="text-black">
+            Our website uses cookies to enhance your browsing experience. For more information, 
+            please see our <a href="/cookie-policy" className="text-primary hover:text-primary-dark">Cookie Policy</a>.
           </p>
-          <ul>
-            <li>To present our website and its contents to you</li>
-            <li>To provide you with information, products, or services that you request from us</li>
-            <li>To fulfill any other purpose for which you provide it</li>
-            <li>To send you newsletters and updates about new books, events, and other information</li>
-            <li>To improve our website and present its contents to you</li>
-            <li>For any other purpose with your consent</li>
-          </ul>
-          
-          <h2>Disclosure of Your Information</h2>
-          <p>
-            We may disclose personal information that we collect or you provide as described in this privacy policy:
+
+          <h3>Third-Party Services</h3>
+          <p className="text-black">
+            We may use third-party services such as payment processors and analytics tools. 
+            These services have their own privacy policies.
           </p>
-          <ul>
-            <li>To contractors, service providers, and other third parties we use to support our business</li>
-            <li>To comply with any court order, law, or legal process</li>
-            <li>To protect the rights, property, or safety of G.B. Sollie, our customers, or others</li>
-          </ul>
-          <p>
-            We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties except as described above.
-          </p>
-          
-          <h2>Data Security</h2>
-          <p>
-            We have implemented measures designed to secure your personal information from accidental loss and from unauthorized access, use, alteration, and disclosure. However, the transmission of information via the internet is not completely secure. Although we do our best to protect your personal information, we cannot guarantee the security of your personal information transmitted to our website.
-          </p>
-          
-          <h2>Children&apos;s Privacy</h2>
-          <p>
-            Our website is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are under 13, do not provide any information on this website or through any of its features.
-          </p>
-          
-          <h2>Changes to Our Privacy Policy</h2>
-          <p>
-            We may update our privacy policy from time to time. If we make material changes to how we treat our users&apos; personal information, we will post the new privacy policy on this page with a notice that the privacy policy has been updated.
-          </p>
-          
-          <h2>Contact Information</h2>
-          <p>
-            To ask questions or comment about this privacy policy and our privacy practices, contact us at:
-          </p>
-          <p>
-            <strong>Email:</strong> privacy@gbsollie.com<br />
-            <strong>Address:</strong> G.B. Sollie, P.O. Box 12345, Birmingham, AL 35201
+
+          <h3>Contact Us</h3>
+          <p className="text-black">
+            If you have any questions about this Privacy Policy, please contact us at contact@gbsollie.com.
           </p>
         </div>
       </Section>

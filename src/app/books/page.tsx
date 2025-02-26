@@ -1,7 +1,7 @@
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
-import Link from 'next/link';
 import Image from 'next/image';
+import { ArrowRight, Star, BookOpen, ShoppingBag } from 'lucide-react';
 
 export default function BooksPage() {
   return (
@@ -22,38 +22,146 @@ export default function BooksPage() {
         className="bg-white"
         id="book-list"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          <Link href="/cat-luker-dark-clock" className="group">
-            <div className="rounded-whimsical bg-gray-50 p-6 flex flex-col md:flex-row gap-6 hover:shadow-lg transition-all duration-300">
-              <div className="w-full md:w-1/3 flex-shrink-0">
-                <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg group-hover:scale-105 transition-transform duration-300">
-                  <Image 
-                    src="/images/book-cover.jpg" 
-                    alt="Cat Luker: The Swamp Witch Chronicles" 
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <div className="flex-grow">
-                <h3 className="text-2xl text-primary font-bold mb-3 group-hover:text-accent transition-colors">Cat Luker: The Swamp Witch Chronicles</h3>
-                <p className="text-gray-700 mb-4">
-                  Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends as they band together to confront the mysterious Swamp Witch.
-                </p>
-                <div className="text-accent font-medium group-hover:underline">
-                  Read more →
-                </div>
+        <div className="grid grid-cols-1 gap-16">
+          {/* Cat Luker: The Swamp Witch Chronicles */}
+          <div className="rounded-whimsical bg-primary/5 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300 border-2 border-accent/20">
+            <div className="w-full md:w-1/4 flex-shrink-0">
+              <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
+                <Image 
+                  src="/images/Catlukercover.png" 
+                  alt="Cat Luker: The Swamp Witch Chronicles" 
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
-          </Link>
-          
-          <div className="rounded-whimsical bg-gray-50 p-6 flex flex-col items-center justify-center text-center">
-            <h3 className="text-2xl text-primary font-bold mb-3">More Books Coming Soon</h3>
-            <p className="text-gray-700 mb-4">
-              Stay tuned for more exciting adventures from G.B. Sollie.
-            </p>
-            <Button href="/contact">
-              Join the Newsletter
+            <div className="flex-grow">
+              <div className="flex items-center mb-3">
+                <h3 className="text-3xl text-primary font-bold mr-4">Cat Luker: The Swamp Witch Chronicles</h3>
+                <div className="bg-accent text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+                  Featured
+                </div>
+              </div>
+              <div className="flex text-yellow-400 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={16} fill="currentColor" />
+                ))}
+              </div>
+              <p className="text-gray-700 mb-6 text-lg">
+                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends—Cat, Little Preacher, and Jane Alice—as they band together to confront the mysterious Swamp Witch. When strange occurrences begin happening in their small town of Aimwell, the children&apos;s curiosity leads them into the heart of the swamp, where local legend claims a witch has lived for generations.
+              </p>
+              <p className="text-gray-700 mb-6">
+                This coming-of-age story tests their courage, strengthens their faith, and teaches valuable lessons about friendship, bravery, and trust in God.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button href="/cat-luker-dark-clock" variant="primary">
+                  Read More <ArrowRight className="ml-2" size={18} />
+                </Button>
+                <Button 
+                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
+                  variant="primary"
+                  className="bg-primary text-white hover:bg-primary/90"
+                >
+                  Buy Now <ShoppingBag className="ml-2" size={18} />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* A Journey to the Light */}
+          <div className="rounded-whimsical bg-gray-50 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300">
+            <div className="w-full md:w-1/4 flex-shrink-0">
+              <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
+                <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
+                  <p className="text-primary font-bold">Coming Soon</p>
+                </div>
+                <Image 
+                  src="/images/journeycover.jpg" 
+                  alt="A Journey to the Light" 
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-3xl text-primary font-bold mb-4">A Journey to the Light</h3>
+              <p className="text-gray-700 mb-6 text-lg">
+                Join Cat and her friends on a new adventure as they discover the meaning of hope in the darkest of times. This upcoming installment in the Cat Luker series delves deeper into themes of faith, perseverance, and the power of friendship.
+              </p>
+              <p className="text-gray-700 mb-6">
+                Join the newsletter to be the first to know when this book becomes available, and receive exclusive content and special offers.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button href="/a-journey-to-the-light" variant="primary">
+                  Learn More <ArrowRight className="ml-2" size={18} />
+                </Button>
+                <Button 
+                  href="https://www.amazon.com/Journey-Light-Bible-Companion-Chronicles/dp/1735359661/" 
+                  variant="primary"
+                  className="bg-primary text-white  hover:bg-primary/90"
+                >
+                  Buy Now <ShoppingBag className="ml-2" size={18} />
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          {/* Cat Luker: The Audio Experience */}
+          <div className="rounded-whimsical bg-gray-50 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300">
+            <div className="w-full md:w-1/4 flex-shrink-0">
+              <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
+                <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
+                  <p className="text-primary font-bold">Coming Soon</p>
+                </div>
+                <Image 
+                  src="/images/audiocover.png" 
+                  alt="Cat Luker: The Audio Experience" 
+                  fill
+                  className="object-fill"
+                />
+              </div>
+            </div>
+            <div className="flex-grow">
+              <h3 className="text-3xl text-primary font-bold mb-4">Cat Luker: The Audio Experience</h3>
+              <p className="text-gray-700 mb-6 text-lg">
+                Experience the magic of Cat Luker through the voice of G.B. Sollie himself. This audio adaptation brings the world of 1930s Aimwell to life with professional narration, sound effects, and music.
+              </p>
+              <p className="text-gray-700 mb-6">
+                Perfect for road trips, bedtime stories, or simply enjoying the adventure in a new way. The audio version makes the Cat Luker experience accessible to children of all reading levels.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Button href="/audio-book" variant="primary">
+                  Learn More <ArrowRight className="ml-2" size={18} />
+                </Button>
+                <Button 
+                  href="https://www.amazon.com/Dark-Clock-Luker-Swamp-Chronicles/dp/B0DFD1X33T/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.GRujj-iPyOYwXod2kg9_pkxaffPk-CsSbp_nR35nKqM.TbDH45EBK1Vh4av7v4y_DiyYSQUDv0U2ogGn68eFY-g&qid=1740608342&sr=8-1" 
+                  variant="primary"
+                  className="bg-primary text-white hover:bg-primary/90"
+                >
+                  Buy Now <ShoppingBag className="ml-2" size={18} />
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Call to Action */}
+      <Section 
+        className="bg-secondary"
+        id="books-cta"
+      >
+        <div className="text-center max-w-2xl mx-auto">
+          <h2 className="text-primary-dark mb-6">Share the Adventure</h2>
+          <p className="text-xl text-primary-dark/90 mb-8">
+            G.B. Sollie&apos;s books make perfect gifts for young readers who love adventure, mystery, and stories that celebrate faith and family values.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Button href="/contact" variant="primary" size="lg" className="bg-primary text-white hover:bg-primary/90">
+              Request Signed Copy <BookOpen className="ml-2" size={18} />
+            </Button>
+            <Button href="/about" variant="primary" size="lg" className="bg-primary text-white hover:bg-primary/90">
+              About the Author
             </Button>
           </div>
         </div>

@@ -40,10 +40,13 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
             >
               <p className="text-xl leading-relaxed">
-                My journey as an author began with the stories I heard as a child, passed down through generations in Aimwell, Alabama. These tales of family, faith, and adventure shaped my worldview and eventually inspired the Cat Luker series.
+                My claim to fame is that Cat and Little Preacher Sollie raised me
+                down in Dothan, Alabama, and I inherited a storytelling gene from
+                my dad&apos;s father (Big Daddy, a.k.a. Preacher Sollie).
               </p>
               <p>
-                I believe that children&apos;s literature has the power to shape young minds and hearts, teaching them about courage, kindness, and the enduring power of love.
+                I have a bunch of grandkids, and counting, and I am reminded
+                each day of how important this next generation will be.
               </p>
             </motion.div>
           </div>
@@ -55,11 +58,13 @@ export default function AboutPage() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <Image 
-              src="/images/author-portrait.jpg" 
+              src="/images/greg2.png" 
               alt="G.B. Sollie - Author Portrait" 
               fill
               className="object-cover"
               priority
+              sizes="(max-width: 768px) 100vw, 50vw"
+              loading="eager"
             />
           </motion.div>
         </div>
@@ -78,7 +83,10 @@ export default function AboutPage() {
             ref={quoteRef}
             className="text-2xl md:text-3xl font-display text-primary italic relative z-10 leading-relaxed"
           >
-            If I could bottle-up what my dear parents meant to me and the impact they had on our family, and the impact their parents had on them; I would give it away. And this book is as close as I can come to doing that.
+            If I could bottle-up what my dear parents meant to me and
+            the impact they had on our family, and the impact their parents
+            had on them, I would give it away. This book is as close as I can
+            come to doing that.
           </p>
         </div>
       </Section>
@@ -96,22 +104,36 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="relative rounded-whimsical overflow-hidden shadow-lg aspect-[4/3]">
             <Image 
-              src="/images/family-photo.jpg" 
+              src="/images/gregwkids.jpg" 
               alt="G.B. Sollie with family" 
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           
           <div className="prose prose-lg max-w-none">
-            <p>
-              My claim to fame is that Cat and Little Preacher Sollie raised me down in Dothan, Alabama, and I inherited a storytelling gene from my dad&apos;s father (Big Daddy, a.k.a. Preacher Sollie). My brothers, sisters, and I would pile into the family station wagon with our parents for trips to Aimwell as often as possible. With both sets of grandparents located there we would get loved unconditionally, fed like royalty for a few days, and then head home.
+            <p className="text-black">
+              My claim to fame is that Cat and Little Preacher Sollie raised me
+              down in Dothan, Alabama, and I inherited a storytelling gene from
+              my dad&apos;s father (Big Daddy, a.k.a. Preacher Sollie). My brothers,
+              sisters, and I would pile into the family station wagon with our
+              parents for trips to Aimwell as often as possible. With both sets of
+              grandparents located there we would get loved unconditionally, fed
+              like royalty for a few days, and then head home.
             </p>
-            <p>
-              I heard countless stories about Aimwell and the characters that inhabited Marengo County over the years. It gave me a sense of how my parents were raised and a burning appreciation for why they were so special. It also has become my mission to share that rearing recipe, that love, with others through these stories, because it is something too valuable to be lost.
+            <p className="text-black">
+              I heard countless
+              stories about Aimwell and the characters that inhabited Marengo
+              County over the years. It gave me a sense of how my parents were
+              raised and a burning appreciation for why they were so special. It also
+              has become my mission to share that rearing recipe, that love, with
+              others through these stories, because it is something too valuable to
+              be lost.
             </p>
-            <p>
-              I have a bunch of grandkids, and counting, and I am reminded each day of how important this next generation will be.
+            <p className="text-black">
+              I have a bunch of grandkids, and counting, and I am reminded
+              each day of how important this next generation will be.
             </p>
           </div>
         </div>
@@ -128,11 +150,32 @@ export default function AboutPage() {
         </div>
         
         <div className="prose prose-lg max-w-3xl mx-auto">
-          <p className="lead text-xl">
-            All they really had was love. My parents received it from theirs and they passed it down the line. And if I stop and think about it, there is no doubt that it extends all the way back to Jesus. That love was poured out on them like a river, and that generation washed themselves clean in the flow.
+          <p className="lead text-xl text-black">
+            And furthermore....
+            If I could bottle-up what my dear parents meant to me and
+            the impact they had on our family, and the impact their parents
+            had on them, I would give it away. This book is as close as I can
+            come to doing that. All they really had was love. My parents received
+            it from theirs and they passed it down the line. If I stop and think
+            about it, there is no doubt that it extends all the way back to Jesus.
+            That love was poured out on them like a river, and that generation
+            washed themselves clean in the flow.
           </p>
-          <p>
-            I have been listening to a cleverly titled sermon series by Andy Stanley called, &quot;The Way - in the Manger&quot; and would like to extend that to the community where my parents were raised, and this book is set- Aimwell, Alabama. They embraced &quot;The Way - in the Manger&quot; philosophy, and it is reflected in this book series. I encourage you to take a long swig from that bottled-up gift and not look back.
+          <p className="text-black">
+            What does that mean to young
+            parents today? If you think having to wake-up in the middle of the
+            night with a crying infant is hard, fast-forward 15 years and look at
+            what&apos;s in store. But just as there are techniques for getting your baby
+            back to sleep, or better yet, sleeping peacefully through the night,
+            there are techniques for surviving the tumultuous teens, or better
+            yet sailing through them with peaceful nights.
+            And you guessed it, love is at the center of that plan. I have been
+            listening to a cleverly titled sermon series by Andy Stanley called,
+            The Way - in the Manger and would like to extend that to the
+            community where my parents were raised, and this book is set-
+            Aimwell, Alabama. They embraced &quot;The Way - in the Manger&quot;
+            philosophy, and it is reflected in this book series. I encourage you
+            to take a long swig from that bottled-up gift and not look back.
           </p>
           <p className="font-bold text-center text-primary text-xl mt-8">
             Your kids will thank you!
@@ -170,7 +213,7 @@ export default function AboutPage() {
               className="bg-gray-50 p-8 rounded-whimsical shadow-sm hover:shadow-md transition-shadow"
             >
               <h3 className="text-primary text-2xl mb-4 font-bold">{item.title}</h3>
-              <p className="text-gray-700">{item.description}</p>
+              <p className="text-black">{item.description}</p>
             </div>
           ))}
         </div>

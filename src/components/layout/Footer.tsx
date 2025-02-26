@@ -18,9 +18,8 @@ export default function Footer() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Books', href: '/books' },
-    { name: 'Media', href: '/media' },
+    { name: 'Media', href: '/news' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Privacy Policy', href: '/privacy-policy' },
   ];
 
   const containerVariants = {
@@ -55,7 +54,7 @@ export default function Footer() {
               <h3 className="text-3xl font-display text-secondary">G.B. Sollie</h3>
             </Link>
             <p className="text-gray-300 max-w-sm">
-              Children's fantasy author bringing magical adventures to young readers, where imagination knows no bounds.
+              Children&apos;s fantasy author bringing magical adventures to young readers, where imagination knows no bounds.
             </p>
             {/* Social Links */}
             <div className="flex space-x-4 mt-4">
@@ -109,18 +108,29 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Copyright */}
-        <motion.div 
-          className="pt-8 border-t border-gray-700 text-center text-gray-400"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <p>
-            &copy; {currentYear} G.B. Sollie. All rights reserved.
-          </p>
-        </motion.div>
+        {/* Copyright and Legal Links */}
+        <div className="pt-6 mt-6 border-t border-gray-700">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-gray-300 mb-4 md:mb-0">
+              © {currentYear} G.B. Sollie. All rights reserved.
+            </p>
+            
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+              <Link href="/privacy-policy" className="text-sm text-white hover:text-gray-200 transition-colors">
+                Privacy Policy
+              </Link>
+              <Link href="/terms-of-service" className="text-sm text-white hover:text-gray-200 transition-colors">
+                Terms of Service
+              </Link>
+              <Link href="/accessibility" className="text-sm text-white hover:text-gray-200 transition-colors">
+                Accessibility
+              </Link>
+              <Link href="/cookie-policy" className="text-sm text-white hover:text-gray-200 transition-colors">
+                Cookie Policy
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );

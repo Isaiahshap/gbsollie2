@@ -1,13 +1,14 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Star, Award, Mail } from 'lucide-react';
+import { ArrowRight, Star, Award, Mail, Download, ShoppingBag } from 'lucide-react';
 
 import { Button } from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
+import NewsletterModal from '@/components/ui/NewsletterModal';
 import { useStaggerAnimation } from '@/lib/animations';
 
 export function Book3D({ imageSrc, alt, className = '' }: { imageSrc: string; alt: string; className?: string }) {
@@ -17,32 +18,53 @@ export function Book3D({ imageSrc, alt, className = '' }: { imageSrc: string; al
     const book = bookRef.current;
     if (!book) return;
     
+    let requestId: number;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
+    
+    // Smoother animation with lerping
+    const animate = () => {
+      // Smooth interpolation with lower factor for more gradual movement
+      currentRotateX += (targetRotateX - currentRotateX) * 0.08;
+      currentRotateY += (targetRotateY - currentRotateY) * 0.08;
+      
+      // Apply transform with smoother values
+      book.style.transform = `rotateY(${currentRotateY}deg) rotateX(${currentRotateX}deg)`;
+      
+      // Continue animation loop
+      requestId = requestAnimationFrame(animate);
+    };
+    
     const handleMouseMove = (e: MouseEvent) => {
       const rect = book.getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
       const centerY = rect.top + rect.height / 2;
       
-      // Calculate rotation based on mouse position
-      // Keep the effect subtle (max 10 degrees)
-      const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 5;
-      const rotateX = ((centerY - e.clientY) / (rect.height / 2)) * 5;
-      
-      // Apply transform
-      book.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
+      // Calculate rotation based on mouse position - more subtle (max 3 degrees)
+      targetRotateY = ((e.clientX - centerX) / (rect.width / 2)) * 3;
+      targetRotateX = ((centerY - e.clientY) / (rect.height / 2)) * 2;
     };
     
     const handleMouseLeave = () => {
-      // Reset to original position
-      book.style.transform = 'rotateY(0deg) rotateX(0deg)';
+      // Smoothly return to original position
+      targetRotateX = 0;
+      targetRotateY = 0;
     };
+    
+    // Start animation loop
+    requestId = requestAnimationFrame(animate);
     
     // Listen for mouse events
     document.addEventListener('mousemove', handleMouseMove);
     book.addEventListener('mouseleave', handleMouseLeave);
     
     return () => {
+      // Clean up
       document.removeEventListener('mousemove', handleMouseMove);
       book.removeEventListener('mouseleave', handleMouseLeave);
+      cancelAnimationFrame(requestId);
     };
   }, []);
   
@@ -65,16 +87,29 @@ export default function Home() {
   const testimonialRef = useRef<HTMLDivElement>(null);
   const signupRef = useRef<HTMLFormElement>(null);
   
+  // Add state for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Stagger animation for book list
   useStaggerAnimation(bookListRef as React.RefObject<HTMLElement>);
+  
+  // Handle newsletter signup
+  const handleNewsletterSubmit = ({ name, email, city }: { name: string; email: string; city: string }) => {
+    // Add logic to handle the form submission
+    // For example, sending data to an API
+    console.log("Form submitted:", { name, email, city });
+    
+    // Show confirmation and close modal
+    alert("Thank you! Your Bible guide will be emailed to you shortly.");
+    setIsModalOpen(false);
+  };
   
   return (
     <>
       {/* Hero Section */}
       <div 
         id="hero-section"
-        className="relative min-h-screen overflow-hidden flex items-center mt-[-84px] pt-[64px]"
+        className="relative min-h-screen overflow-hidden flex items-center"
         style={{
           backgroundImage: 'url(/images/hero-bg.png)',
           backgroundSize: 'cover',
@@ -129,7 +164,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.9 }}
               >
-                Join award-winning author G.B. Sollie on a magical journey through faith, courage, and adventure with the Cat Luker series.
+                Join renowned author G.B. Sollie on a magical journey through faith, courage, and adventure with the Cat Luker series.
               </motion.p>
               <motion.div 
                 className="flex flex-wrap gap-4"
@@ -195,7 +230,7 @@ export default function Home() {
               ease: "easeInOut"
             }}
           >
-            Scroll Down
+            Scroll
           </motion.span>
           <motion.div
             className="mt-2 w-6 h-10 border-2 border-white/30 rounded-full flex justify-center"
@@ -241,42 +276,12 @@ export default function Home() {
         </div>
         
         <div ref={bookListRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          {/* Cat Luker */}
-          <Link href="/cat-luker-dark-clock" className="group">
-            <div className="bg-gray-50 rounded-whimsical p-6 flex flex-col h-full hover:shadow-lg transition-all duration-300">
-              <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
-                <Image
-                  src="/images/Catlukercover.png"
-                  alt="Cat Luker: The Swamp Witch Chronicles"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
-                Cat Luker: The Swamp Witch Chronicles
-              </h3>
-              <p className="text-gray-600 flex-grow mb-4">
-                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends as they confront the mysterious Swamp Witch.
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex text-yellow-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
-                  ))}
-                </div>
-                <span className="text-accent font-medium flex items-center group-hover:underline">
-                  Read More <ArrowRight size={16} className="ml-1" />
-                </span>
-              </div>
-            </div>
-          </Link>
           
           {/* A Journey to the Light */}
-          <Link href="/a-journey-to-the-light" className="group">
+          <Link href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="group">
             <div className="bg-gray-50 rounded-whimsical p-6 flex flex-col h-full hover:shadow-lg transition-all duration-300">
               <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
-                  <p className="text-primary font-bold">Coming Soon</p>
                 </div>
                 <Image
                   src="/images/journeycover.jpg"
@@ -291,16 +296,70 @@ export default function Home() {
               <p className="text-gray-600 flex-grow mb-4">
                 Join Cat and her friends on a new adventure as they discover the meaning of hope in the darkest of times. Coming soon!
               </p>
-              <div className="flex items-center justify-end">
-                <span className="text-accent font-medium flex items-center group-hover:underline">
-                  Learn More <ArrowRight size={16} className="ml-1" />
-                </span>
+              <div className="flex items-center justify-between w-full gap-2">
+                <button 
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open("https://www.amazon.com/Journey-Light-Bible-Companion-Chronicles/dp/1735359661/", "_blank");
+                  }}
+                  className="inline-flex items-center justify-center rounded-whimsical transition-colors bg-primary text-white hover:bg-primary/90 px-4 py-2 text-sm font-medium flex-grow"
+                >
+                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                </button>
+                <button 
+                  onClick={(e) => { 
+                    e.stopPropagation();
+                    setIsModalOpen(true); 
+                  }}
+                  className="inline-flex items-center justify-center rounded-whimsical transition-colors border-primary text-primary hover:bg-primary/10 px-4 py-2 text-sm font-medium flex-grow"
+                >
+                  Bible Guide <Download size={16} className="ml-2" />
+                </button>
               </div>
             </div>
           </Link>
+
+          {/* Cat Luker */}
+          <div className="group cursor-pointer" onClick={() => window.location.href = '/cat-luker-dark-clock'}>
+            <div className="bg-primary/5 rounded-whimsical p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300 border-2 border-accent/30 scale-105 relative">
+              <div className="absolute -top-3 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+                Featured
+              </div>
+              <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-lg group-hover:shadow-xl transition-all">
+                <Image
+                  src="/images/Catlukercover.png"
+                  alt="Cat Luker: The Swamp Witch Chronicles"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <h3 className="text-2xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                Cat Luker: The Swamp Witch Chronicles
+              </h3>
+              <p className="text-gray-600 flex-grow mb-4">
+                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends as they confront the mysterious Swamp Witch.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex text-yellow-400">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={16} fill="currentColor" />
+                  ))}
+                </div>
+                <Button 
+                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
+                  variant="secondary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                </Button>
+              </div>
+            </div>
+          </div>
           
           {/* Audio Book */}
-          <Link href="/audio-book" className="group">
+          <div className="group cursor-pointer" onClick={() => window.location.href = '/audio-book'}>
             <div className="bg-gray-50 rounded-whimsical p-6 flex flex-col h-full hover:shadow-lg transition-all duration-300">
               <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
@@ -320,16 +379,21 @@ export default function Home() {
                 Experience the magic of Cat Luker through the voice of G.B. Sollie himself. Perfect for road trips and bedtime stories!
               </p>
               <div className="flex items-center justify-end">
-                <span className="text-accent font-medium flex items-center group-hover:underline">
-                  Learn More <ArrowRight size={16} className="ml-1" />
-                </span>
+                <Button 
+                  href="https://www.amazon.com/Dark-Clock-Luker-Swamp-Chronicles/dp/B0DFD1X33T/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.GRujj-iPyOYwXod2kg9_pkxaffPk-CsSbp_nR35nKqM.TbDH45EBK1Vh4av7v4y_DiyYSQUDv0U2ogGn68eFY-g&qid=1740608342&sr=8-1"
+                  variant="secondary"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                </Button>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
-        
-        <div className="text-center">
-          <Button href="/books" variant="secondary">
+        <div className="text-center flex flex-col gap-4 items-center">
+          <Button href="/books" variant="secondary" size="lg">
             View All Books
           </Button>
         </div>
@@ -400,22 +464,21 @@ export default function Home() {
         
         <div 
           ref={testimonialRef}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
           {[
             {
-              quote: "The Cat Luker series has become a family favorite. Our children ask for these stories night after night!",
-              author: "Sarah M., Parent",
+              quote: "In my process, I first look for the story. Whether it's music, a book, or a painting—anything, really—there's always a story. In the case of The Swamp Witch Chronicles—box checked. It's an adventure/fantasy involving three kids from rural 1930s Alabama, enthralled in an epic battle of good vs. evil. As I read, my mind was filled with images of classics like The Chronicles of Narnia mixed with the folksiness of The Adventures of Tom Sawyer. Everything a middle-grade reader could ask for. But, as with any great surface story, there's also something more profound, something bigger, lurking underneath.",
+              author: "Monroe Jones",
+              subtitle: "Grammy Award-winning Producer",
+              title: "The Swamp Witch Chronicles",
               rating: 5
             },
             {
-              quote: "G.B. Sollie weaves faith, history, and adventure into stories that captivate young readers while teaching valuable life lessons.",
-              author: "John D., Elementary School Teacher",
-              rating: 5
-            },
-            {
-              quote: "The Depression-era setting brings to life an important part of American history in a way that children can understand and connect with.",
-              author: "Michelle T., Librarian",
+              quote: "It's really great! I think students who attend a study like this will really benefit from the ideas you lay out in the guide. So excited for you and the ways God is leading you through this project.",
+              author: "Cory Osborne",
+              subtitle: "MIDDLE SCHOOL: MS Group Director Woodstock City Church",
+              title: "A Journey to the Light Bible Study Guide and Companion to Cat Luker: The Swamp Witch Chronicles",
               rating: 5
             }
           ].map((testimonial, index) => (
@@ -432,78 +495,16 @@ export default function Home() {
                   <Star key={i} size={18} fill="currentColor" />
                 ))}
               </div>
+              <h3 className="text-lg font-bold text-secondary mb-2">{testimonial.title}</h3>
               <p className="italic text-white/90 mb-4">&quot;{testimonial.quote}&quot;</p>
               <p className="text-secondary font-bold">— {testimonial.author}</p>
+              <p className="text-white/80">{testimonial.subtitle}</p>
             </motion.div>
           ))}
         </div>
       </Section>
       
-      {/* Recent News */}
-      <Section 
-        className="bg-white"
-        id="recent-news"
-      >
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display text-primary mb-4">Latest Updates</h2>
-          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            {
-              title: "New Book Announcement",
-              date: "July 15, 2023",
-              excerpt: "Exciting news! The second book in the Cat Luker series is now in production and will be released early next year.",
-              image: "/images/news-1.jpg"
-            },
-            {
-              title: "School Tour Dates Announced",
-              date: "August 2, 2023",
-              excerpt: "G.B. Sollie will be visiting schools across Alabama this fall. Check the events calendar for dates and locations.",
-              image: "/images/news-2.jpg"
-            },
-            {
-              title: "Cat Luker Wins Children's Book Award",
-              date: "June 30, 2023",
-              excerpt: "We're honored to announce that Cat Luker: The Swamp Witch Chronicles has received the Southern Literature Award for Children's Fiction.",
-              image: "/images/news-3.jpg"
-            }
-          ].map((news, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white border border-gray-100 rounded-whimsical overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="relative h-48">
-                <Image
-                  src={news.image}
-                  alt={news.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-6">
-                <p className="text-sm text-gray-500 mb-2">{news.date}</p>
-                <h3 className="text-xl font-bold text-primary mb-2">{news.title}</h3>
-                <p className="text-gray-600 mb-4">{news.excerpt}</p>
-                <Link href="/news" className="text-accent hover:underline flex items-center">
-                  Read More <ArrowRight size={16} className="ml-1" />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-10">
-          <Button href="/news" variant="secondary">
-            View All News
-          </Button>
-        </div>
-      </Section>
+  
       
       {/* Newsletter Signup */}
       <Section 
@@ -612,6 +613,13 @@ export default function Home() {
           </motion.form>
         </div>
       </Section>
+      
+      {/* Use the NewsletterModal component */}
+      <NewsletterModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleNewsletterSubmit}
+      />
     </>
   );
 }
