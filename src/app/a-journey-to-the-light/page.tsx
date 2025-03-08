@@ -201,17 +201,23 @@ export default function JourneyToLightPage() {
 
       {/* The Seven Foundational Elements */}
       <Section 
-        className="bg-gray-50"
+        className="bg-gradient-to-b from-primary to-primary-dark relative overflow-hidden"
         id="foundational-elements"
       >
-        <div className="text-center mb-12">
-          <h2 className="text-primary mb-4">The Seven Foundational Elements</h2>
+        {/* Background decorative elements */}
+        <div className="absolute inset-0 opacity-10 z-0 pointer-events-none">
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/images/light-bg.jpg')] bg-cover opacity-20 mix-blend-overlay"></div>
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-secondary/30 blur-3xl"></div>
+        </div>
+        
+        <div className="text-center mb-12 relative z-10">
+          <h2 className="text-white mb-4">The Seven Foundational Elements</h2>
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
         </div>
         
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white p-8 rounded-whimsical shadow-lg border border-gray-100">
-            <div className="prose prose-lg text-black">
+        <div className="max-w-3xl mx-auto relative z-10">
+          <div className="bg-white/10 backdrop-blur-lg p-8 rounded-whimsical shadow-2xl border border-white/20 hover:shadow-secondary/30 transition-shadow duration-500">
+            <div className="prose prose-lg text-white">
               <p>
                 The people that were the inspiration for Cat Luker: The Swamp Witch Chronicles grew up in the Great Depression of the 1930s, an extremely difficult period of time in America. It was even more difficult in the rural South, where times had already been hard. Without jobs or much money, people had to live off the land, raise their own food, and make things by hand. The children had to use their imaginations to entertain themselves—and going on adventures was a popular option.
               </p>
@@ -219,14 +225,63 @@ export default function JourneyToLightPage() {
                 When those children grew into adulthood, they became known as the Greatest Generation because of the many difficulties they had overcome. It is clear that God was with them, and they prospered, but it was not easy. There are lessons to be learned from these strong souls. They built their lives on a foundation of faith, with seven foundational elements:
               </p>
 
-              <ul>
-                <li><strong>Courage</strong> — Physical, mental, emotional, and spiritual. The courage to believe.</li>
-                <li><strong>Focused discipline</strong> — Hard work, patience, perseverance, and self-control. The discipline to seek God.</li>
-                <li><strong>Honesty</strong> — Integrity, fairness, trust, and truthfulness.</li>
-                <li><strong>The value of freedom</strong> — Understanding and appreciating their Bill of Rights.</li>
-                <li><strong>Personal responsibility</strong> — Being a good team player. Owning up.</li>
-                <li><strong>Ambitious ingenuity</strong> — Taking risks, trying to grow, and being creative. Using their God-given talents.</li>
-                <li><strong>Love-based compassion</strong> — Embracing the teachings of Jesus. Standing up for others.</li>
+              <ul className="space-y-6 mt-8">
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">1</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Courage</strong> — Physical, mental, emotional, and spiritual. The courage to believe.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">2</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Focused discipline</strong> — Hard work, patience, perseverance, and self-control. The discipline to seek God.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">3</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Honesty</strong> — Integrity, fairness, trust, and truthfulness.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">4</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">The value of freedom</strong> — Understanding and appreciating their Bill of Rights.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">5</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Personal responsibility</strong> — Being a good team player. Owning up.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">6</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Ambitious ingenuity</strong> — Taking risks, trying to grow, and being creative. Using their God-given talents.
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="mr-4 mt-1 flex-shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-primary font-bold">7</div>
+                  </div>
+                  <div>
+                    <strong className="text-secondary text-xl">Love-based compassion</strong> — Embracing the teachings of Jesus. Standing up for others.
+                  </div>
+                </li>
               </ul>
               
               <p>
@@ -238,7 +293,7 @@ export default function JourneyToLightPage() {
             </div>
             
             <div className="mt-8 text-center">
-              <Button href="https://www.amazon.com/Journey-Light-Bible-Companion-Chronicles/dp/1735359661/">
+              <Button href="https://www.amazon.com/Journey-Light-Bible-Companion-Chronicles/dp/1735359661/" variant="primary" size="lg" className="shadow-xl hover:shadow-secondary/30 transition-shadow duration-300">
                 Get Your Copy Today <BookOpen className="ml-2" size={18} />
               </Button>
             </div>

@@ -17,9 +17,9 @@ export default function NewsletterModal({
   isOpen,
   onClose,
   onSubmit,
-  title = "Download Your Free Bible Guide",
-  description = "Sign up for our newsletter to receive your free \"Journey to Light\" Bible guide and updates on new releases.",
-  downloadText = "Download Bible Guide"
+  title = "Download Your Free Bible Study Guide",
+  description = "Sign up to receive your free \"Journey to Light\" Bible study guide and updates on new releases.",
+  downloadText = "Download Bible Study Guide"
 }: NewsletterModalProps) {
   
   if (!isOpen) return null;

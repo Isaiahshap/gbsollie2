@@ -86,7 +86,7 @@ export default function ContactPage() {
             {
               icon: <MapPin size={24} />,
               title: 'Location',
-              info: 'Alabama, United States',
+              info: 'Georgia, United States',
               link: null
             }
           ].map((item, index) => (

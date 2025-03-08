@@ -13,7 +13,7 @@ export default function BooksPage() {
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">Explore My Books</h1>
           <p className="text-xl max-w-2xl mx-auto text-white/90">
-            Embark on magical adventures through the pages of G.B. Sollie&apos;s captivating stories for young readers.
+            Embark on magical adventures through the pages of G.B. Sollie&apos;s captivating series for young readers.
           </p>
         </div>
       </Section>
@@ -42,6 +42,7 @@ export default function BooksPage() {
                   Featured
                 </div>
               </div>
+              <h2 className="text-primary font-bold text-xl mb-4">Book 1 - The Dark Clock</h2>
               <div className="flex text-yellow-400 mb-4">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={16} fill="currentColor" />
@@ -124,7 +125,7 @@ export default function BooksPage() {
             <div className="flex-grow">
               <h3 className="text-3xl text-primary font-bold mb-4">Cat Luker: The Audio Experience</h3>
               <p className="text-gray-700 mb-6 text-lg">
-                Experience the magic of Cat Luker through the voice of G.B. Sollie himself. This audio adaptation brings the world of 1930s Aimwell to life with professional narration, sound effects, and music.
+                Experience the magic of Cat Luker through the voice of grammy winner, Monroe Jones. This audio adaptation brings the world of 1930s Aimwell to life with professional narration, sound effects, and music.
               </p>
               <p className="text-gray-700 mb-6">
                 Perfect for road trips, bedtime stories, or simply enjoying the adventure in a new way. The audio version makes the Cat Luker experience accessible to children of all reading levels.

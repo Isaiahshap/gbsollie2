@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ArrowRight,  ShoppingBag, Download, Play } from 'lucide-react';
+import { ArrowRight,  ShoppingBag, Download } from 'lucide-react';
 
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
@@ -71,9 +71,7 @@ export default function AudioBookPage() {
                   Journey through 1930s Alabama with Monroe Jones&apos;s captivating narration
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <Button href="#audio-sample" variant="primary">
-                    Listen to Sample <Play className="ml-2" size={18} />
-                  </Button>
+
                   <Button href="https://www.amazon.com/Dark-Clock-Luker-Swamp-Chronicles/dp/B0DFD1X33T/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.GRujj-iPyOYwXod2kg9_pkxaffPk-CsSbp_nR35nKqM.TbDH45EBK1Vh4av7v4y_DiyYSQUDv0U2ogGn68eFY-g&qid=1740608342&sr=8-1">
                     Buy Now <ShoppingBag className="ml-2" size={18} />
                   </Button>
@@ -160,7 +158,7 @@ export default function AudioBookPage() {
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
-                  Professional narration by G.B. Sollie
+                  Professional narration by grammy winner, Monroe Jones
                 </li>
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
@@ -196,43 +194,7 @@ export default function AudioBookPage() {
         </div>
       </Section>
 
-      {/* Audio Sample */}
-      <Section 
-        className="bg-gray-50"
-        id="audio-sample"
-      >
-        <div className="text-center mb-12">
-          <h2 className="text-primary mb-4">Listen to a Sample</h2>
-          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
-        </div>
-        
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white p-8 rounded-whimsical shadow-lg border border-gray-100">
-            <h3 className="font-display text-2xl text-primary mb-6">Chapter One: The Whispers</h3>
-            
-            <div className="relative w-full h-[200px] mb-6 bg-black/5 rounded-lg flex items-center justify-center">
-              <div className="bg-primary w-20 h-20 rounded-full flex items-center justify-center text-white cursor-pointer hover:bg-primary-dark transition-colors">
-                <Play size={40} />
-              </div>
-            </div>
-            
-            <div className="prose prose-lg text-black">
-              <p>
-                Experience the opening chapter of Cat Luker as you&apos;ve never heard it before. Listen to G.B. Sollie bring his characters to life with authentic emotion and regional dialect that perfectly captures the atmosphere of 1930s rural Alabama.
-              </p>
-              <p>
-                The full audio experience includes over 6 hours of narration, taking you through the complete adventure of Cat, Little Preacher, and Jane Alice as they confront the mysterious Swamp Witch.
-              </p>
-            </div>
-            
-            <div className="mt-8 text-center">
-              <Button href="https://www.amazon.com/Dark-Clock-Luker-Swamp-Chronicles/dp/B0DFD1X33T/ref=tmm_aud_swatch_0?_encoding=UTF8&dib_tag=se&dib=eyJ2IjoiMSJ9.GRujj-iPyOYwXod2kg9_pkxaffPk-CsSbp_nR35nKqM.TbDH45EBK1Vh4av7v4y_DiyYSQUDv0U2ogGn68eFY-g&qid=1740608342&sr=8-1">
-                Buy Now <ShoppingBag className="ml-2" size={18} />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Section>
+
 
       {/* Purchase CTA */}
       <Section 

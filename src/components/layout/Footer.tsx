@@ -89,7 +89,7 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="space-y-4">
             <h4 className="text-xl font-bold mb-4">Join the Adventure</h4>
             <p className="text-gray-300">
-              Subscribe to get updates on new books, events, and exclusive content!
+              Sign up to get updates on new books, events, and exclusive content!
             </p>
             <form className="mt-4 space-y-2">
               <input
@@ -102,7 +102,7 @@ export default function Footer() {
                 type="submit"
                 className="w-full primary-button"
               >
-                Subscribe
+                Sign Up
               </button>
             </form>
           </motion.div>

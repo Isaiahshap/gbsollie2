@@ -164,7 +164,7 @@ export default function Home() {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.9 }}
               >
-                Join renowned author G.B. Sollie on a magical journey through faith, courage, and adventure with the Cat Luker series.
+                <strong><em>Join captivating author G.B. Sollie on a magical journey through faith.</em></strong>
               </motion.p>
               <motion.div 
                 className="flex flex-wrap gap-4"
@@ -294,7 +294,7 @@ export default function Home() {
                 A Journey to the Light
               </h3>
               <p className="text-gray-600 flex-grow mb-4">
-                Join Cat and her friends on a new adventure as they discover the meaning of hope in the darkest of times. Coming soon!
+                Join Cat and her friends on a spiritual adventure as they discover the meaning of hope in the darkest of times.
               </p>
               <div className="flex items-center justify-between w-full gap-2">
                 <button 
@@ -376,7 +376,7 @@ export default function Home() {
                 Cat Luker: The Audio Experience
               </h3>
               <p className="text-gray-600 flex-grow mb-4">
-                Experience the magic of Cat Luker through the voice of G.B. Sollie himself. Perfect for road trips and bedtime stories!
+                Revel in the magic of Cat Luker through the voice of grammy winner, Monroe Jones. Perfect for road trips and immersive storytelling!
               </p>
               <div className="flex items-center justify-end">
                 <Button 
@@ -530,7 +530,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-3xl md:text-4xl font-display text-primary-dark mb-6"
+              className="text-4xl md:text-5xl font-display text-primary-dark mb-6"
             >
               Join the Adventure
             </motion.h2>
@@ -541,7 +541,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-xl text-primary-dark mb-4"
             >
-              Subscribe to my newsletter for:
+              Sign up for:
             </motion.p>
             <motion.ul
               initial={{ opacity: 0 }}
@@ -551,10 +551,9 @@ export default function Home() {
               className="space-y-3 mb-6"
             >
               {[
-                "Early access to new books",
-                "Exclusive content and behind-the-scenes",
-                "Special offers and discounts",
-                "Event announcements and book signings"
+                "Free Bible Study Guide",
+                "Updates on new releases",
+                "Newsletter",
               ].map((item, index) => (
                 <li key={index} className="flex items-start">
                   <span className="w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-3 text-white">✓</span>
@@ -589,6 +588,19 @@ export default function Home() {
                 />
               </div>
               <div>
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                  Your City
+                </label>
+                <input
+                  type="text"
+                  id="city"
+                  name="city"
+                  required
+                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Birmingham"
+                />
+              </div>
+              <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
                 </label>
@@ -603,11 +615,11 @@ export default function Home() {
               </div>
               <div className="pt-2">
                 <Button type="submit" variant="primary" fullWidth icon={<Mail size={18} />}>
-                  Subscribe to Newsletter
+                  Get Free Bible Study Guide
                 </Button>
               </div>
               <p className="text-xs text-gray-500 mt-4">
-                By subscribing, you agree to our <Link href="/privacy-policy" className="underline">Privacy Policy</Link>. We respect your privacy and will never share your information.
+                By signing up, you agree to our <Link href="/privacy-policy" className="underline">Privacy Policy</Link>. We respect your privacy and will never share your information.
               </p>
             </div>
           </motion.form>

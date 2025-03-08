@@ -15,7 +15,7 @@ const books = [
     image: "/images/Catlukercover.png"
   },
   { 
-    title: "A Journey To The Light", 
+    title: "A Journey to the Light", 
     path: "/a-journey-to-the-light",
     image: "/images/journeycover.jpg"
   },

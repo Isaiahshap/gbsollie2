@@ -187,7 +187,7 @@ export default function CatLukerDarkClockPage() {
               <ul className="space-y-2">
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
-                  Young readers ages 8-12
+                  Young readers ages 9-13
                 </li>
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
@@ -235,9 +235,12 @@ export default function CatLukerDarkClockPage() {
         
         <div className="max-w-3xl mx-auto">
           <div className="bg-white p-8 rounded-whimsical shadow-lg border border-gray-100">
-            <h3 className="font-display text-2xl text-primary mb-6">Chapter One: The Whispers</h3>
+            <h3 className="font-display text-4xl text-primary mb-6 text-center">Chapter One: The Dare</h3>
             
             <div className="prose prose-lg text-black">
+              <p className="italic mb-6">
+                Many have tried to record what happened in that God-forsaken swamp, just as it was handed down from the beginning by those with first-hand knowledge. With this in mind, since I myself have carefully investigated everything, it seemed a good idea for me to write an orderly account for you, most dear Catherine. My prayer is that others may know with certainty the wonderous things that you have done for your beloved.
+              </p>
               <p>
                 A long time ago, at the bottom of the Great Depression, Cat
                 Luker lived in the backwoods of Alabama, down a red dirt road on
@@ -255,39 +258,6 @@ export default function CatLukerDarkClockPage() {
                 Curtis—called her Sister but all her friends called her Cat. She
                 had long, wavy, black hair and green eyes, and her nickname fit
                 her to a tee.
-              </p>
-              <p>
-                Cat liked to climb trees and talk to the birds and squirrels,
-                and she could run like the wind. Her brothers loved her dearly
-                but thought she was crazy. After all, she had learned to fight just
-                so she could get by in a house full of mean ol&apos; boys who enjoyed
-                picking on her. She was like a wildcat when she got mad, and
-                if she got angry enough, she would punch them in the nose—
-                not too hard, mind you—and then take off running. Anyone who
-                saw her flying by with her brothers in hot pursuit would laugh,
-                knowing that they were wasting their time trying to catch her.
-              </p>
-              <p>
-                For most of the summer, Cat wore a white flour-sack dress
-                and went barefoot. She laughed as she ran, making her brothers
-                all the madder. She found trails through the woods that no one
-                else knew about and had secret hiding places, some that were
-                close to the swamp, where her brothers were too afraid to go.
-              </p>
-              <p>
-                On this sunny morning, Cat had run away from her
-                troublesome brothers in the usual way. Out of sight of them, she
-                darted up the trunk and into the safety of some huge branches
-                of an old oak tree that stood off the main path from the house.
-                Her favorite tree, the Big Oak, had a knotty stool that sat in the
-                fork of its two twisted limbs, high above the ground and out of
-                sight of anyone passing by. As she settled into her seat, she heard
-                her brothers rush by, whooping and hollering, still thinking they
-                might catch her this time. She smiled and thought she&apos;d give
-                them time to cool off before she headed home. She reached down,
-                gathered a handful of acorns, and made a chirping sound, as she
-                called her friend Tubby the Squirrel over for a visit. They had not
-                talked for a while.
               </p>
             </div>
             
