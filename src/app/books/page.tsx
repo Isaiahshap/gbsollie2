@@ -1,3 +1,5 @@
+'use client';
+
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import Image from 'next/image';
@@ -16,12 +18,21 @@ export default function BooksPage() {
             loop 
             playsInline
           >
-            <source src="/images/forest.mp4" type="video/mp4" />
+            <source src="/images/cem.mp4" type="video/mp4" />
           </video>
         </div>
         
         {/* Overlay for better text visibility */}
         <div className="absolute inset-0 bg-primary/70"></div>
+        
+        {/* Bottom gradient for seamless transition to starry background */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 z-10" 
+          style={{ 
+            height: '100px', 
+            background: 'linear-gradient(to bottom, transparent, #081020)',
+          }}
+        ></div>
         
         {/* Content */}
         <div className="relative h-full z-10 flex items-center justify-center">
@@ -37,12 +48,87 @@ export default function BooksPage() {
       </div>
       
       <Section
-        className="bg-white"
+        className="bg-[#081020] relative overflow-hidden"
         id="book-list"
       >
-        <div className="grid grid-cols-1 gap-16">
+        {/* Starry background - extended to full viewport width and height with proper positioning */}
+        <div 
+          className="absolute overflow-hidden" 
+          style={{ 
+            width: '100vw', 
+            height: '100%',
+            left: '50%', 
+            top: '0',
+            transform: 'translateX(-50%)',
+            zIndex: 0
+          }}
+        >
+          {/* Stars background - static stars */}
+          <div className="absolute inset-0">
+            {Array.from({ length: 150 }).map((_, i) => (
+              <div
+                key={`star-${i}`}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: i % 5 === 0 ? 2 : 1,
+                  height: i % 5 === 0 ? 2 : 1,
+                  top: `${Math.floor(Math.random() * 100)}%`,
+                  left: `${Math.floor(Math.random() * 100)}%`,
+                  opacity: Math.random() * 0.5 + 0.1,
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Subtle glowing stars */}
+          {Array.from({ length: 30 }).map((_, i) => (
+            <div
+              key={`glow-star-${i}`}
+              className="absolute rounded-full"
+              style={{
+                width: 3,
+                height: 3,
+                top: `${Math.floor(Math.random() * 100)}%`,
+                left: `${Math.floor(Math.random() * 100)}%`,
+                background: "radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)",
+                opacity: 0.4,
+                animation: `twinkle ${3 + Math.random() * 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 2}s`,
+              }}
+            />
+          ))}
+          
+          {/* Add some larger, brighter stars */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={`bright-star-${i}`}
+              className="absolute rounded-full"
+              style={{
+                width: 4,
+                height: 4,
+                top: `${Math.floor(Math.random() * 100)}%`,
+                left: `${Math.floor(Math.random() * 100)}%`,
+                backgroundColor: i % 3 === 0 ? '#F9D56E' : '#fff',
+                boxShadow: i % 3 === 0 ? '0 0 4px #F9D56E' : '0 0 4px #fff',
+                opacity: 0.7,
+                animation: `twinkle ${4 + Math.random() * 5}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 3}s`,
+              }}
+            />
+          ))}
+
+          {/* Gradient overlay to ensure cards are readable */}
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: "radial-gradient(circle at center, rgba(16, 42, 94, 0.3) 0%, rgba(8, 16, 32, 0.4) 100%)"
+            }}
+          ></div>
+        </div>
+
+        <div className="grid grid-cols-1 gap-16 relative z-10">
           {/* Cat Luker: The Swamp Witch Chronicles */}
-          <div className="rounded-whimsical bg-primary/5 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300 border-2 border-accent/20">
+          <div className="rounded-whimsical bg-white p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300 border-4 border-secondary shadow-[0_0_15px_rgba(249,213,110,0.3)]">
             <div className="w-full md:w-1/4 flex-shrink-0">
               <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
                 <Image 
@@ -88,7 +174,7 @@ export default function BooksPage() {
           </div>
 
           {/* A Journey to the Light */}
-          <div className="rounded-whimsical bg-gray-50 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300">
+          <div className="rounded-whimsical bg-white p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300 border-4 border-secondary shadow-[0_0_15px_rgba(249,213,110,0.3)]">
             <div className="w-full md:w-1/4 flex-shrink-0">
               <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
@@ -126,7 +212,7 @@ export default function BooksPage() {
           </div>
 
           {/* Cat Luker: The Audio Experience */}
-          <div className="rounded-whimsical bg-gray-50 p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300">
+          <div className="rounded-whimsical bg-white p-8 flex flex-col md:flex-row gap-8 hover:shadow-lg transition-all duration-300 border-4 border-secondary shadow-[0_0_15px_rgba(249,213,110,0.3)]">
             <div className="w-full md:w-1/4 flex-shrink-0">
               <div className="relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
@@ -163,6 +249,14 @@ export default function BooksPage() {
             </div>
           </div>
         </div>
+
+        {/* Add keyframes for the twinkling effect */}
+        <style jsx global>{`
+          @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+          }
+        `}</style>
       </Section>
 
       {/* Call to Action */}

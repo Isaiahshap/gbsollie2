@@ -569,57 +569,162 @@ export default function Home() {
       
       {/* Testimonials */}
       <Section 
-        className="bg-primary text-white"
+        className="bg-[#081020] relative overflow-hidden -mt-1"
         id="testimonials"
+        noPadding={true}
       >
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-display text-white mb-4">What Readers Say</h2>
-          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
-        </div>
-        
+        {/* Starry background - extended to full viewport width and height with proper positioning */}
         <div 
-          ref={testimonialRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          className="absolute overflow-hidden" 
+          style={{ 
+            width: '100vw', 
+            height: '100%',
+            left: '50%', 
+            top: '0',
+            transform: 'translateX(-50%)',
+            zIndex: 0
+          }}
         >
-          {[
-            {
-              quote: "In my process, I first look for the story. Whether it's music, a book, or a painting—anything, really—there's always a story. In the case of The Swamp Witch Chronicles—box checked. It's an adventure/fantasy involving three kids from rural 1930s Alabama, enthralled in an epic battle of good vs. evil. As I read, my mind was filled with images of classics like The Chronicles of Narnia mixed with the folksiness of The Adventures of Tom Sawyer. Everything a middle-grade reader could ask for. But, as with any great surface story, there's also something more profound, something bigger, lurking underneath.",
-              author: "Monroe Jones",
-              subtitle: "Grammy Award-winning Producer",
-              title: "The Swamp Witch Chronicles",
-              rating: 5
-            },
-            {
-              quote: "It's really great! I think students who attend a study like this will really benefit from the ideas you lay out in the guide. So excited for you and the ways God is leading you through this project.",
-              author: "Cory Osborne",
-              subtitle: "MIDDLE SCHOOL: MS Group Director Woodstock City Church",
-              title: "A Journey to the Light Bible Study Guide and Companion to Cat Luker: The Swamp Witch Chronicles",
-              rating: 5
-            }
-          ].map((testimonial, index) => (
+          {/* Stars background - static stars */}
+          <div className="absolute inset-0">
+            {Array.from({ length: 150 }).map((_, i) => (
+              <div
+                key={`star-${i}`}
+                className="absolute rounded-full bg-white"
+                style={{
+                  width: i % 5 === 0 ? 2 : 1,
+                  height: i % 5 === 0 ? 2 : 1,
+                  top: `${Math.floor(Math.random() * 100)}%`,
+                  left: `${Math.floor(Math.random() * 100)}%`,
+                  opacity: Math.random() * 0.5 + 0.1,
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Subtle glowing stars */}
+          {Array.from({ length: 30 }).map((_, i) => (
+            <div
+              key={`glow-star-${i}`}
+              className="absolute rounded-full"
+              style={{
+                width: 3,
+                height: 3,
+                top: `${Math.floor(Math.random() * 100)}%`,
+                left: `${Math.floor(Math.random() * 100)}%`,
+                background: "radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%)",
+                opacity: 0.4,
+                animation: `twinkle ${3 + Math.random() * 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 2}s`,
+              }}
+            />
+          ))}
+          
+          {/* Add some larger, brighter stars */}
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div
+              key={`bright-star-${i}`}
+              className="absolute rounded-full"
+              style={{
+                width: 4,
+                height: 4,
+                top: `${Math.floor(Math.random() * 100)}%`,
+                left: `${Math.floor(Math.random() * 100)}%`,
+                backgroundColor: i % 3 === 0 ? '#F9D56E' : '#fff',
+                boxShadow: i % 3 === 0 ? '0 0 4px #F9D56E' : '0 0 4px #fff',
+                opacity: 0.7,
+                animation: `twinkle ${4 + Math.random() * 5}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 3}s`,
+              }}
+            />
+          ))}
+
+          {/* Gradient overlay to ensure testimonials are readable */}
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: "radial-gradient(circle at center, rgba(16, 42, 94, 0.3) 0%, rgba(8, 16, 32, 0.4) 100%)"
+            }}
+          ></div>
+        </div>
+
+        <div ref={testimonialRef} className="relative z-10 px-4 py-16 md:py-24 container-custom mx-auto">
+          <div className="text-center mb-12">
+            <motion.h2 
+              className="text-3xl md:text-5xl font-display text-secondary mb-4 text-shadow-magical"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              What Readers Say
+            </motion.h2>
+            <motion.div 
+              className="w-20 h-1 bg-secondary mx-auto rounded-full glow"
+              initial={{ opacity: 0, width: 0 }}
+              whileInView={{ opacity: 1, width: 80 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* The Swamp Witch Chronicles Testimonial */}
             <motion.div
-              key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="bg-white/10 backdrop-blur-sm p-6 rounded-whimsical"
+              transition={{ duration: 0.6 }}
+              className="rounded-whimsical bg-white/10 backdrop-blur-sm p-8 hover:shadow-lg transition-all duration-300 border-2 border-secondary/30 shadow-[0_0_15px_rgba(249,213,110,0.15)]"
             >
-              <div className="flex text-yellow-400 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
+              <h3 className="text-2xl font-bold text-secondary mb-3">The Swamp Witch Chronicles</h3>
+              <div className="flex text-yellow-400 mb-5">
+                {[...Array(5)].map((_, i) => (
                   <Star key={i} size={18} fill="currentColor" />
                 ))}
               </div>
-              <h3 className="text-lg font-bold text-secondary mb-2">{testimonial.title}</h3>
-              <p className="italic text-white/90 mb-4">&quot;{testimonial.quote}&quot;</p>
-              <p className="text-secondary font-bold">— {testimonial.author}</p>
-              <p className="text-white/80">{testimonial.subtitle}</p>
+              <p className="italic text-white/90 mb-6 text-lg">
+                &quot;In my process, I first look for the story. Whether it&apos;s music, a book, or a painting—anything, really—there&apos;s always a story. In the case of The Swamp Witch Chronicles—box checked. It&apos;s an adventure/fantasy involving three kids from rural 1930s Alabama, enthralled in an epic battle of good vs. evil. As I read, my mind was filled with images of classics like The Chronicles of Narnia mixed with the folksiness of The Adventures of Tom Sawyer. Everything a middle-grade reader could ask for. But, as with any great surface story, there&apos;s also something more profound, something bigger, lurking underneath.&quot;
+              </p>
+              <div className="flex flex-col">
+                <p className="text-secondary font-bold text-lg">— Monroe Jones</p>
+                <p className="text-white/80">Grammy Award-winning Producer</p>
+              </div>
             </motion.div>
-          ))}
+
+            {/* A Journey to the Light Testimonial */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="rounded-whimsical bg-white/10 backdrop-blur-sm p-8 hover:shadow-lg transition-all duration-300 border-2 border-secondary/30 shadow-[0_0_15px_rgba(249,213,110,0.15)]"
+            >
+              <h3 className="text-2xl font-bold text-secondary mb-3">A Journey to the Light Bible Study Guide and Companion to Cat Luker: The Swamp Witch Chronicles</h3>
+              <div className="flex text-yellow-400 mb-5">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={18} fill="currentColor" />
+                ))}
+              </div>
+              <p className="italic text-white/90 mb-6 text-lg">
+                &quot;It&apos;s really great! I think students who attend a study like this will really benefit from the ideas you lay out in the guide. So excited for you and the ways God is leading you through this project.&quot;
+              </p>
+              <div className="flex flex-col">
+                <p className="text-secondary font-bold text-lg">— Cory Osborne</p>
+                <p className="text-white/80">MIDDLE SCHOOL: MS Group Director Woodstock City Church</p>
+              </div>
+            </motion.div>
+          </div>
         </div>
+
+        {/* Add keyframes for the twinkling effect if not already defined elsewhere */}
+        <style jsx global>{`
+          @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+          }
+        `}</style>
       </Section>
-      
-  
       
       {/* Newsletter Signup */}
 
