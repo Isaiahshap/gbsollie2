@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
@@ -8,6 +8,30 @@ import { Quote } from 'lucide-react';
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { useTextReveal } from '@/lib/animations';
+import GoldCard from '@/components/ui/GoldCard';
+
+// Star component for the night sky background
+const Star = ({ size, top, left, delay, duration }: { size: number, top: string, left: string, delay: number, duration: number }) => (
+  <motion.div
+    className="absolute rounded-full bg-white"
+    style={{
+      width: size,
+      height: size,
+      top,
+      left,
+    }}
+    animate={{
+      opacity: [0.1, 0.7, 0.1],
+      scale: [1, 1.2, 1],
+    }}
+    transition={{
+      duration,
+      repeat: Infinity,
+      repeatType: "reverse",
+      delay,
+    }}
+  />
+);
 
 export default function AboutPage() {
   const quoteRef = useRef<HTMLParagraphElement>(null);
@@ -15,66 +39,408 @@ export default function AboutPage() {
   // Apply text reveal animation
   useTextReveal(quoteRef as React.RefObject<HTMLElement>);
 
+  // Generate stars for the night sky with deterministic values
+  const stars = useMemo(() => {
+    const starCount = 250; // Further increased for better coverage
+    
+    // Prime numbers for creating pseudo-random distribution
+    const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53];
+    
+    return Array.from({ length: starCount }).map((_, i) => {
+      // Create pseudo-random but deterministic position values using prime numbers
+      // This gives the appearance of randomness while being consistent
+      const seed1 = (i * 13) % 100;
+      const seed2 = (i * 17) % 100;
+      
+      // Apply different algorithms based on index to avoid grid-like patterns
+      const topPercentage = (seed1 + primes[i % primes.length]) % 100;
+      const leftPercentage = (seed2 + primes[(i + 7) % primes.length]) % 100;
+      
+      // Create varying star sizes with a deterministic pattern
+      const sizeVariations = [1, 1.2, 1.5, 1.8, 2, 2.3, 2.7, 3];
+      const sizeIndex = (i * 3 + 11) % sizeVariations.length;
+      const size = sizeVariations[sizeIndex];
+      
+      // Vary animation delays deterministically
+      const delayVariations = [0, 0.3, 0.7, 1.1, 1.5, 1.9, 2.3, 2.8, 3.3, 3.9, 4.5];
+      const delayIndex = (i * 5 + 3) % delayVariations.length;
+      const delay = delayVariations[delayIndex];
+      
+      // Vary animation durations deterministically
+      const durationVariations = [3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7];
+      const durationIndex = (i * 7 + 5) % durationVariations.length;
+      const duration = durationVariations[durationIndex];
+      
+      return {
+        size,
+        top: `${topPercentage}%`,
+        left: `${leftPercentage}%`,
+        delay,
+        duration,
+        id: i,
+      };
+    });
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
       <Section 
-        className="bg-primary text-white relative bg-movie-cover"
+        className="bg-[#0a1128] text-white relative overflow-hidden w-full"
         id="about-hero"
         fullHeight
       >
-        <style jsx global>{`
-          .bg-movie-cover {
-            background-image: url('/images/moviecoverart.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-          }
-        `}</style>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
-          <div className="bg-blue-900/80 p-6 rounded-lg shadow-xl backdrop-blur-sm">
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl font-display mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              About G.B. Sollie
-            </motion.h1>
-            <motion.div
-              className="prose prose-lg prose-invert max-w-none"
+        {/* Night Sky Background - Full viewport width and height */}
+        <div className="fixed inset-0 w-screen h-screen">
+          {/* Stars - Distributed across the entire viewport */}
+          {stars.map((star) => (
+            <Star
+              key={star.id}
+              size={star.size}
+              top={star.top}
+              left={star.left}
+              delay={star.delay}
+              duration={star.duration}
+            />
+          ))}
+          {/* Enhanced gradient overlay to add depth */}
+          <div 
+            className="absolute inset-0 w-screen h-screen" 
+            style={{
+              background: "radial-gradient(circle at center, rgba(16, 42, 94, 0.3) 0%, rgba(10, 17, 40, 0.95) 100%)"
+            }}
+          ></div>
+        </div>
+        
+        <div className="container-custom relative z-10 min-h-screen flex flex-col items-center justify-center">
+          {/* Central Image with Faded Edges */}
+          <div className="relative w-full max-w-md mx-auto mb-8">
+            <motion.div 
+              className="relative aspect-square"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8 }}
+              whileHover={{ scale: 1.03 }}
             >
-              <p className="text-xl leading-relaxed">
-                My claim to fame is that Cat and Little Preacher Sollie raised me
-                down in Dothan, Alabama, and I inherited a storytelling gene from
-                my dad&apos;s father (Big Daddy, a.k.a. Preacher Sollie).
-              </p>
-              <p>
-                I have a bunch of grandkids, and counting, and I am reminded
-                each day of how important this next generation will be.
-              </p>
+              {/* Decorative Circle */}
+              <motion.div 
+                className="absolute -inset-4 rounded-full bg-gradient-to-br from-secondary/40 to-primary/20"
+                animate={{
+                  scale: [1, 1.05, 1],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  repeatType: "reverse"
+                }}
+              ></motion.div>
+              
+              {/* Radial Gradient Overlay */}
+              <div className="absolute inset-0 rounded-full" style={{
+                background: "radial-gradient(circle, rgba(255,255,255,0) 50%, rgba(10,17,40,1) 100%)",
+                zIndex: 2
+              }}></div>
+              
+              {/* Main Image */}
+              <div className="rounded-full overflow-hidden relative shadow-lg" style={{ zIndex: 1 }}>
+                <Image 
+                  src="/images/greg2.png" 
+                  alt="G.B. Sollie - Author Portrait" 
+                  fill
+                  className="object-cover rounded-full"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  loading="eager"
+                />
+              </div>
             </motion.div>
           </div>
+
+          {/* Title with colorful styling */}
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-display mb-2 text-center text-transparent bg-clip-text bg-gradient-to-r from-secondary to-white"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            About G.B. Sollie
+          </motion.h1>
           
+          {/* Playful subtitle */}
+          <motion.p
+            className="text-lg md:text-xl font-medium text-secondary mb-6 text-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            Storyteller, Grandparent, and Creator of Magical Adventures
+          </motion.p>
+
+          {/* Bio Text */}
+          <motion.div
+            className="prose prose-lg max-w-2xl text-center mx-auto prose-invert"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <p className="text-xl leading-relaxed">
+              My claim to fame is that Cat and Little Preacher Sollie raised me
+              down in Dothan, Alabama, and I inherited a storytelling gene from
+              my dad&apos;s father (Big Daddy, a.k.a. Preacher Sollie).
+            </p>
+            <p>
+              I have a bunch of grandkids, and counting, and I am reminded
+              each day of how important this next generation will be.
+            </p>
+          </motion.div>
+
+          {/* Enhanced Floating Illustrations - Repositioned to avoid text */}
+          {/* Bear */}
           <motion.div 
-            className="relative rounded-whimsical overflow-hidden aspect-square shadow-2xl"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ top: '5%', left: '5%' }}
+            animate={{
+              y: [0, -15, 0],
+              x: [0, 10, 0],
+              rotate: [0, 5, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
           >
             <Image 
-              src="/images/greg2.png" 
-              alt="G.B. Sollie - Author Portrait" 
+              src="/images/illustrations/bear.png" 
+              alt="Bear illustration" 
               fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
-              loading="eager"
+              className="object-contain"
             />
           </motion.div>
+
+          {/* Monkey */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ bottom: '5%', right: '5%' }}
+            animate={{
+              y: [0, 20, 0],
+              x: [0, -15, 0],
+              rotate: [0, -8, 0],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 0.5
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/monkey.png" 
+              alt="Monkey illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+
+          {/* Snake - with circular path */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ top: '10%', right: '8%' }}
+            animate={{
+              x: [0, 20, 0, -20, 0],
+              y: [0, 15, 30, 15, 0],
+              rotate: [0, 10, 0, -10, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 1
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/snake.png" 
+              alt="Snake illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+
+          {/* Squirrel */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ bottom: '10%', left: '8%' }}
+            animate={{
+              y: [0, -10, -20, -10, 0],
+              x: [0, -5, 0, 5, 0],
+              rotate: [0, -5, 0, 5, 0],
+              scale: [1, 1.05, 1, 1.05, 1],
+            }}
+            transition={{
+              duration: 7,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 1.5
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/squirrel.png" 
+              alt="Squirrel illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+
+          {/* Book */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ top: '30%', left: '3%' }}
+            animate={{
+              y: [0, 15, 30, 15, 0],
+              x: [0, 10, 0, -10, 0],
+              rotate: [0, 8, 0, -8, 0],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 2
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 },
+              rotate: [0, 10, -10, 10, 0],
+            }}
+          >
+            <Image 
+              src="/images/illustrations/book.png" 
+              alt="Book illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+
+          {/* Hat */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ top: '30%', right: '3%' }}
+            animate={{
+              y: [0, -15, -30, -15, 0],
+              x: [0, -10, 0, 10, 0],
+              rotate: [0, -10, 0, 10, 0],
+              scale: [1, 1.05, 1, 1.05, 1],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 2.5
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/hat-color.png" 
+              alt="Hat illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+          
+          {/* Add Salem to the mix */}
+          <motion.div 
+            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+            style={{ top: '75%', right: '15%' }}
+            animate={{
+              y: [0, 20, 0, -20, 0],
+              x: [0, -20, 0, 20, 0],
+              rotate: [0, 5, 0, -5, 0],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              repeatType: "loop",
+              delay: 3
+            }}
+            whileHover={{ 
+              scale: 1.2,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/salem.png" 
+              alt="Salem illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+          
+          {/* Add Steeple to the mix */}
+          <motion.div 
+            className="absolute w-28 h-28 md:w-36 md:h-36 cursor-pointer"
+            style={{ bottom: '25%', right: '35%' }}
+            animate={{
+              y: [0, -10, 0],
+              scale: [1, 1.03, 1],
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: 1
+            }}
+            whileHover={{ 
+              scale: 1.15,
+              transition: { duration: 0.3 }
+            }}
+          >
+            <Image 
+              src="/images/illustrations/steeple.png" 
+              alt="Steeple illustration" 
+              fill
+              className="object-contain"
+            />
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* Gold Card Section */}
+      <Section
+        className="bg-white py-20"
+        id="about-gold-card"
+      >
+        <div className="container mx-auto px-4 max-w-3xl">
+          <GoldCard 
+            content={{
+              title: "G.B. Sollie - Author Portrait",
+              subtitle: "Storyteller, Grandparent, and Creator of Magical Adventures",
+              paragraphs: [
+                "My claim to fame is that Cat and Little Preacher Sollie raised me down in Dothan, Alabama, and I inherited a storytelling gene from my dad's father (Big Daddy, a.k.a. Preacher Sollie).",
+                "I have a bunch of grandkids, and counting, and I am reminded each day of how important this next generation will be."
+              ],
+              imageSrc: "/images/gregwkids.jpg",
+              imageAlt: "G.B. Sollie - Author Portrait"
+            }}
+            className="mx-auto"
+          />
         </div>
       </Section>
 

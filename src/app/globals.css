@@ -297,3 +297,50 @@
     }
   }
 }
+
+@layer utilities {
+  /* 3D Card Utilities */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .translate-z-5 {
+    transform: translateZ(5px);
+  }
+  
+  .translate-z-10 {
+    transform: translateZ(10px);
+  }
+  
+  .translate-z-15 {
+    transform: translateZ(15px);
+  }
+  
+  .translate-z-20 {
+    transform: translateZ(20px);
+  }
+  
+  /* Gold card specific effects */
+  .gold-metallic {
+    background: linear-gradient(135deg, 
+      rgba(255, 215, 0, 1) 0%, 
+      rgba(218, 165, 32, 1) 30%, 
+      rgba(255, 215, 0, 1) 50%, 
+      rgba(184, 134, 11, 1) 70%, 
+      rgba(255, 215, 0, 1) 100%);
+    background-size: 200% 200%;
+  }
+  
+  .gold-edge {
+    box-shadow: 0 0 15px 2px rgba(255, 215, 0, 0.5), 
+                inset 0 0 15px rgba(255, 255, 255, 0.5);
+  }
+}

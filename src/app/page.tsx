@@ -109,7 +109,7 @@ export default function Home() {
       {/* Hero Section */}
       <div 
         id="hero-section"
-        className="relative min-h-screen overflow-hidden flex items-center pt-16 md:pt-20"
+        className="relative min-h-screen overflow-hidden flex items-center"
         style={{
           backgroundImage: 'url(/images/hero-bg.png)',
           backgroundSize: 'cover',
