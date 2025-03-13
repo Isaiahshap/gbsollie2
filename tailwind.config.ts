@@ -68,6 +68,14 @@ export default {
       backgroundImage: {
         'night-forest': "url('/images/night-forest-bg.jpg')",
         'paper-texture': "url('/images/paper-texture.jpg')"
+      },
+      dropShadow: {
+        'glow': '0 0 8px rgba(255, 255, 255, 0.5)',
+        'magic': [
+          '0 0 5px rgba(249, 213, 110, 0.5)',
+          '0 0 10px rgba(249, 213, 110, 0.3)'
+        ],
+        'time': '0 0 15px rgba(59, 130, 246, 0.6)'
       }
     },
   },

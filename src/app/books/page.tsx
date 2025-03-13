@@ -6,17 +6,35 @@ import { ArrowRight, Star, BookOpen, ShoppingBag } from 'lucide-react';
 export default function BooksPage() {
   return (
     <>
-      <Section 
-        className="bg-primary text-white"
-        id="books-hero"
-      >
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">Explore My Books</h1>
-          <p className="text-xl max-w-2xl mx-auto text-white/90">
-            Embark on magical adventures through the pages of G.B. Sollie&apos;s captivating series for young readers.
-          </p>
+      <div className="relative h-[70vh] min-h-[500px] w-full overflow-hidden" id="books-hero">
+        {/* Video Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <video 
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+          >
+            <source src="/images/forest.mp4" type="video/mp4" />
+          </video>
         </div>
-      </Section>
+        
+        {/* Overlay for better text visibility */}
+        <div className="absolute inset-0 bg-primary/70"></div>
+        
+        {/* Content */}
+        <div className="relative h-full z-10 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-display mb-8 text-white drop-shadow-lg">
+              Explore My Books
+            </h1>
+            <p className="text-xl md:text-2xl max-w-2xl mx-auto text-white drop-shadow-md font-medium">
+              Embark on magical adventures through the pages of G.B. Sollie&apos;s captivating series for young readers.
+            </p>
+          </div>
+        </div>
+      </div>
       
       <Section
         className="bg-white"
@@ -49,7 +67,7 @@ export default function BooksPage() {
                 ))}
               </div>
               <p className="text-gray-700 mb-6 text-lg">
-                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends—Cat, Little Preacher, and Jane Alice—as they band together to confront the mysterious Swamp Witch. When strange occurrences begin happening in their small town of Aimwell, the children&apos;s curiosity leads them into the heart of the swamp, where local legend claims a witch has lived for generations.
+                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends—Cat, Little Preacher, and Jane Alice—as they travel back in time and confront the mysterious Swamp Witch. When strange occurrences begin happening in their small town of Aimwell, the children&apos;s curiosity leads them into the heart of the swamp, where local legend claims a witch has lived for generations.
               </p>
               <p className="text-gray-700 mb-6">
                 This coming-of-age story tests their courage, strengthens their faith, and teaches valuable lessons about friendship, bravery, and trust in God.

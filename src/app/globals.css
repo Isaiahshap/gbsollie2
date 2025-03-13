@@ -96,7 +96,7 @@
   }
   
   .nav-link {
-    @apply relative px-3 py-2 text-white/90 hover:text-white transition-colors duration-300;
+    @apply relative px-3 py-2 text-white/90 hover:text-white transition-colors duration-300 whitespace-nowrap font-medium;
   }
   
   .nav-link::after {
@@ -234,4 +234,66 @@
   background: rgba(255, 255, 255, 0.15);
   border-color: white;
   transform: translateY(-2px);
+}
+
+/* Text selection styling */
+::selection {
+  background-color: #F9D56E; /* yellow */
+  color: #3B82F6; /* blue */
+}
+
+::-moz-selection {
+  background-color: #F9D56E; /* yellow */
+  color: #3B82F6; /* blue */
+}
+
+/* Mystical effects */
+.glow {
+  box-shadow: 0 0 10px rgba(249, 213, 110, 0.7), 0 0 20px rgba(249, 213, 110, 0.4);
+  animation: glowing 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowing {
+  from {
+    box-shadow: 0 0 10px rgba(249, 213, 110, 0.7), 0 0 20px rgba(249, 213, 110, 0.4);
+  }
+  to {
+    box-shadow: 0 0 15px rgba(249, 213, 110, 0.9), 0 0 30px rgba(249, 213, 110, 0.6);
+  }
+}
+
+/* Book card glow effect */
+.book-card-glow {
+  box-shadow: 0 4px 20px rgba(18, 40, 72, 0.15);
+  transition: all 0.4s ease;
+}
+
+.book-card-glow:hover {
+  box-shadow: 
+    0 10px 25px rgba(18, 40, 72, 0.2),
+    0 0 15px rgba(59, 130, 246, 0.3),
+    0 0 30px rgba(59, 130, 246, 0.15);
+}
+
+/* Add subtle glow for mobile devices where hover doesn't apply */
+@media (max-width: 768px) {
+  .book-card-glow {
+    box-shadow: 
+      0 5px 15px rgba(18, 40, 72, 0.15),
+      0 0 10px rgba(59, 130, 246, 0.1);
+    animation: subtle-pulse 3s ease-in-out infinite alternate;
+  }
+  
+  @keyframes subtle-pulse {
+    from {
+      box-shadow: 
+        0 5px 15px rgba(18, 40, 72, 0.15),
+        0 0 10px rgba(59, 130, 246, 0.1);
+    }
+    to {
+      box-shadow: 
+        0 8px 20px rgba(18, 40, 72, 0.2),
+        0 0 15px rgba(59, 130, 246, 0.2);
+    }
+  }
 }

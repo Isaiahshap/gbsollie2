@@ -109,15 +109,15 @@ export default function Home() {
       {/* Hero Section */}
       <div 
         id="hero-section"
-        className="relative min-h-screen overflow-hidden flex items-center"
+        className="relative min-h-screen overflow-hidden flex items-center pt-16 md:pt-20"
         style={{
           backgroundImage: 'url(/images/hero-bg.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center'
         }}
       >
-        {/* Optional overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/40 to-primary/80 z-0"></div>
+        {/* Additional gradient at the bottom to ensure smooth transition to the night-gradient section */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-midnight to-transparent z-0"></div>
         
         <div className="container-custom relative z-10 py-16 md:py-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -253,34 +253,57 @@ export default function Home() {
       
       {/* Featured Books Section */}
       <Section 
-        className="bg-white"
+        className="night-gradient relative overflow-hidden"
         id="featured-books"
       >
-        <div className="text-center mb-12">
-          <motion.h2 
-            className="text-3xl md:text-5xl font-display text-primary mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        {/* Removing the mystical elements (bubbles) as requested */}
+        
+        <div className="relative flex justify-center items-center mb-12">
+          {/* Background book illustration */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 0.2, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
+            className="absolute w-60 h-60 md:w-80 md:h-80"
           >
-            Discover My Books
-          </motion.h2>
-          <motion.div 
-            className="w-20 h-1 bg-secondary mx-auto rounded-full"
-            initial={{ opacity: 0, width: 0 }}
-            whileInView={{ opacity: 1, width: 80 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          />
+            <Image
+              src="/images/illustrations/book.png"
+              alt=""
+              fill
+              className="object-contain filter drop-shadow-glow"
+              aria-hidden="true"
+            />
+          </motion.div>
+          
+          {/* Text content */}
+          <div className="text-center relative z-10">
+            <motion.h2 
+              className="text-3xl md:text-5xl font-display text-secondary mb-4 text-shadow-magical"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Discover My Books
+            </motion.h2>
+            <motion.div 
+              className="w-20 h-1 bg-secondary mx-auto rounded-full glow"
+              initial={{ opacity: 0, width: 0 }}
+              whileInView={{ opacity: 1, width: 80 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+          </div>
         </div>
         
-        <div ref={bookListRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        {/* Improved mobile responsiveness with smaller gap and padding on mobile */}
+        <div ref={bookListRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-4 md:px-0 mb-8 md:mb-12 relative z-10">
           
           {/* A Journey to the Light */}
           <Link href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }} className="group">
-            <div className="bg-gray-50 rounded-whimsical p-6 flex flex-col h-full hover:shadow-lg transition-all duration-300">
-              <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
+            <div className="bg-white/95 backdrop-blur-sm rounded-whimsical p-4 md:p-6 flex flex-col h-full transition-all duration-300 hover:translate-y-[-5px] book-card-glow">
+              <div className="relative w-full aspect-[2/3] mb-3 md:mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
                 </div>
                 <Image
@@ -290,10 +313,10 @@ export default function Home() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+              <h3 className="text-lg md:text-xl font-bold text-primary mb-1 md:mb-2 group-hover:text-accent transition-colors">
                 A Journey to the Light
               </h3>
-              <p className="text-gray-600 flex-grow mb-4">
+              <p className="text-sm md:text-base text-gray-600 flex-grow mb-3 md:mb-4">
                 Join Cat and her friends on a spiritual adventure as they discover the meaning of hope in the darkest of times.
               </p>
               <div className="flex items-center justify-between w-full gap-2">
@@ -302,18 +325,18 @@ export default function Home() {
                     e.stopPropagation();
                     window.open("https://www.amazon.com/Journey-Light-Bible-Companion-Chronicles/dp/1735359661/", "_blank");
                   }}
-                  className="inline-flex items-center justify-center rounded-whimsical transition-colors bg-primary text-white hover:bg-primary/90 px-4 py-2 text-sm font-medium flex-grow"
+                  className="inline-flex items-center justify-center rounded-whimsical transition-colors bg-primary text-white hover:bg-primary/90 px-3 md:px-4 py-2 text-xs md:text-sm font-medium flex-grow"
                 >
-                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                  Buy Now <ShoppingBag size={14} className="ml-1 md:ml-2" />
                 </button>
                 <button 
                   onClick={(e) => { 
                     e.stopPropagation();
                     setIsModalOpen(true); 
                   }}
-                  className="inline-flex items-center justify-center rounded-whimsical transition-colors border-primary text-primary hover:bg-primary/10 px-4 py-2 text-sm font-medium flex-grow"
+                  className="inline-flex items-center justify-center rounded-whimsical transition-colors border-primary text-primary hover:bg-primary/10 px-3 md:px-4 py-2 text-xs md:text-sm font-medium flex-grow"
                 >
-                  Bible Guide <Download size={16} className="ml-2" />
+                  Bible Guide <Download size={14} className="ml-1 md:ml-2" />
                 </button>
               </div>
             </div>
@@ -321,11 +344,14 @@ export default function Home() {
 
           {/* Cat Luker */}
           <div className="group cursor-pointer" onClick={() => window.location.href = '/cat-luker-dark-clock'}>
-            <div className="bg-primary/5 rounded-whimsical p-6 flex flex-col h-full hover:shadow-xl transition-all duration-300 border-2 border-accent/30 scale-105 relative">
-              <div className="absolute -top-3 right-4 bg-accent text-white px-3 py-1 rounded-full text-sm font-bold shadow-md">
+            <div className="bg-white/95 backdrop-blur-sm rounded-whimsical p-4 md:p-6 flex flex-col h-full transition-all duration-300 border-2 border-accent/30 scale-100 md:scale-105 relative hover:translate-y-[-5px] book-card-glow">
+              <div className="absolute -top-3 right-4 bg-accent text-white px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-bold shadow-md">
                 Featured
               </div>
-              <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-lg group-hover:shadow-xl transition-all">
+              <div className="absolute -top-3 left-4 bg-secondary text-primary-dark px-2 md:px-3 py-0.5 md:py-1 rounded-full text-xs md:text-sm font-bold shadow-md">
+                Illustrated!
+              </div>
+              <div className="relative w-full aspect-[2/3] mb-3 md:mb-4 rounded-whimsical overflow-hidden shadow-lg group-hover:shadow-xl transition-all">
                 <Image
                   src="/images/Catlukercover.png"
                   alt="Cat Luker: The Swamp Witch Chronicles"
@@ -333,16 +359,16 @@ export default function Home() {
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+              <h3 className="text-lg md:text-2xl font-bold text-primary mb-1 md:mb-2 group-hover:text-accent transition-colors">
                 Cat Luker: The Swamp Witch Chronicles
               </h3>
-              <p className="text-gray-600 flex-grow mb-4">
-                Set in 1930s rural Alabama during the Great Depression, this compelling tale follows three young friends as they confront the mysterious Swamp Witch.
+              <p className="text-sm md:text-base text-gray-600 flex-grow mb-3 md:mb-4">
+                A time-traveling historical fantasy set in 1930s rural Alabama, where three young friends confront the mysterious Swamp Witch and journey back to French-speaking Alabama of the past.
               </p>
               <div className="flex items-center justify-between">
                 <div className="flex text-yellow-400">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} fill="currentColor" />
+                    <Star key={i} size={14} className="md:w-4 md:h-4" fill="currentColor" />
                   ))}
                 </div>
                 <Button 
@@ -351,8 +377,9 @@ export default function Home() {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
+                  className="text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"
                 >
-                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                  Buy Now <ShoppingBag size={14} className="ml-1 md:ml-2" />
                 </Button>
               </div>
             </div>
@@ -360,10 +387,10 @@ export default function Home() {
           
           {/* Audio Book */}
           <div className="group cursor-pointer" onClick={() => window.location.href = '/audio-book'}>
-            <div className="bg-gray-50 rounded-whimsical p-6 flex flex-col h-full hover:shadow-lg transition-all duration-300">
-              <div className="relative w-full aspect-[2/3] mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
+            <div className="bg-white/95 backdrop-blur-sm rounded-whimsical p-4 md:p-6 flex flex-col h-full transition-all duration-300 hover:translate-y-[-5px] book-card-glow">
+              <div className="relative w-full aspect-[2/3] mb-3 md:mb-4 rounded-whimsical overflow-hidden shadow-md group-hover:shadow-lg transition-all">
                 <div className="absolute inset-0 flex items-center justify-center bg-primary/10 backdrop-blur-sm">
-                  <p className="text-primary font-bold">Coming Soon</p>
+                  <p className="text-primary font-bold text-sm md:text-base">Coming Soon</p>
                 </div>
                 <Image
                   src="/images/audiocover.png"
@@ -372,10 +399,10 @@ export default function Home() {
                   className="object-fill group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
-              <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+              <h3 className="text-lg md:text-xl font-bold text-primary mb-1 md:mb-2 group-hover:text-accent transition-colors">
                 Cat Luker: The Audio Experience
               </h3>
-              <p className="text-gray-600 flex-grow mb-4">
+              <p className="text-sm md:text-base text-gray-600 flex-grow mb-3 md:mb-4">
                 Revel in the magic of Cat Luker through the voice of grammy winner, Monroe Jones. Perfect for road trips and immersive storytelling!
               </p>
               <div className="flex items-center justify-end">
@@ -385,15 +412,16 @@ export default function Home() {
                   onClick={(e) => {
                     e.stopPropagation();
                   }}
+                  className="text-xs md:text-sm px-3 md:px-4 py-1.5 md:py-2"
                 >
-                  Buy Now <ShoppingBag size={16} className="ml-2" />
+                  Buy Now <ShoppingBag size={14} className="ml-1 md:ml-2" />
                 </Button>
               </div>
             </div>
           </div>
         </div>
-        <div className="text-center flex flex-col gap-4 items-center">
-          <Button href="/books" variant="secondary" size="lg">
+        <div className="text-center flex flex-col gap-4 items-center relative z-10">
+          <Button href="/books" variant="secondary" size="lg" className="hover:shadow-magic">
             View All Books
           </Button>
         </div>
@@ -401,55 +429,142 @@ export default function Home() {
       
       {/* About the Author */}
       <Section 
-        className="bg-gray-50"
+        className="night-gradient relative overflow-hidden"
         id="about-author"
+        animate={false}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="relative rounded-whimsical overflow-hidden aspect-square shadow-xl">
+        {/* Realistic night sky with stars - expanded to full width */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: '120vw', left: '-10vw' }}>
+          {/* Small twinkling stars - increased quantity and spread */}
+          {[...Array(60)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 120}%`,
+                width: `${Math.random() * 2 + 1}px`,
+                height: `${Math.random() * 2 + 1}px`,
+                backgroundColor: '#fff',
+                opacity: Math.random() * 0.7 + 0.3,
+                animation: `twinkle ${Math.random() * 4 + 3}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+          
+          {/* Medium stars with glow - increased quantity and spread */}
+          {[...Array(25)].map((_, i) => (
+            <div 
+              key={i + 100}
+              className="absolute rounded-full glow"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 120}%`,
+                width: `${Math.random() * 3 + 2}px`,
+                height: `${Math.random() * 3 + 2}px`,
+                backgroundColor: i % 3 === 0 ? '#F9D56E' : i % 3 === 1 ? '#fff' : '#B4E4FF',
+                boxShadow: `0 0 ${Math.random() * 4 + 2}px ${i % 3 === 0 ? '#F9D56E' : i % 3 === 1 ? '#fff' : '#B4E4FF'}`,
+                opacity: Math.random() * 0.5 + 0.5,
+                animation: `twinkle ${Math.random() * 5 + 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+          
+          {/* Larger, brighter stars - increased quantity and spread */}
+          {[...Array(10)].map((_, i) => (
+            <div 
+              key={i + 200}
+              className="absolute"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 120}%`,
+                width: `${Math.random() * 4 + 3}px`,
+                height: `${Math.random() * 4 + 3}px`,
+                background: 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%)',
+                boxShadow: '0 0 10px 2px rgba(255, 255, 255, 0.7)',
+                borderRadius: '50%',
+                opacity: Math.random() * 0.4 + 0.6,
+                animation: `pulse ${Math.random() * 6 + 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+          <div className="relative book-wrapper">
+            <div className="relative rounded-whimsical overflow-hidden aspect-square shadow-xl book-card-glow">
               <Image
                 src="/images/gregwkids.jpg"
                 alt="G.B. Sollie - Author Portrait"
                 fill
                 className="object-cover"
               />
+              
             </div>
-            <div className="absolute -bottom-6 -right-6 bg-secondary p-4 rounded-whimsical shadow-lg">
+            
+            <motion.div 
+              className="absolute -bottom-6 -right-6 bg-secondary p-4 rounded-whimsical shadow-lg"
+              whileHover={{ rotate: 10, scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            >
               <Award className="w-10 h-10 text-primary" />
-            </div>
-          </motion.div>
+            </motion.div>
+            
+            {/* Decorative hat replacing the star */}
+            <motion.div 
+              className="absolute -top-16 -left-16 w-36 h-36"
+            >
+              <Image 
+                src="/images/illustrations/hat-color.png"
+                alt="Decorative hat"
+                fill
+                className="object-contain"
+              />
+            </motion.div>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-display text-primary mb-6">Meet G.B. Sollie</h2>
-            <div className="prose prose-lg text-gray-800 font-medium">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-display text-secondary mb-6 text-shadow-magical">Meet G.B. Sollie</h2>
+            <div className="prose prose-lg text-white/90 font-medium">
               <p>
                 My journey as an author began with the stories I heard as a child, passed down through generations in Aimwell, Alabama. These tales of family, faith, and adventure shaped my worldview and eventually inspired the Cat Luker series.
               </p>
               <p>
                 I believe that children&apos;s literature has the power to shape young minds and hearts, teaching them about courage, kindness, and the enduring power of love.
               </p>
-              <blockquote className="not-italic border-l-4 border-secondary pl-4 my-6 text-gray-900">
+              <blockquote className="not-italic pl-4 my-6 text-white relative border-l-0">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-secondary via-accent to-secondary-light rounded-full glow"></div>
                 &quot;If I could bottle-up what my dear parents meant to me and the impact they had on our family, I would give it away. And this book is as close as I can come to doing that.&quot;
               </blockquote>
             </div>
-            <div className="mt-6">
-              <Button href="/about" variant="secondary">
+            <div className="mt-6 relative inline-block">
+              <Button 
+                href="/about" 
+                variant="primary" 
+                className="relative z-10 btn-primary"
+              >
                 Read My Story
               </Button>
             </div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Add keyframes for the twinkling and pulsing stars */}
+        <style jsx global>{`
+          @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+          }
+          
+          @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+            100% { transform: scale(0.9); opacity: 0.7; }
+          }
+        `}</style>
       </Section>
       
       {/* Testimonials */}
@@ -507,22 +622,12 @@ export default function Home() {
   
       
       {/* Newsletter Signup */}
+
       <Section 
-        className="bg-secondary relative"
+        className="bg-primary relative"
         id="newsletter"
+        bgImage="/images/moviecoverart.png"
       >
-        {/* Add subtle background image */}
-        <div 
-          className="absolute inset-0 opacity-10 z-0 pointer-events-none"
-          style={{
-            backgroundImage: 'url(/images/trblackcat.png)',
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left 100px bottom 0px',
-            mixBlendMode: 'soft-light'
-          }}
-        ></div>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
           <div>
             <motion.h2
@@ -530,7 +635,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-4xl md:text-5xl font-display text-primary-dark mb-6"
+              className="text-4xl md:text-5xl font-display text-white mb-6"
             >
               Join the Adventure
             </motion.h2>
@@ -539,7 +644,7 @@ export default function Home() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl text-primary-dark mb-4"
+              className="text-xl text-white mb-4"
             >
               Sign up for:
             </motion.p>
@@ -551,13 +656,13 @@ export default function Home() {
               className="space-y-3 mb-6"
             >
               {[
-                "Free Bible Study Guide",
+                "Free Bible Study Guide - A unique companion that bridges faith and adventure",
                 "Updates on new releases",
                 "Newsletter",
               ].map((item, index) => (
                 <li key={index} className="flex items-start">
-                  <span className="w-6 h-6 rounded-full bg-primary flex items-center justify-center mr-3 text-white">✓</span>
-                  <span className="text-primary-dark">{item}</span>
+                  <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center mr-3 text-primary">✓</span>
+                  <span className="text-white">{item}</span>
                 </li>
               ))}
             </motion.ul>
@@ -569,13 +674,13 @@ export default function Home() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-white p-8 rounded-whimsical shadow-lg"
+            className="bg-white p-8 rounded-whimsical shadow-lg relative"
             onSubmit={(e) => e.preventDefault()}
           >
             <h3 className="text-2xl font-bold text-primary mb-6">Sign Up Today</h3>
             <div className="space-y-4">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-sm font-medium text-black mb-1">
                   Your Name
                 </label>
                 <input
@@ -583,12 +688,12 @@ export default function Home() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black placeholder-black"
                   placeholder="John Doe"
                 />
               </div>
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="city" className="block text-sm font-medium text-black mb-1">
                   Your City
                 </label>
                 <input
@@ -596,12 +701,12 @@ export default function Home() {
                   id="city"
                   name="city"
                   required
-                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black placeholder-black"
                   placeholder="Birmingham"
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-black mb-1">
                   Email Address
                 </label>
                 <input
@@ -609,7 +714,7 @@ export default function Home() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                  className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black placeholder-black"
                   placeholder="john@example.com"
                 />
               </div>
@@ -618,7 +723,7 @@ export default function Home() {
                   Get Free Bible Study Guide
                 </Button>
               </div>
-              <p className="text-xs text-gray-500 mt-4">
+              <p className="text-xs text-black mt-4">
                 By signing up, you agree to our <Link href="/privacy-policy" className="underline">Privacy Policy</Link>. We respect your privacy and will never share your information.
               </p>
             </div>

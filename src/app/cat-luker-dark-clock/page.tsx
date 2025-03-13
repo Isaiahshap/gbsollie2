@@ -65,8 +65,13 @@ export default function CatLukerDarkClockPage() {
                   ref={titleRef}
                   className="text-4xl md:text-5xl lg:text-6xl font-display leading-none mb-4"
                 >
-                  Cat Luker: The Swamp Witch Chronicles
+                  Cat Luker: The Dark Clock
+                  <br/>
                 </h1>
+                <div className="mb-3">
+                  <span className="bg-secondary text-primary-dark px-3 py-1 rounded-full text-sm font-bold shadow-md inline-block mr-2">Book One</span>
+                  <span className="bg-white/20 backdrop-blur-sm text-white px-3 py-1 rounded-full text-sm font-medium inline-block">The Swamp Witch Chronicles</span>
+                </div>
                 <p className="text-xl opacity-90 mb-6">
                   A tale of courage, friendship, and faith in 1930s Alabama
                 </p>
@@ -88,6 +93,12 @@ export default function CatLukerDarkClockPage() {
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <div className="relative w-[300px] h-[450px] mx-auto drop-shadow-2xl">
+                <div className="absolute -top-5 -right-5 bg-secondary text-primary-dark px-4 py-2 rounded-full font-bold shadow-lg z-10 transform rotate-12">
+                  Illustrated Edition!
+                </div>
+                <div className="absolute -top-5 left-5 bg-primary text-white px-4 py-2 rounded-full font-bold shadow-lg z-10">
+                  Book One
+                </div>
                 <Image 
                   src="/images/Catlukercover.png" 
                   alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
@@ -162,6 +173,7 @@ export default function CatLukerDarkClockPage() {
       >
         <div className="text-center mb-12">
           <h2 className="text-primary mb-4">The Adventure Begins</h2>
+          <p className="text-lg text-gray-600">Book One in the Cat Luker Series</p>
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
         </div>
         
@@ -180,7 +192,7 @@ export default function CatLukerDarkClockPage() {
               At the bottom of the Great Depression in 1930s rural Alabama, three young friends- Cat, Little Preacher, and Jane Alice- form a secret alliance to do battle with the Swamp Witch. After a dare from her brothers, Cat comes face-to-face with the mysterious witch and barely escapes her clutches. Afraid of what she has found, she enlists her two friends on a mission to save their small town from the evil lurking in the swamp.
             </p>
             <p>
-              This is a coming-of-age morality tale that tests their courage and builds their faith. As the plot thickens, they call on God for deliverance.
+              This beautifully <strong>illustrated time-traveling adventure</strong> takes readers back to a forgotten era of French-speaking Alabama. As our heroes journey through time, they discover historical secrets and face challenges that test their faith and courage. This coming-of-age morality tale interweaves historical fantasy with spiritual growth as the children call on God for deliverance.
             </p>
             <div className="not-prose mt-6">
               <h3 className="text-primary font-bold text-xl mb-4">Perfect For:</h3>
@@ -200,6 +212,14 @@ export default function CatLukerDarkClockPage() {
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
                   Faith-based learning environments
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
+                  Fans of time travel and historical fantasy
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
+                  Series readers looking for a new fantasy adventure
                 </li>
               </ul>
             </div>
@@ -280,7 +300,7 @@ export default function CatLukerDarkClockPage() {
             <div className="text-center md:text-left">
               <h2 className="text-primary-dark text-3xl md:text-4xl font-display mb-6">Begin Your Adventure Today</h2>
               <p className="text-primary-dark text-lg mb-8">
-                Join Cat Luker and friends on an unforgettable journey of courage, faith, and friendship that will inspire young readers and families alike.
+                Start the Cat Luker series with Book One: The Dark Clock. Join Cat and friends on an unforgettable journey through time to French-speaking Alabama in this beautifully illustrated adventure of courage, faith, and friendship.
               </p>
               
               <div className="space-y-4">

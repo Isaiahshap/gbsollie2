@@ -19,12 +19,20 @@ export default function AboutPage() {
     <>
       {/* Hero Section */}
       <Section 
-        className="bg-primary text-white"
+        className="bg-primary text-white relative bg-movie-cover"
         id="about-hero"
         fullHeight
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div>
+        <style jsx global>{`
+          .bg-movie-cover {
+            background-image: url('/images/moviecoverart.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        `}</style>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
+          <div className="bg-blue-900/80 p-6 rounded-lg shadow-xl backdrop-blur-sm">
             <motion.h1
               className="text-4xl md:text-5xl lg:text-6xl font-display mb-6"
               initial={{ opacity: 0, y: 20 }}
@@ -135,6 +143,41 @@ export default function AboutPage() {
               I have a bunch of grandkids, and counting, and I am reminded
               each day of how important this next generation will be.
             </p>
+          </div>
+        </div>
+      </Section>
+
+      {/* The Origins of Cat Luker */}
+      <Section 
+        className="bg-secondary"
+        id="cat-luker-origins"
+      >
+        <div className="text-center mb-12">
+          <h2 className="text-primary mb-4">The Origins of Cat Luker</h2>
+          <div className="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="prose prose-lg max-w-none">
+            <p className="text-black">
+              Cat Luker was almost accidentally created after numerous carpool trips with my granddaughter. As I would drive her to school, I found myself making up stories to entertain her and the other kids during these rides.
+            </p>
+            <p className="text-black">
+              What began as simple car ride entertainment soon evolved into something more. I started recording these improvised tales, and before I knew it, they had taken on a life of their own, gradually shaping the character and world of Cat Luker.
+            </p>
+            <p className="text-black">
+              The character of Cat Luker is also deeply rooted in my own upbringing in Alabama. The values, experiences, and countryside adventures of my childhood found their way into these stories, creating a bridge between generations and preserving pieces of my heritage in a form that could be shared with young readers today.
+            </p>
+          </div>
+          
+          <div className="relative aspect-square">
+            <Image 
+              src="/images/trblackcat.png" 
+              alt="Cat Luker" 
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
           </div>
         </div>
       </Section>
