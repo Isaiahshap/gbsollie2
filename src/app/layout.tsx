@@ -1,11 +1,8 @@
-'use client';
-
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
-import { DefaultSeo } from 'next-seo';
 import "./globals.css";
+import { Metadata } from "next";
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -29,6 +26,18 @@ const nunito = Nunito({
   weight: ["400", "500", "600", "700"],
 });
 
+export const metadata: Metadata = {
+  title: {
+    template: '%s | G.B. Sollie',
+    default: 'G.B. Sollie | Children\'s Fantasy Author',
+  },
+  description: 'G.B. Sollie is an author of captivating children\'s fantasy books.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+  themeColor: '#122848',
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,28 +45,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <meta name="theme-color" content="#122848" />
-        <link rel="icon" href="/favicon.ico" />
-        <DefaultSeo
-          titleTemplate="%s | G.B. Sollie"
-          defaultTitle="G.B. Sollie | Children's Fantasy Author"
-          additionalLinkTags={[
-            {
-              rel: 'icon',
-              href: '/favicon.ico',
-            },
-          ]}
-        />
-      </head>
       <body
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-grow pt-16">
+        <ClientLayout>
           {children}
-        </main>
-        <Footer />
+        </ClientLayout>
       </body>
     </html>
   );

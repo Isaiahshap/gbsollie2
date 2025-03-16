@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
@@ -9,77 +9,8 @@ import { ArrowRight, Star, Award, Mail, Download, ShoppingBag } from 'lucide-rea
 import { Button } from '@/components/ui/Button';
 import Section from '@/components/ui/Section';
 import NewsletterModal from '@/components/ui/NewsletterModal';
+import Book3D from '@/components/ui/Book3D';
 import { useStaggerAnimation } from '@/lib/animations';
-
-export function Book3D({ imageSrc, alt, className = '' }: { imageSrc: string; alt: string; className?: string }) {
-  const bookRef = useRef<HTMLDivElement>(null);
-  
-  useEffect(() => {
-    const book = bookRef.current;
-    if (!book) return;
-    
-    let requestId: number;
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-    let currentRotateX = 0;
-    let currentRotateY = 0;
-    
-    // Smoother animation with lerping
-    const animate = () => {
-      // Smooth interpolation with lower factor for more gradual movement
-      currentRotateX += (targetRotateX - currentRotateX) * 0.08;
-      currentRotateY += (targetRotateY - currentRotateY) * 0.08;
-      
-      // Apply transform with smoother values
-      book.style.transform = `rotateY(${currentRotateY}deg) rotateX(${currentRotateX}deg)`;
-      
-      // Continue animation loop
-      requestId = requestAnimationFrame(animate);
-    };
-    
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = book.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      // Calculate rotation based on mouse position - more subtle (max 3 degrees)
-      targetRotateY = ((e.clientX - centerX) / (rect.width / 2)) * 3;
-      targetRotateX = ((centerY - e.clientY) / (rect.height / 2)) * 2;
-    };
-    
-    const handleMouseLeave = () => {
-      // Smoothly return to original position
-      targetRotateX = 0;
-      targetRotateY = 0;
-    };
-    
-    // Start animation loop
-    requestId = requestAnimationFrame(animate);
-    
-    // Listen for mouse events
-    document.addEventListener('mousemove', handleMouseMove);
-    book.addEventListener('mouseleave', handleMouseLeave);
-    
-    return () => {
-      // Clean up
-      document.removeEventListener('mousemove', handleMouseMove);
-      book.removeEventListener('mouseleave', handleMouseLeave);
-      cancelAnimationFrame(requestId);
-    };
-  }, []);
-  
-  return (
-    <div ref={bookRef} className={`book-3d ${className}`}>
-      <div className="book-pages"></div>
-      <div className="book-pages-edge"></div>
-      <div className="book-cover">
-        <Image src={imageSrc} alt={alt} fill className="object-cover" />
-      </div>
-      <div className="book-spine"></div>
-      <div className="book-glow"></div>
-    </div>
-  );
-}
 
 export default function Home() {
   // Refs for animations
@@ -89,6 +20,14 @@ export default function Home() {
   
   // Add state for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Add state for client-side rendering detection
+  const [isClient, setIsClient] = useState(false);
+  
+  // Set isClient to true when the component mounts
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Stagger animation for book list
   useStaggerAnimation(bookListRef as React.RefObject<HTMLElement>);
@@ -206,11 +145,13 @@ export default function Home() {
                 } 
               }}
             >
-              <Book3D 
-                imageSrc="/images/Catlukercover.png"
-                alt="Cat Luker: The Swamp Witch Chronicles"
-                className="h-[500px] w-[350px] mx-auto"
-              />
+              {isClient && (
+                <Book3D 
+                  imageSrc="/images/Catlukercover.png"
+                  alt="Cat Luker: The Swamp Witch Chronicles"
+                  className="h-[500px] w-[350px] mx-auto"
+                />
+              )}
             </motion.div>
           </div>
         </div>
@@ -840,11 +781,13 @@ export default function Home() {
       </Section>
       
       {/* Use the NewsletterModal component */}
-      <NewsletterModal 
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleNewsletterSubmit}
-      />
+      {isClient && (
+        <NewsletterModal 
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleNewsletterSubmit}
+        />
+      )}
     </>
   );
 }
