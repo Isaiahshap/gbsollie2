@@ -468,6 +468,9 @@ export default function Home() {
                 opacity: Math.random() * 0.5 + 0.5,
                 animation: `twinkle ${Math.random() * 5 + 4}s ease-in-out infinite alternate`,
                 animationDelay: `${Math.random() * 5}s`,
+                pointerEvents: 'none', // Prevent hover interactions
+                willChange: 'opacity, box-shadow', // Performance optimization
+                transform: 'translateZ(0)' // Hardware acceleration
               }}
             />
           ))}

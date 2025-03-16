@@ -19,7 +19,10 @@ const Star = ({ size, top, left, delay, duration }: { size: number, top: string,
       height: size,
       top,
       left,
-      backgroundColor: "rgba(255, 255, 255, 0)" // Start completely transparent
+      backgroundColor: "rgba(255, 255, 255, 0)", // Start completely transparent
+      pointerEvents: "none", // Prevent hover interactions
+      willChange: "opacity, transform, backgroundColor", // Performance optimization
+      transform: "translateZ(0)" // Enable hardware acceleration
     }}
     initial={{
       opacity: 0,
@@ -35,6 +38,7 @@ const Star = ({ size, top, left, delay, duration }: { size: number, top: string,
       repeat: Infinity,
       repeatType: "reverse",
       delay: delay + 0.5, // Add extra delay to ALL stars
+      ease: "easeInOut" // Add easing for smoother animation
     }}
   />
 );
@@ -76,7 +80,7 @@ export default function AboutPage() {
   
   useEffect(() => {
     if (mounted) {
-      const starCount = 600; // Further increased for better coverage
+      const starCount = 300; // Reduced from 600 for better performance while maintaining visual appeal
       
       // Prime numbers for creating pseudo-random distribution
       const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97];
@@ -91,19 +95,19 @@ export default function AboutPage() {
         let topPercentage, leftPercentage;
         
         // Add extra stars to the corners and edges
-        if (i < 100) {
+        if (i < 50) {
           // Top left corner
           topPercentage = (seed1 % 20);
           leftPercentage = (seed2 % 20);
-        } else if (i < 200) {
+        } else if (i < 100) {
           // Top right corner
           topPercentage = (seed1 % 20);
           leftPercentage = 80 + (seed2 % 20);
-        } else if (i < 300) {
+        } else if (i < 150) {
           // Bottom left corner
           topPercentage = 80 + (seed1 % 20);
           leftPercentage = (seed2 % 20);
-        } else if (i < 400) {
+        } else if (i < 200) {
           // Bottom right corner
           topPercentage = 80 + (seed1 % 20);
           leftPercentage = 80 + (seed2 % 20);
@@ -170,7 +174,7 @@ export default function AboutPage() {
               transition={{ duration: 1 }}
             >
               {/* Stars - Expanded coverage with larger area */}
-              <div className="absolute inset-0" style={{ width: "100%", height: "100%" }}>
+              <div className="absolute inset-0" style={{ width: "100%", height: "100%", overflow: "hidden", pointerEvents: "none" }}>
                 {starsReady && stars.map((star) => (
                   <Star
                     key={star.id}
@@ -208,33 +212,36 @@ export default function AboutPage() {
         
         <div className="container-custom relative z-10 min-h-screen flex flex-col items-center justify-center">
           {/* Central Image with Faded Edges */}
-          <div className="relative w-full max-w-md mx-auto mb-8">
+          <div className="relative w-full max-w-md mx-auto mb-8 transform-gpu">
             <motion.div 
-              className="relative aspect-square"
+              className="relative aspect-square transform-gpu"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1.2 }}
               whileHover={{ 
                 scale: 1.03,
-                transition: { duration: 0.3 } 
+                transition: { duration: 0.3, ease: "easeInOut" } 
               }}
             >
               {/* Decorative Circle */}
               <motion.div 
                 className="absolute -inset-8 rounded-full bg-gradient-to-br from-secondary/70 to-primary/40 blur-md"
+                style={{ pointerEvents: "none", willChange: "transform" }}
                 animate={{
                   scale: [1, 1.05, 1],
                 }}
                 transition={{
                   duration: 4,
                   repeat: Infinity,
-                  repeatType: "reverse"
+                  repeatType: "reverse",
+                  ease: "easeInOut"
                 }}
               ></motion.div>
               
               {/* Additional outer glow */}
               <motion.div 
                 className="absolute -inset-12 rounded-full bg-gradient-to-r from-secondary/30 to-primary/20 blur-xl"
+                style={{ pointerEvents: "none", willChange: "transform, opacity" }}
                 animate={{
                   scale: [1, 1.08, 1],
                   opacity: [0.4, 0.7, 0.4],
@@ -243,13 +250,15 @@ export default function AboutPage() {
                   duration: 5,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  delay: 0.5
+                  delay: 0.5,
+                  ease: "easeInOut"
                 }}
               ></motion.div>
               
               {/* Intense center glow */}
               <motion.div 
                 className="absolute -inset-2 rounded-full bg-gradient-to-br from-yellow-300/60 to-amber-500/30 blur-sm"
+                style={{ pointerEvents: "none", willChange: "transform, opacity" }}
                 animate={{
                   scale: [1, 1.1, 1],
                   opacity: [0.6, 0.8, 0.6],
@@ -258,7 +267,7 @@ export default function AboutPage() {
                   duration: 3,
                   repeat: Infinity,
                   repeatType: "reverse",
-                  delay: 0.2
+                  ease: "easeInOut"
                 }}
               ></motion.div>
               

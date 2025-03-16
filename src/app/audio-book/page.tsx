@@ -178,8 +178,8 @@ export default function AudioBookPage() {
           
           <div className="hidden md:block relative h-[500px] w-full rounded-whimsical overflow-hidden shadow-xl">
             <Image 
-              src="/images/audio-studio.jpg" 
-              alt="Recording studio" 
+              src="/images/drama.png" 
+              alt="Dramatic audio experience" 
               fill
               className="object-cover"
             />

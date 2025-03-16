@@ -35,7 +35,7 @@ const navItems = [
     dropdownContent: books
   },
   { name: 'About', path: '/about' },
-  { name: 'News', path: '/news' },
+  { name: 'Blog', path: '/blog' },
   { name: 'Contact', path: '/contact' },
 ];
 

@@ -19,7 +19,7 @@ export default function Footer() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Books', href: '/books' },
-    { name: 'Media', href: '/news' },
+    { name: 'Blog', href: '/blog' },
     { name: 'Contact', href: '/contact' },
   ];
 
@@ -221,9 +221,14 @@ export default function Footer() {
         {/* Copyright and Legal Links */}
         <div className="pt-6 mt-6 border-t border-gray-700/40 backdrop-blur-sm">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-300 mb-4 md:mb-0">
-              © {currentYear} G.B. Sollie. All rights reserved.
-            </p>
+            <div className="flex flex-col items-center md:items-start">
+              <p className="text-sm text-gray-300 mb-2 md:mb-0">
+                © {currentYear} G.B. Sollie. All rights reserved.
+              </p>
+              <p className="text-sm text-gray-300 mb-4 md:mb-0">
+                Website made with <span className="text-red-500 mx-0.5">❤</span> by <a href="https://yeshaya.dev" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary-light transition-colors hover:underline">yeshaya.dev</a>
+              </p>
+            </div>
             
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
               <Link href="/privacy-policy" className="text-sm text-white hover:text-secondary-light transition-colors">

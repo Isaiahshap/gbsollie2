@@ -3,13 +3,25 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
+// Define proper ScrollTrigger type
+type ScrollTriggerInstance = {
+  vars: { trigger: Element | null };
+  kill: () => void;
+};
+
+type ScrollTriggerStatic = {
+  getAll: () => ScrollTriggerInstance[];
+};
+
 // Only import ScrollTrigger on the client side
-let ScrollTrigger: typeof import('gsap/ScrollTrigger').ScrollTrigger | undefined;
+let ScrollTrigger: ScrollTriggerStatic | undefined;
+
+// Load ScrollTrigger only on the client side
 if (typeof window !== 'undefined') {
-  // Dynamic import for ScrollTrigger
+  // Import ScrollTrigger dynamically
   import('gsap/ScrollTrigger').then(module => {
-    ScrollTrigger = module.ScrollTrigger;
-    gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger = module.ScrollTrigger as ScrollTriggerStatic;
+    gsap.registerPlugin(module.ScrollTrigger);
   });
 }
 
@@ -111,7 +123,9 @@ const setupFloatingAnimation = (
 // React hooks that use the setup functions
 export const useTextReveal = (elementRef: React.RefObject<HTMLElement>) => {
   useEffect(() => {
-    if (!elementRef.current) return;
+    // Only run on the client side
+    if (typeof window === 'undefined' || !elementRef.current) return;
+    
     setupTextReveal(elementRef.current);
   }, [elementRef]);
 };
@@ -121,7 +135,8 @@ export const useParallaxEffect = (
   options = { speed: 0.5, direction: 'y' as 'x' | 'y' }
 ) => {
   useEffect(() => {
-    if (!elementRef.current) return;
+    // Only run on the client side
+    if (typeof window === 'undefined' || !elementRef.current) return;
     
     // Capture the current value of the ref
     const element = elementRef.current;
@@ -131,7 +146,7 @@ export const useParallaxEffect = (
     // Cleanup
     return () => {
       if (typeof window !== 'undefined' && ScrollTrigger) {
-        ScrollTrigger.getAll().forEach((st: import('gsap/ScrollTrigger').ScrollTrigger) => {
+        ScrollTrigger.getAll().forEach((st: ScrollTriggerInstance) => {
           if (st.vars.trigger === element) {
             st.kill();
           }
@@ -156,7 +171,7 @@ export const useStaggerAnimation = (
       
       return () => {
         if (typeof window !== 'undefined' && ScrollTrigger) {
-          ScrollTrigger.getAll().forEach((st: import('gsap/ScrollTrigger').ScrollTrigger) => {
+          ScrollTrigger.getAll().forEach((st: ScrollTriggerInstance) => {
             if (st.vars.trigger === element) {
               st.kill();
             }
@@ -172,7 +187,9 @@ export const useFloatingAnimation = (
   options = { y: 15, duration: 3, delay: 0 }
 ) => {
   useEffect(() => {
-    if (!elementRef.current) return;
+    // Only run on the client side
+    if (typeof window === 'undefined' || !elementRef.current) return;
+    
     const timeline = setupFloatingAnimation(elementRef.current, options);
     
     // Cleanup
