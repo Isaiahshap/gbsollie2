@@ -113,13 +113,20 @@ export default function AudioBookPage() {
           <div className="bg-gray-50 p-8 rounded-whimsical shadow-lg border border-gray-100">
             <div className="prose prose-lg text-black">
               <p>
-                Immerse yourself in the world of 1930s rural Alabama through the voice of G.B. Sollie, bringing his own characters to life in this captivating audio adaptation.
+                Immerse yourself in the world of 1930s rural Alabama through the voice of
+                Monroe Jones. G.B. Sollie dreamed of bringing the book to life in this captivating
+                audio adaptation and Monroe delivered.
               </p>
               <p>
-                More than just a narration, this audio experience features subtle sound effects and ambient music that transport listeners directly into Cat Luker&apos;s world. From the chirping of birds in the Big Oak to the eerie sounds of the swamp, every detail has been carefully crafted.
+                More than just a narration, this audio experience features subtle sound effects and ambient music that transport
+                listeners directly into Cat Luker&apos;s world. From the chirping of birds in the Big Oak
+                to the eerie sounds of the swamp, every detail has been carefully crafted.
               </p>
               <p>
-                Whether you&apos;re a long-time fan of the Cat Luker series or discovering this magical world for the first time, the audio experience offers a fresh way to connect with these beloved characters and their timeless story of courage, faith, and friendship.
+                Whether you&apos;re a long-time fan of the Cat Luker series or discovering this magical
+                world for the first time, the audio experience offers a fresh way to connect with
+                these beloved characters and their timeless story of courage, faith, and
+                friendship.
               </p>
             </div>
           </div>
@@ -148,10 +155,15 @@ export default function AudioBookPage() {
           
           <div className="prose prose-lg max-w-none text-black">
             <p>
-              Step into the world of 1930s Alabama with this immersive audio experience narrated by author G.B. Sollie. Listen as the adventures of Cat, Little Preacher, and Jane Alice come alive through professional narration enhanced with ambient sounds and music.
+              Step into the vivid world of Cat Luker with this immersive audio experience
+              narrated and produced by grammy winner Monroe Jones. Listen as the
+              adventures of Cat, Little Preacher, and Jane Alice come alive through
+              professional narration enhanced with ambient sounds and music.
             </p>
             <p>
-              This is more than just an audiobook - it&apos;s a complete auditory journey that captures the essence of the original story while adding new dimensions through sound.
+              This is more than just an audiobook - it&apos;s a complete auditory journey that captures the
+              essence of the original story while adding new dimensions through sound. So
+              real, it is like a movie in the mind!
             </p>
             <div className="not-prose mt-6">
               <h3 className="text-primary font-bold text-xl mb-4">Audio Features:</h3>
@@ -167,6 +179,10 @@ export default function AudioBookPage() {
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
                   Ambient sound effects from the Alabama countryside
+                </li>
+                <li className="flex items-center">
+                  <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>
+                  Dramatized adaptation with sound effects and music
                 </li>
                 <li className="flex items-center">
                   <span className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center mr-3 text-primary">✓</span>

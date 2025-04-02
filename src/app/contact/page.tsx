@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, CheckCircle, Sparkles, MessageSquare, BookOpen, Users, Coffee, ArrowRight } from 'lucide-react';
+import { Mail, Send, CheckCircle, MessageSquare, BookOpen, Users, Coffee, ArrowRight, Sparkles, MapPin } from 'lucide-react';
 
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
@@ -428,23 +428,12 @@ export default function ContactPage() {
                 icon: <Mail size={32} />,
                 title: 'Send an Owl',
                 subtitle: 'Email Me',
-                info: 'contact@gbsollie.com',
-                link: 'mailto:contact@gbsollie.com',
+                info: 'greg.sollie@gmail.com',
+                link: 'mailto:greg.sollie@gmail.com',
                 color: 'from-secondary/90 to-yellow-600/90',
                 borderColor: 'border-secondary',
                 iconBg: 'bg-gradient-to-br from-yellow-300 to-secondary',
                 delay: 0
-              },
-              {
-                icon: <Phone size={32} />,
-                title: 'Magic Mirror',
-                subtitle: 'Call Me',
-                info: '(555) 123-4567',
-                link: 'tel:+15551234567',
-                color: 'from-accent/90 to-purple-700/90',
-                borderColor: 'border-accent-purple',
-                iconBg: 'bg-gradient-to-br from-purple-300 to-accent-purple',
-                delay: 0.2
               },
               {
                 icon: <MapPin size={32} />,
@@ -456,6 +445,15 @@ export default function ContactPage() {
                 borderColor: 'border-primary-light',
                 iconBg: 'bg-gradient-to-br from-blue-300 to-primary',
                 delay: 0.4
+              },
+              {
+                icon: <Coffee size={32} />,
+                title: 'Magic Mirror',
+                subtitle: 'Use the form',
+                info: 'Send a message',
+                link: '#contact-form',
+                color: 'from-accent/90 to-purple-700/90',
+                
               }
             ].map((item, index) => (
               <motion.div 
@@ -464,7 +462,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 + item.delay }}
+                transition={{ duration: 0.5, delay: 0.3 + (item.delay || 0) }}
               >
                 {/* Card with glass morphism effect */}
                 <div className={`relative rounded-whimsical overflow-hidden group`}>

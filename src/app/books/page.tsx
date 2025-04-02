@@ -191,10 +191,13 @@ export default function BooksPage() {
             <div className="flex-grow">
               <h3 className="text-3xl text-primary font-bold mb-4">A Journey to the Light</h3>
               <p className="text-gray-700 mb-6 text-lg">
-                Join Cat and her friends on a new adventure as they discover the meaning of hope in the darkest of times. This upcoming installment in the Cat Luker series delves deeper into themes of faith, perseverance, and the power of friendship.
+                Join Cat and her friends on a spiritual adventure as they discover the meaning of hope in the darkest of times. This new extension to the Cat Luker series delves deeper into themes of faith, perseverance, and the power of friendship.
               </p>
               <p className="text-gray-700 mb-6">
-                Join the newsletter to be the first to know when this book becomes available, and receive exclusive content and special offers.
+                This book is available in print form on Amazon and as an eBook, but please note that because it has a textbook format it is not available on Kindle. You can read it on other devices, such as tablets and smartphones (see full list on Amazon).
+              </p>
+              <p className="text-gray-700 mb-6">
+                Join the newsletter to be the first to know more about the book and receive exclusive content and special offers. We are in the process of producing an online Bible Study video series for example.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button href="/a-journey-to-the-light" variant="primary">

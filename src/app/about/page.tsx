@@ -9,6 +9,7 @@ import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { useTextReveal } from '@/lib/animations';
 import GoldCard from '@/components/ui/GoldCard';
+import AudioPlayer from '@/components/ui/AudioPlayer';
 
 // Star component for the night sky background
 const Star = ({ size, top, left, delay, duration }: { size: number, top: string, left: string, delay: number, duration: number }) => (
@@ -335,30 +336,16 @@ export default function AboutPage() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Storyteller, Grandparent, and Creator of Magical Adventures
+            Storyteller, Grandaddy, Creator of Christian Adventures
           </motion.p>
 
           {/* Bio Text - Removed as requested since it will be in the gold card section */}
 
           {/* Enhanced Floating Illustrations - Repositioned to the sides */}
-          {/* Bear */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+          {/* Bear - Static and larger */}
+          <div 
+            className="absolute w-32 h-32 md:w-48 md:h-48"
             style={{ top: '15%', left: '2%' }}
-            animate={{
-              y: [0, -15, 0],
-              x: [0, 10, 0],
-              rotate: [0, 5, 0],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
           >
             <Image 
               src="/images/illustrations/bear.png" 
@@ -366,55 +353,13 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
 
-          {/* Monkey */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
-            style={{ bottom: '10%', right: '2%' }}
-            animate={{
-              y: [0, 20, 0],
-              x: [0, -15, 0],
-              rotate: [0, -8, 0],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 0.5
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
-          >
-            <Image 
-              src="/images/illustrations/monkey.png" 
-              alt="Monkey illustration" 
-              fill
-              className="object-contain"
-            />
-          </motion.div>
-
-          {/* Snake - with circular path */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+    
+          {/* Snake - Static and larger */}
+          <div 
+            className="absolute w-32 h-32 md:w-48 md:h-48"
             style={{ top: '20%', right: '3%' }}
-            animate={{
-              x: [0, 20, 0, -20, 0],
-              y: [0, 15, 30, 15, 0],
-              rotate: [0, 10, 0, -10, 0],
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 1
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
           >
             <Image 
               src="/images/illustrations/snake.png" 
@@ -422,28 +367,12 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
 
-          {/* Squirrel */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+          {/* Squirrel - Static and larger */}
+          <div 
+            className="absolute w-32 h-32 md:w-48 md:h-48"
             style={{ bottom: '20%', left: '3%' }}
-            animate={{
-              y: [0, -10, -20, -10, 0],
-              x: [0, -5, 0, 5, 0],
-              rotate: [0, -5, 0, 5, 0],
-              scale: [1, 1.05, 1, 1.05, 1],
-            }}
-            transition={{
-              duration: 7,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 1.5
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
           >
             <Image 
               src="/images/illustrations/squirrel.png" 
@@ -451,28 +380,12 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
 
-          {/* Book */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+          {/* Book - Static and larger */}
+          <div 
+            className="absolute w-32 h-32 md:w-48 md:h-48"
             style={{ top: '40%', left: '5%' }}
-            animate={{
-              y: [0, 15, 30, 15, 0],
-              x: [0, 10, 0, -10, 0],
-              rotate: [0, 8, 0, -8, 0],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 2
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 },
-              rotate: [0, 10, -10, 10, 0],
-            }}
           >
             <Image 
               src="/images/illustrations/book.png" 
@@ -480,28 +393,12 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
 
-          {/* Hat */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
+          {/* Hat - Static and larger */}
+          <div 
+            className="absolute w-32 h-32 md:w-48 md:h-48"
             style={{ top: '40%', right: '5%' }}
-            animate={{
-              y: [0, -15, -30, -15, 0],
-              x: [0, -10, 0, 10, 0],
-              rotate: [0, -10, 0, 10, 0],
-              scale: [1, 1.05, 1, 1.05, 1],
-            }}
-            transition={{
-              duration: 9,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 2.5
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
           >
             <Image 
               src="/images/illustrations/hat-color.png" 
@@ -509,54 +406,13 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
           
-          {/* Add Salem to the mix */}
-          <motion.div 
-            className="absolute w-24 h-24 md:w-32 md:h-32 cursor-pointer"
-            style={{ bottom: '30%', right: '7%' }}
-            animate={{
-              y: [0, 20, 0, -20, 0],
-              x: [0, -20, 0, 20, 0],
-              rotate: [0, 5, 0, -5, 0],
-            }}
-            transition={{
-              duration: 12,
-              repeat: Infinity,
-              repeatType: "loop",
-              delay: 3
-            }}
-            whileHover={{ 
-              scale: 1.2,
-              transition: { duration: 0.3 }
-            }}
-          >
-            <Image 
-              src="/images/illustrations/salem.png" 
-              alt="Salem illustration" 
-              fill
-              className="object-contain"
-            />
-          </motion.div>
           
-          {/* Add Steeple to the mix */}
-          <motion.div 
-            className="absolute w-28 h-28 md:w-36 md:h-36 cursor-pointer"
+          {/* Steeple - Static and larger */}
+          <div 
+            className="absolute w-36 h-36 md:w-52 md:h-52"
             style={{ bottom: '5%', left: '12%' }}
-            animate={{
-              y: [0, -10, 0],
-              scale: [1, 1.03, 1],
-            }}
-            transition={{
-              duration: 6,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 1
-            }}
-            whileHover={{ 
-              scale: 1.15,
-              transition: { duration: 0.3 }
-            }}
           >
             <Image 
               src="/images/illustrations/steeple.png" 
@@ -564,7 +420,7 @@ export default function AboutPage() {
               fill
               className="object-contain"
             />
-          </motion.div>
+          </div>
         </div>
       </Section>
 
@@ -604,7 +460,7 @@ export default function AboutPage() {
           <GoldCard 
             content={{
               title: "G.B. Sollie - Author Portrait",
-              subtitle: "Storyteller, Grandparent, and Creator of Magical Adventures",
+              subtitle: "Storyteller, Grandaddy, Creator of Christian Adventures",
               paragraphs: [
                 "My claim to fame is that Cat and Little Preacher Sollie raised me down in Dothan, Alabama, and I inherited a storytelling gene from my dad's father (Big Daddy, a.k.a. Preacher Sollie).",
                 "I have a bunch of grandkids, and counting, and I am reminded each day of how important this next generation will be."
@@ -895,11 +751,21 @@ export default function AboutPage() {
               <div className="relative z-10 p-6 sm:p-8 rounded-whimsical bg-white/95 backdrop-blur-sm shadow-xl border border-amber-300/30">
                 <div className="prose prose-lg max-w-none relative z-10">
                   <p className="text-black first-letter:text-4xl first-letter:font-bold first-letter:mr-1 first-letter:float-left first-letter:leading-tight">
-                    Cat Luker was almost accidentally created after numerous carpool trips with my granddaughter. As I would drive her to school, I found myself making up stories to entertain her and the other kids during these rides.
+                    Cat Luker was almost accidentally created after numerous carpool trips with my granddaughters (Mary Evelyn and Lucy). As I would drive them to school, I found myself making up stories to entertain the two sisters during these rides. One morning the older sister, Mary Evelyn, asked if I could tell a story about my parents (her great-grandparents!) when they were kids. Looking back, I thank God for that simple request.
                   </p>
                   <p className="text-black">
-                    What began as simple car ride entertainment soon evolved into something more. I started recording these improvised tales, and before I knew it, they had taken on a life of their own, gradually shaping the character and world of Cat Luker.
+                    What began as lighthearted car ride entertainment soon evolved into something more. I started recording these improvised tales, and before I knew it, they had taken on a life of their own, gradually shaping the character and world of Cat Luker.
                   </p>
+                  
+                  {/* Original Recording Player */}
+                  <div className="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/10">
+                    <h4 className="text-lg font-semibold text-primary mb-3">Listen to an Original Carpool Story</h4>
+                    <AudioPlayer src="/recordings/carpool.m4a" />
+                    <p className="text-sm text-gray-600 mt-4 italic">
+                      This is one of the original recordings from G.B. Sollie&apos;s morning carpool trips, where the Cat Luker stories first came to life.
+                    </p>
+                  </div>
+
                   <p className="text-black font-medium">
                     The character of Cat Luker is also deeply rooted in my own upbringing in Alabama. The values, experiences, and countryside adventures of my childhood found their way into these stories, creating a bridge between generations and preserving pieces of my heritage in a form that could be shared with young readers today.
                   </p>
