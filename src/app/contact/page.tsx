@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Send, CheckCircle, MessageSquare, BookOpen, Users, Coffee, ArrowRight, Sparkles, MapPin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Mail, Coffee, ArrowRight, Sparkles, MapPin } from 'lucide-react';
 
 import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
@@ -151,7 +151,6 @@ const FloatingCloud = ({ top, left, scale }: { top: string, left: string, scale:
 
 export default function ContactPage() {
   // Refs for animations
-  const formRef = useRef<HTMLFormElement>(null);
   const quoteRef = useRef<HTMLDivElement>(null);
   
   // Apply text reveal animation
@@ -161,18 +160,6 @@ export default function ContactPage() {
   const [starsReady, setStarsReady] = useState(false);
   const [stars, setStars] = useState<StarObject[]>([]);
   
-  // Form state management
-  const [formState, setFormState] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-    inquiryType: 'general',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
   // Generate stars for night sky
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -214,62 +201,6 @@ export default function ContactPage() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Handle form input changes
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormState(prev => ({ ...prev, [name]: value }));
-  };
-
-  // Handle form submission with visual feedback
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate form
-    if (!formState.name || !formState.email || !formState.message) {
-      setErrorMessage('Please fill out all required fields.');
-      return;
-    }
-    
-    setIsSubmitting(true);
-    setErrorMessage('');
-    
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1800));
-      
-      // Success!
-      setIsSubmitted(true);
-      setFormState({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
-        inquiryType: 'general',
-      });
-      
-      // Scroll to success message
-      setTimeout(() => {
-        window.scrollTo({
-          top: formRef.current?.offsetTop || 0,
-          behavior: 'smooth'
-        });
-      }, 300);
-      
-    } catch {
-      setErrorMessage('Something went wrong. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  // Define inquiry types with icons
-  const inquiryTypes = [
-    { id: 'general', label: 'General Inquiry', icon: <MessageSquare size={20} /> },
-    { id: 'author-visit', label: 'Author Visit', icon: <Users size={20} /> },
-    { id: 'books', label: 'Book Questions', icon: <BookOpen size={20} /> },
-    { id: 'collaboration', label: 'Collaboration', icon: <Coffee size={20} /> },
-  ];
-  
   return (
     <>
       {/* Hero Section with Night Sky */}
@@ -344,7 +275,7 @@ export default function ContactPage() {
               }}
             >
               <h1 className="text-5xl md:text-7xl font-display mb-6 text-secondary text-shadow-magical">
-                Connect With Me
+                Contact Me
               </h1>
             </motion.div>
             
@@ -356,7 +287,7 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <p className="leading-relaxed">
-                I&apos;d love to hear from you! Whether you have questions about my magical books, 
+                I&apos;d love to hear from you! Whether you have questions about my books, 
                 want to schedule an author visit, or just want to say hello — your message will reach me directly.
               </p>
             </motion.div>
@@ -372,7 +303,7 @@ export default function ContactPage() {
                 size="lg"
                 className="shadow-[0_0_15px_rgba(249,213,110,0.3)]"
               >
-                Send a Magical Message <Sparkles className="ml-2" size={18} />
+                Send a Message <Sparkles className="ml-2" size={18} />
               </Button>
             </motion.div>
           </motion.div>
@@ -426,8 +357,8 @@ export default function ContactPage() {
             {[
               {
                 icon: <Mail size={32} />,
-                title: 'Send an Owl',
-                subtitle: 'Email Me',
+                title: 'Email Me',
+                subtitle: 'Get in Touch',
                 info: 'greg.sollie@gmail.com',
                 link: 'mailto:greg.sollie@gmail.com',
                 color: 'from-secondary/90 to-yellow-600/90',
@@ -437,7 +368,7 @@ export default function ContactPage() {
               },
               {
                 icon: <MapPin size={32} />,
-                title: 'Royal Castle',
+                title: 'Location',
                 subtitle: 'Find Me',
                 info: 'Georgia, United States',
                 link: null,
@@ -448,12 +379,11 @@ export default function ContactPage() {
               },
               {
                 icon: <Coffee size={32} />,
-                title: 'Magic Mirror',
+                title: 'Contact Form',
                 subtitle: 'Use the form',
                 info: 'Send a message',
                 link: '#contact-form',
                 color: 'from-accent/90 to-purple-700/90',
-                
               }
             ].map((item, index) => (
               <motion.div 
@@ -627,7 +557,6 @@ export default function ContactPage() {
             </div>
             
             {/* Right Column: Contact Form */}
-            {/* Right Column: Contact Form */}
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -640,7 +569,7 @@ export default function ContactPage() {
                   Send a Message
                 </h2>
                 <p className="text-white/80">
-                  Fill out the enchanted form below and I&apos;ll respond as soon as possible.
+                  Fill out the form below and I&apos;ll respond as soon as possible.
                 </p>
               </motion.div>
               
@@ -651,192 +580,28 @@ export default function ContactPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="relative"
               >
-                {/* Success message */}
-                <AnimatePresence>
-                  {isSubmitted && (
-                    <motion.div
-                      className="absolute inset-0 bg-primary/95 backdrop-blur-sm rounded-whimsical p-8 flex flex-col items-center justify-center text-center"
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.4, type: "spring" }}
-                    >
-                      <div className="w-20 h-20 rounded-full bg-white/10 flex items-center justify-center mb-6">
-                        <CheckCircle size={40} className="text-secondary" />
-                      </div>
-                      <h3 className="text-2xl text-white font-bold mb-3">Message Sent!</h3>
-                      <p className="text-white/80 mb-6 max-w-md">
-                        Thank you for reaching out! I&apos;ll respond to your message as soon as possible. 
-                        Magic is already on the way!
-                      </p>
-                      <Button
-                        onClick={() => setIsSubmitted(false)}
-                        variant="primary"
-                      >
-                        Send Another Message
-                      </Button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                
-                {/* Form */}
-                <form 
-                  ref={formRef}
-                  onSubmit={handleSubmit} 
-                  className="p-8 rounded-whimsical bg-white/5 backdrop-blur-sm border-2 border-secondary/20 shadow-[0_10px_50px_rgba(249,213,110,0.1)]"
-                >
-                  {/* Error message */}
-                  <AnimatePresence>
-                    {errorMessage && (
-                      <motion.div 
-                        className="mb-6 p-4 rounded-whimsical bg-red-900/20 border border-red-500/30 text-white"
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                      >
-                        <p>{errorMessage}</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  
-                  {/* Inquiry Type */}
+                {/* Google Form Link */}
+                <div className="rounded-whimsical overflow-hidden bg-white/5 backdrop-blur-sm border-2 border-secondary/20 shadow-[0_10px_50px_rgba(249,213,110,0.1)] p-10 text-center">
                   <div className="mb-6">
-                    <label className="block text-white mb-2 font-medium">Type of Inquiry</label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {inquiryTypes.map((type) => (
-                        <label 
-                          key={type.id}
-                          className={`
-                            flex items-center p-3 rounded-whimsical cursor-pointer transition-all
-                            ${formState.inquiryType === type.id 
-                              ? 'bg-secondary/20 border-2 border-secondary/50' 
-                              : 'bg-white/5 border-2 border-white/10 hover:bg-white/10'}
-                          `}
-                        >
-                          <input
-                            type="radio"
-                            name="inquiryType"
-                            value={type.id}
-                            checked={formState.inquiryType === type.id}
-                            onChange={handleChange}
-                            className="sr-only"
-                          />
-                          <span className={`
-                            w-5 h-5 rounded-full mr-3 flex items-center justify-center
-                            ${formState.inquiryType === type.id 
-                              ? 'bg-secondary text-primary-dark' 
-                              : 'bg-white/20'}
-                          `}>
-                            {formState.inquiryType === type.id && (
-                              <motion.div
-                                initial={{ scale: 0 }}
-                                animate={{ scale: 1 }}
-                                className="rounded-full"
-                              >
-                                {type.icon}
-                              </motion.div>
-                            )}
-                          </span>
-                          <span className="text-white">{type.label}</span>
-                        </label>
-                      ))}
-                    </div>
+                    <h3 className="text-white text-xl mb-4">Use our Contact Form</h3>
+                    <p className="text-white/70 mb-8">
+                      Click the button below to access our contact form directly. It will open in a new tab.
+                    </p>
                   </div>
                   
-                  {/* Name & Email Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <div>
-                      <label htmlFor="name" className="block text-white mb-2 font-medium">
-                        Your Name <span className="text-secondary">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formState.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-whimsical bg-white/5 border-2 border-white/10 text-white placeholder-white/50 focus:border-secondary/50 focus:outline-none transition-colors"
-                        placeholder="Jane Doe"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-white mb-2 font-medium">
-                        Email Address <span className="text-secondary">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formState.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 rounded-whimsical bg-white/5 border-2 border-white/10 text-white placeholder-white/50 focus:border-secondary/50 focus:outline-none transition-colors"
-                        placeholder="jane@example.com"
-                      />
-                    </div>
-                  </div>
-                  
-                  {/* Subject */}
-                  <div className="mb-6">
-                    <label htmlFor="subject" className="block text-white mb-2 font-medium">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formState.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-whimsical bg-white/5 border-2 border-white/10 text-white placeholder-white/50 focus:border-secondary/50 focus:outline-none transition-colors"
-                      placeholder="What's your message about?"
-                    />
-                  </div>
-                  
-                  {/* Message */}
-                  <div className="mb-6">
-                    <label htmlFor="message" className="block text-white mb-2 font-medium">
-                      Your Message <span className="text-secondary">*</span>
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formState.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="w-full px-4 py-3 rounded-whimsical bg-white/5 border-2 border-white/10 text-white placeholder-white/50 focus:border-secondary/50 focus:outline-none transition-colors resize-none"
-                      placeholder="Share your thoughts, questions, or just say hello!"
-                    />
-                  </div>
-                  
-                  {/* Submit Button */}
-                  <div className="text-right">
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      size="lg"
-                      className="relative group overflow-hidden shadow-[0_0_15px_rgba(249,213,110,0.2)]"
-                      disabled={isSubmitting}
-                    >
-                      <span className="relative z-10 flex items-center">
-                        {isSubmitting ? (
-                          <>
-                            <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin mr-2"></div>
-                            Sending...
-                          </>
-                        ) : (
-                          <>
-                            Send Message <Send size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                          </>
-                        )}
-                      </span>
-                      
-                      {/* Animated background glow on hover */}
-                      <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-secondary-light via-secondary to-secondary-light bg-[length:200%_100%] group-hover:animate-shimmer"></span>
-                    </Button>
-                  </div>
-                </form>
+                  <a
+                    href="https://docs.google.com/forms/d/1goxAq4UYCliOhkvVbJjJu2AXsS0L4XnWKs7-EqX8bEc/viewform"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-whimsical transition-all duration-300 font-medium bg-secondary text-primary-dark hover:bg-secondary-light h-14 px-8 text-lg shadow-[0_0_15px_rgba(249,213,110,0.3)]"
+                  >
+                    Open Contact Form
+                  </a>
+                </div>
+
+                <div className="mt-6 text-white/60 text-sm text-center">
+                  <p>Or email me directly at <a href="mailto:greg.sollie@gmail.com" className="text-secondary font-medium underline hover:text-secondary-light transition-colors">greg.sollie@gmail.com</a></p>
+                </div>
               </motion.div>
             </div>
           </div>

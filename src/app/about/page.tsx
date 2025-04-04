@@ -9,7 +9,7 @@ import Section from '@/components/ui/Section';
 import { Button } from '@/components/ui/Button';
 import { useTextReveal } from '@/lib/animations';
 import GoldCard from '@/components/ui/GoldCard';
-import AudioPlayer from '@/components/ui/AudioPlayer';
+import AboutAudioPlayer from '@/components/ui/AboutAudioPlayer';
 
 // Star component for the night sky background
 const Star = ({ size, top, left, delay, duration }: { size: number, top: string, left: string, delay: number, duration: number }) => (
@@ -760,7 +760,7 @@ export default function AboutPage() {
                   {/* Original Recording Player */}
                   <div className="mt-8 p-6 bg-primary/5 rounded-xl border border-primary/10">
                     <h4 className="text-lg font-semibold text-primary mb-3">Listen to an Original Carpool Story</h4>
-                    <AudioPlayer src="/recordings/carpool.m4a" />
+                    <AboutAudioPlayer filename="carpool.m4a" />
                     <p className="text-sm text-gray-600 mt-4 italic">
                       This is one of the original recordings from G.B. Sollie&apos;s morning carpool trips, where the Cat Luker stories first came to life.
                     </p>

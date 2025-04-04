@@ -3,12 +3,12 @@
 import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Volume2, VolumeX, SkipBack, SkipForward } from 'lucide-react';
 
-interface AudioPlayerProps {
-  src: string;
+interface AboutAudioPlayerProps {
+  filename: string;
   className?: string;
 }
 
-export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
+export default function AboutAudioPlayer({ filename, className = '' }: AboutAudioPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -20,6 +20,9 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
   const [buffered, setBuffered] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const previousVolumeRef = useRef(volume);
+
+  // Construct the full URL for the local audio file
+  const audioUrl = `/recordings/${filename}`;
 
   useEffect(() => {
     if (audioRef.current) {
@@ -100,9 +103,9 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
         audio.removeEventListener('waiting', onWaiting);
       };
     }
-  }, [src, volume]);
+  }, [volume]);
 
-  // Handle src changes
+  // Handle filename changes
   useEffect(() => {
     setIsLoading(true);
     setHasError(false);
@@ -110,25 +113,15 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
     setCurrentTime(0);
     setIsPlaying(false);
     
-    // Check if the source URL is valid
-    if (!src || src === '') {
-      console.error('Invalid audio source URL:', src);
-      setHasError(true);
-      setIsLoading(false);
-      return;
-    } 
-    
-    console.log('Loading audio from:', src);
-    
-    // Check if URL is actually valid
-    try {
-      new URL(src);
-    } catch {
-      console.error('Invalid URL format:', src);
+    // Check if the filename is valid
+    if (!filename || filename === '') {
+      console.error('Invalid audio filename:', filename);
       setHasError(true);
       setIsLoading(false);
     }
-  }, [src]);
+    
+    console.log('Loading audio from:', audioUrl);
+  }, [filename, audioUrl]);
 
   const togglePlayPause = () => {
     if (!audioRef.current || hasError) return;
@@ -217,7 +210,7 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
     <div className={`flex flex-col ${className}`}>
       <audio 
         ref={audioRef} 
-        src={src} 
+        src={audioUrl} 
         preload="auto" 
         onLoadStart={() => setIsLoading(true)}
         onCanPlayThrough={() => setIsLoading(false)}
@@ -255,48 +248,53 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
           
           <button
             onClick={skipForward}
-            disabled={hasError}
+            disabled={hasError || isLoading}
             className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 disabled:opacity-50 transition-colors"
             aria-label="Skip 10 seconds forward"
           >
             <SkipForward size={16} />
           </button>
           
-          <div className="flex-1 ml-2">
+          <div className="flex-1 flex items-center gap-2">
+            <span className="text-xs text-gray-600 min-w-[40px]">
+              {formatTime(currentTime)}
+            </span>
+            
             <div 
-              className={`h-2 bg-gray-200 rounded-full cursor-pointer relative overflow-hidden ${hasError ? 'opacity-50 cursor-not-allowed' : ''}`}
-              onClick={hasError ? undefined : handleProgressClick}
+              className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden cursor-pointer relative"
+              onClick={handleProgressClick}
             >
-              {/* Buffered progress */}
+              {/* Buffered Progress */}
               <div 
-                className="absolute top-0 left-0 h-full bg-gray-300 transition-all duration-100"
+                className="absolute h-full bg-gray-300"
                 style={{ width: `${buffered}%` }}
-              />
-              {/* Playback progress */}
+              ></div>
+              
+              {/* Playback Progress */}
               <div 
-                className="absolute top-0 left-0 h-full bg-primary transition-all duration-100"
+                className="absolute h-full bg-primary"
                 style={{ width: `${progress}%` }}
-              />
+              ></div>
             </div>
             
-            <div className="flex justify-between text-xs mt-1 text-gray-600">
-              <span>{formatTime(currentTime)}</span>
-              <span>{formatTime(duration)}</span>
-            </div>
+            <span className="text-xs text-gray-600 min-w-[40px]">
+              {formatTime(duration)}
+            </span>
           </div>
           
-          {/* Volume Control */}
-          <div className="hidden sm:flex items-center space-x-2">
-            <button 
-              onClick={toggleMute} 
-              className="text-gray-600 hover:text-gray-800 transition-colors"
+          <div className="flex items-center gap-2">
+            <button
+              onClick={toggleMute}
+              className="text-gray-600 hover:text-gray-900"
+              aria-label={isMuted ? 'Unmute' : 'Mute'}
             >
               {isMuted || volume === 0 ? (
-                <VolumeX size={18} />
+                <VolumeX size={20} />
               ) : (
-                <Volume2 size={18} />
+                <Volume2 size={20} />
               )}
             </button>
+            
             <input
               type="range"
               min="0"
@@ -304,17 +302,19 @@ export default function AudioPlayer({ src, className = '' }: AudioPlayerProps) {
               step="0.01"
               value={volume}
               onChange={handleVolumeChange}
-              className="w-16 h-1 bg-gray-300 rounded-lg appearance-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-primary"
+              className="w-20 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              aria-label="Volume"
             />
           </div>
         </div>
+        
+        {/* Error message */}
+        {hasError && (
+          <div className="text-red-500 text-sm mt-2">
+            There was an error loading the audio file. Please try again later.
+          </div>
+        )}
       </div>
-      
-      {hasError && (
-        <div className="mt-2 text-sm text-red-500">
-          Error loading audio. Please check the file and try again.
-        </div>
-      )}
     </div>
   );
 } 

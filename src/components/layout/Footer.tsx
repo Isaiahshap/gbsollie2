@@ -2,19 +2,10 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Facebook, Instagram, Twitter, Mail, Sparkles } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
-  const socialLinks = [
-    { icon: <Facebook size={20} />, href: '#', label: 'Facebook' },
-    { icon: <Instagram size={20} />, href: '#', label: 'Instagram' },
-    { icon: <Twitter size={20} />, href: '#', label: 'Twitter' },
-    { icon: <Mail size={20} />, href: 'mailto:contact@gbsollie.com', label: 'Email' },
-  ];
-
   const footerLinks = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
@@ -40,7 +31,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-primary text-white pt-12 pb-6 relative overflow-hidden">
+    <footer className="bg-primary text-white pt-8 pb-4 relative overflow-hidden">
       {/* Magical starry background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: '120vw', left: '-10vw' }}>
         {/* Small twinkling stars */}
@@ -101,7 +92,7 @@ export default function Footer() {
         ))}
         
         {/* Magical book illustration */}
-        <div className="absolute top-10 left-10 w-32 h-32 opacity-10 pointer-events-none">
+        <div className="absolute top-10 left-10 w-24 h-24 opacity-10 pointer-events-none">
           <Image
             src="/images/illustrations/book.png"
             alt=""
@@ -111,7 +102,7 @@ export default function Footer() {
         </div>
         
         {/* Magical hat illustration */}
-        <div className="absolute bottom-10 right-10 w-36 h-36 opacity-10 pointer-events-none">
+        <div className="absolute bottom-10 right-10 w-24 h-24 opacity-10 pointer-events-none">
           <Image
             src="/images/illustrations/hat-color.png"
             alt=""
@@ -121,19 +112,19 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 max-w-5xl mx-auto">
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
           {/* Logo and About */}
-          <motion.div variants={itemVariants} className="space-y-4">
+          <motion.div variants={itemVariants} className="space-y-2 flex flex-col items-center md:items-start">
             <Link href="/" className="inline-block group">
               <motion.h3 
-                className="text-3xl font-display text-secondary relative"
+                className="text-2xl md:text-3xl font-display text-secondary relative"
                 whileHover={{ scale: 1.03 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
@@ -145,43 +136,25 @@ export default function Footer() {
                 </span>
               </motion.h3>
             </Link>
-            <p className="text-gray-300 max-w-sm">
+            <p className="text-gray-300 max-w-xs text-center md:text-left text-sm">
               Children&apos;s fantasy author bringing magical adventures to young readers, where imagination knows no bounds.
             </p>
-            {/* Social Links */}
-            <div className="flex space-x-4 mt-4">
-              {socialLinks.map((social, index) => (
-                <motion.a 
-                  key={index}
-                  href={social.href}
-                  aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-primary-light flex items-center justify-center hover:bg-secondary hover:text-primary transition-colors"
-                  whileHover={{ 
-                    scale: 1.1,
-                    boxShadow: "0 0 10px rgba(255, 255, 255, 0.5)"
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  {social.icon}
-                </motion.a>
-              ))}
-            </div>
           </motion.div>
 
           {/* Links */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h4 className="text-xl font-bold mb-4 text-secondary-light flex items-center">
-              <Sparkles size={18} className="mr-2" />
+          <motion.div variants={itemVariants} className="space-y-2 flex flex-col items-center md:items-end">
+            <h4 className="text-lg font-bold mb-1 text-secondary-light flex items-center">
+              <Sparkles size={16} className="mr-2" />
               Quick Links
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1 text-center md:text-right">
               {footerLinks.map((link, index) => (
                 <li key={index}>
                   <motion.div
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    <Link href={link.href} className="hover:text-secondary transition-colors hover:text-shadow-sm">
+                    <Link href={link.href} className="hover:text-secondary transition-colors hover:text-shadow-sm text-sm">
                       {link.name}
                     </Link>
                   </motion.div>
@@ -189,58 +162,31 @@ export default function Footer() {
               ))}
             </ul>
           </motion.div>
-
-          {/* Newsletter */}
-          <motion.div variants={itemVariants} className="space-y-4">
-            <h4 className="text-xl font-bold mb-4 text-secondary-light flex items-center">
-              <Sparkles size={18} className="mr-2" />
-              Join the Adventure
-            </h4>
-            <p className="text-gray-300">
-              Sign up to get updates on new books, events, and exclusive content!
-            </p>
-            <form className="mt-4 space-y-2">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="w-full px-4 py-2 rounded-whimsical bg-primary-light text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-secondary"
-                required
-              />
-              <motion.button
-                type="submit"
-                className="w-full py-2 px-4 bg-secondary text-primary font-bold rounded-whimsical hover:bg-secondary-light transition-colors duration-300 hover:shadow-glow"
-                whileHover={{ scale: 1.02, boxShadow: "0 0 15px rgba(249, 213, 110, 0.5)" }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Sign Up
-              </motion.button>
-            </form>
-          </motion.div>
         </motion.div>
 
         {/* Copyright and Legal Links */}
-        <div className="pt-6 mt-6 border-t border-gray-700/40 backdrop-blur-sm">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+        <div className="pt-4 mt-4 border-t border-gray-700/40 backdrop-blur-sm">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-3">
             <div className="flex flex-col items-center md:items-start">
-              <p className="text-sm text-gray-300 mb-2 md:mb-0">
-                © {currentYear} G.B. Sollie. All rights reserved.
+              <p className="text-xs text-gray-300">
+                © 2025 G.B. Sollie. All rights reserved.
               </p>
-              <p className="text-sm text-gray-300 mb-4 md:mb-0">
+              <p className="text-xs text-gray-300">
                 Website made with <span className="text-red-500 mx-0.5">❤</span> by <a href="https://yeshaya.dev" target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-secondary-light transition-colors hover:underline">yeshaya.dev</a>
               </p>
             </div>
             
-            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <Link href="/privacy-policy" className="text-sm text-white hover:text-secondary-light transition-colors">
+            <div className="flex flex-wrap justify-center gap-3">
+              <Link href="/privacy-policy" className="text-xs text-white hover:text-secondary-light transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms-of-service" className="text-sm text-white hover:text-secondary-light transition-colors">
+              <Link href="/terms-of-service" className="text-xs text-white hover:text-secondary-light transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/accessibility" className="text-sm text-white hover:text-secondary-light transition-colors">
+              <Link href="/accessibility" className="text-xs text-white hover:text-secondary-light transition-colors">
                 Accessibility
               </Link>
-              <Link href="/cookie-policy" className="text-sm text-white hover:text-secondary-light transition-colors">
+              <Link href="/cookie-policy" className="text-xs text-white hover:text-secondary-light transition-colors">
                 Cookie Policy
               </Link>
             </div>
@@ -248,47 +194,60 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Add keyframes for the twinkling and pulsing stars */}
+      {/* Global CSS styles */}
       <style jsx global>{`
+        /* Shimmer effect for primary button */
+        @keyframes shimmer {
+          0% {
+            background-position: 0% 0%;
+          }
+          100% {
+            background-position: -200% 0%;
+          }
+        }
+        
+        .animate-shimmer {
+          animation: shimmer 3s linear infinite;
+        }
+        
+        /* Twinkle animation for stars */
         @keyframes twinkle {
-          0%, 100% { opacity: 0.2; }
-          50% { opacity: 1; }
+          0%, 100% {
+            opacity: 0.3;
+            transform: scale(0.8);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
         
+        /* Pulse animation for bright stars */
         @keyframes pulse {
-          0% { transform: scale(0.8); opacity: 0.6; }
-          50% { transform: scale(1.1); opacity: 0.9; }
-          100% { transform: scale(0.9); opacity: 0.7; }
+          0%, 100% {
+            opacity: 0.5;
+            transform: scale(0.9);
+            box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.5);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.7);
+          }
         }
         
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes float-reverse {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(10px); }
-        }
-        
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        
-        .animate-float-reverse {
-          animation: float-reverse 7s ease-in-out infinite;
-        }
-        
-        .hover\:shadow-glow:hover {
-          box-shadow: 0 0 15px rgba(249, 213, 110, 0.5);
-        }
-        
-        .hover\:text-shadow-sm:hover {
-          text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-        
+        /* Additional text shadow for heading */
         .text-shadow-magical {
-          text-shadow: 0 0 10px rgba(249, 213, 110, 0.7);
+          text-shadow: 0 2px 10px rgba(249, 213, 110, 0.5);
+        }
+        
+        .text-shadow-sm {
+          text-shadow: 0 1px 3px rgba(249, 213, 110, 0.3);
+        }
+        
+        /* Glow effect for hover */
+        .hover-shadow-glow:hover {
+          box-shadow: 0 0 15px rgba(249, 213, 110, 0.5);
         }
       `}</style>
     </footer>
