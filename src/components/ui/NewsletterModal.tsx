@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
@@ -21,11 +21,15 @@ export default function NewsletterModal({
   description = "Sign up to receive your free \"Journey to Light\" Bible study guide and updates on new releases.",
   downloadText = "Download Bible Study Guide"
 }: NewsletterModalProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError(null);
     
     // Get form data
     const formData = new FormData(e.currentTarget);
@@ -33,13 +37,41 @@ export default function NewsletterModal({
     const email = formData.get('email') as string;
     const city = formData.get('city') as string;
     
-    // Call the onSubmit handler if provided
-    if (onSubmit) {
-      onSubmit({ name, email, city });
-    } else {
-      // Default behavior
-      alert("Thank you! Your Bible guide will be emailed to you shortly.");
-      onClose();
+    try {
+      // Call the onSubmit handler if provided
+      if (onSubmit) {
+        onSubmit({ name, email, city });
+      } else {
+        // Default behavior - submit to API endpoint
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, city }),
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok && !data.sandboxMode) {
+          // Handle error from either the HTTP status or the response body
+          const errorMessage = data.error || `Failed to subscribe: ${response.status} ${response.statusText}`;
+          throw new Error(errorMessage);
+        }
+        
+        // Success - check if we're in sandbox mode
+        if (data.sandboxMode) {
+          alert(data.message || "Your information has been submitted. During development, the website owner will be notified of your request.");
+        } else {
+          alert("Thank you! Your Bible guide will be sent to your email shortly.");
+        }
+        
+        onClose();
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -67,6 +99,12 @@ export default function NewsletterModal({
           </p>
         </div>
         
+        {error && (
+          <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4 text-sm">
+            {error}
+          </div>
+        )}
+        
         <form onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -80,6 +118,7 @@ export default function NewsletterModal({
                 required
                 className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black"
                 placeholder="John Doe"
+                disabled={isLoading}
               />
             </div>
             
@@ -94,6 +133,7 @@ export default function NewsletterModal({
                 required
                 className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black"
                 placeholder="john@example.com"
+                disabled={isLoading}
               />
             </div>
             
@@ -108,12 +148,19 @@ export default function NewsletterModal({
                 required
                 className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black"
                 placeholder="Birmingham"
+                disabled={isLoading}
               />
             </div>
             
             <div className="pt-2">
-              <Button type="submit" variant="primary" fullWidth icon={<Download size={18} />}>
-                {downloadText}
+              <Button 
+                type="submit" 
+                variant="primary" 
+                fullWidth 
+                icon={<Download size={18} />} 
+                disabled={isLoading}
+              >
+                {isLoading ? 'Sending...' : downloadText}
               </Button>
             </div>
             
