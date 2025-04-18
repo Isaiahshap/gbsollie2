@@ -23,7 +23,7 @@ export default function BooksPage() {
         </div>
         
         {/* Overlay for better text visibility */}
-        <div className="absolute inset-0 bg-primary/70"></div>
+        <div className="absolute inset-0 bg-primary/70 opacity-50"></div>
         
         {/* Bottom gradient for seamless transition to starry background */}
         <div 
