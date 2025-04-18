@@ -1,5 +1,7 @@
 import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 // Initialize Resend with the API key
 const apiKey = process.env.RESEND_API_KEY || 're_YZ8QpvdE_Q4EofEwxWvyMq6kMSzDTAjau';
@@ -71,14 +73,21 @@ export async function POST(req: NextRequest) {
         `;
       }
       
-      // Send the email
+      // Include the Bible study PDF when domain is verified
+      const attachments = isDomainVerified
+        ? [{
+            content: fs.readFileSync(path.join(process.cwd(), 'public', 'biblestudy.pdf')).toString('base64'),
+            filename: 'biblestudy.pdf',
+            content_type: 'application/pdf',
+          }]
+        : [];
       const result = await resend.emails.send({
         from: fromEmail,
         to: [toEmail],
         subject: subject,
         text: textContent,
         html: htmlContent,
-        // We'll add attachments after domain verification
+        attachments,
       });
       
       // Check if the result contains an error
