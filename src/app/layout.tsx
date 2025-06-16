@@ -1,6 +1,7 @@
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import "./globals.css";
 import { Metadata } from "next";
+import Script from "next/script";
 
 import ClientLayout from "@/components/layout/ClientLayout";
 import StructuredData from "@/components/seo/StructuredData";
@@ -103,6 +104,17 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-S3XRD45CDY" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S3XRD45CDY');
+          `}
+        </Script>
+        
         <ClientLayout>
           {children}
         </ClientLayout>
