@@ -130,7 +130,12 @@ export default function LibrarianPage() {
                     height={250}
                     className="rounded-lg shadow-lg book-card-glow"
                   />
-                  <a href="#order" className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto">
+                  <a 
+                    href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto"
+                  >
                     Get Your Copy Today
                   </a>
                 </div>
@@ -190,7 +195,12 @@ export default function LibrarianPage() {
                     </div>
                   </div>
                   <div className="mt-6 flex justify-center">
-                    <a href="#order" className="btn-primary py-3 px-6">
+                    <a 
+                      href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-primary py-3 px-6"
+                    >
                       Get Your Copy Today
                     </a>
                   </div>
@@ -241,6 +251,10 @@ export default function LibrarianPage() {
                   {
                     title: "Biblical Themes",
                     description: "Stories of courage, redemption, and faith that will resonate with young readers. A symbolic classic of Good versus Evil, like Narnia!"
+                  },
+                  {
+                    title: "Amazing Characters",
+                    description: "Who will make you laugh, think, and maybe even cheer out loud."
                   }
                 ].map((feature, index) => (
                   <motion.div 
@@ -255,7 +269,12 @@ export default function LibrarianPage() {
               </motion.div>
 
               <div className="text-center mt-12">
-                <a href="#order" className="btn-primary py-3 px-8 text-lg">
+                <a 
+                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary py-3 px-8 text-lg"
+                >
                   Order Now
                 </a>
               </div>
@@ -318,7 +337,7 @@ export default function LibrarianPage() {
 
               <div className="text-center mt-12">
                 <a 
-                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
+                  href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/B0DFD1X33T/ref=tmm_aud_swatch_0"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-secondary text-primary-dark px-8 py-3 rounded-full font-bold hover:bg-secondary-light transition-colors"
@@ -563,6 +582,7 @@ export default function LibrarianPage() {
         title="Download Your Free Sample and Study Guide"
         description="Sign up to receive the first 22 pages of Cat Luker plus the matching Bible Study Guide lesson as a PDF, perfect for introducing the series to your students."
         downloadText="Download Combined PDFs"
+        apiEndpoint="/api/subscribe-catluker"
       />
     </>
   );

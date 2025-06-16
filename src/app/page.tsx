@@ -270,6 +270,15 @@ export default function Home() {
             >
               Discover My Books
             </motion.h2>
+            <motion.p 
+              className="text-white/90 text-lg mb-4 max-w-2xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Faith-filled adventures that inspire young hearts, perfect for ages 9-13
+            </motion.p>
             <motion.div 
               className="w-20 h-1 bg-secondary mx-auto rounded-full glow"
               initial={{ opacity: 0, width: 0 }}

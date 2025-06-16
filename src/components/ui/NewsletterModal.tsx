@@ -11,6 +11,7 @@ interface NewsletterModalProps {
   title?: string;
   description?: string;
   downloadText?: string;
+  apiEndpoint?: string;
 }
 
 export default function NewsletterModal({
@@ -19,7 +20,8 @@ export default function NewsletterModal({
   onSubmit,
   title = "Download Your Free Bible Study Guide",
   description = "Sign up to receive your free \"Journey to Light\" Bible study guide and updates on new releases.",
-  downloadText = "Download Bible Study Guide"
+  downloadText = "Download Bible Study Guide",
+  apiEndpoint = "/api/subscribe"
 }: NewsletterModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +45,7 @@ export default function NewsletterModal({
         onSubmit({ name, email, city });
       } else {
         // Default behavior - submit to API endpoint
-        const response = await fetch('/api/subscribe', {
+        const response = await fetch(apiEndpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -63,7 +65,7 @@ export default function NewsletterModal({
         if (data.sandboxMode) {
           alert(data.message || "Your information has been submitted. During development, the website owner will be notified of your request.");
         } else {
-          alert("Thank you! Your Bible guide will be sent to your email shortly.");
+          alert(data.message || "Thank you! Your download will be sent to your email shortly.");
         }
         
         onClose();

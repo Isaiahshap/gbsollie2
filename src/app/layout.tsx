@@ -29,13 +29,64 @@ const nunito = Nunito({
 export const metadata: Metadata = {
   title: {
     template: '%s | G.B. Sollie',
-    default: 'G.B. Sollie | Children\'s Fantasy Author',
+    default: 'G.B. Sollie | Best Christian Books for Kids | Children\'s Fantasy Author',
   },
-  description: 'G.B. Sollie is an author of captivating children\'s fantasy books.',
+  description: 'Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination for children ages 9-13. Perfect for families, schools, and youth groups.',
+  keywords: [
+    'best christian books for kids',
+    'christian children books',
+    'christian fantasy books',
+    'faith-based children literature',
+    'christian books for youth',
+    'children fantasy author',
+    'G.B. Sollie',
+    'Cat Luker',
+    'christian adventure books',
+    'biblical themes for kids',
+    'family reading',
+    'youth ministry books'
+  ],
+  authors: [{ name: 'G.B. Sollie' }],
+  creator: 'G.B. Sollie',
+  publisher: 'G.B. Sollie',
+  category: 'Children\'s Christian Literature',
   icons: {
     icon: '/favicon.ico',
   },
   themeColor: '#122848',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://gbsollie.com',
+    siteName: 'G.B. Sollie - Best Christian Books for Kids',
+    title: 'G.B. Sollie | Best Christian Books for Kids | Children\'s Fantasy Author',
+    description: 'Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination for children ages 9-13.',
+    images: [
+      {
+        url: '/images/Catlukercover.png',
+        width: 400,
+        height: 600,
+        alt: 'Cat Luker: The Swamp Witch Chronicles - Best Christian Fantasy Book for Kids',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'G.B. Sollie | Best Christian Books for Kids',
+    description: 'Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination.',
+    images: ['/images/Catlukercover.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

@@ -5,32 +5,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Play, CheckCircle, Download, Pause } from 'lucide-react';
-import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import NewsletterModal from '@/components/ui/NewsletterModal';
 
-// Font configurations
-const playfairDisplay = Playfair_Display({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-enchanted",
-  weight: ["400", "500", "700"],
-});
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-whimsical",
-  weight: ["400", "500", "600", "700"],
-});
-
-const nunito = Nunito({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-readable",
-  weight: ["400", "500", "600", "700"],
-});
-
-export default function YouthDirectorPage() {
+export default function MothersPage() {
   // State for audio player
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -96,11 +73,9 @@ export default function YouthDirectorPage() {
     }
   };
 
-  // Newsletter modal doesn't need a custom handler - will submit to API directly
-
   return (
     <>
-      <div className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen bg-gray-50 overflow-x-hidden font-body`}>
+      <div className="min-h-screen overflow-x-hidden font-body bg-gray-50">
         {/* Custom header */}
         <header className="pt-8 pb-6 bg-white border-b border-gray-100">
           <div className="container-custom">
@@ -122,10 +97,10 @@ export default function YouthDirectorPage() {
                 variants={fadeIn}
               >
                 <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-4">
-                  More Than a Story — A Spiritual Journey for Young Christians!
+                  Embark on a Faith-Filled Adventure with Cat Luker!
                 </h1>
                 <p className="text-lg md:text-xl mb-8 text-white/90">
-                  Empower your youth groups (ages 9 to 13) to explore courage, prayer, and faith through adventure-based fantasy.
+                  A Christian Fantasy Novel That Sparks Imagination and Strengthens Faith, for Kids 9 to 13.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto">
                   <Image 
@@ -139,7 +114,7 @@ export default function YouthDirectorPage() {
                     href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto hover:bg-primary/90 transition-colors"
+                    className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto"
                   >
                     Get Your Copy Today
                   </a>
@@ -160,17 +135,17 @@ export default function YouthDirectorPage() {
               >
                 <motion.div variants={fadeIn} className="order-2 md:order-1">
                   <h2 className="text-2xl md:text-3xl font-display font-bold text-primary mb-4">A Story Born from Carpool Rides</h2>
+                  <p className="text-lg text-accent font-medium mb-4">Rest assured it is kid-tested and age appropriate!</p>
                   <div className="prose text-primary-light">
-                    <p className="mb-4"><span className="font-bold text-accent">Cat Luker:</span> The Swamp Witch Chronicles began as stories I told my grandkids during our daily school carpools and are now refined for youth ministries that want more than surface-level content.</p>
-                    <p className="mb-4">These tall-tales, filled with excitement and important lessons, have evolved into a Christian fantasy series that you can use to inspire and prepare young Christians for the road ahead.</p>
-                    <p className="mb-4">The story is packed with heart, faith, and biblical themes that will speak to young readers&apos; imagination and guide their spiritual growth.</p>
+                    <p className="mb-4"><span className="font-bold text-accent">Cat Luker:</span> The Swamp Witch Chronicles began as stories I told my grandkids during our daily school carpools. These tall-tales, filled with excitement and important lessons, have evolved into a Christian fantasy adventure series that you and your child can now enjoy.</p>
+                    <p className="mb-4">The story is packed with heart, faith, and biblical themes that will speak to your child&apos;s imagination and guide their spiritual growth.</p>
                     <p className="font-display italic text-lg text-primary">It&apos;s not just a book—it&apos;s an adventure that teaches timeless truths.</p>
                   </div>
                 </motion.div>
                 
                 <motion.div variants={fadeIn} className="order-1 md:order-2">
                   <div className="bg-gray-50 rounded-whimsical p-6 shadow-lg border border-primary/10">
-                    <h3 className="font-display text-center text-primary mb-3">&quot;An original carpool recording!&quot;</h3>
+                    <h3 className="font-display text-center text-primary mb-3">&quot;Listen to the love this book is built upon!&quot;</h3>
                     <div 
                       className="aspect-video bg-primary/10 rounded-md relative flex items-center justify-center cursor-pointer group"
                       onClick={toggleCarPoolAudio}
@@ -225,7 +200,7 @@ export default function YouthDirectorPage() {
                 className="text-center mb-12"
               >
                 <motion.h2 variants={fadeIn} className="text-3xl md:text-4xl font-display font-bold text-primary mb-4">
-                  Why Youth Groups Love Cat Luker
+                  Why Families Love Cat Luker
                 </motion.h2>
               </motion.div>
 
@@ -246,8 +221,8 @@ export default function YouthDirectorPage() {
                     description: "Hand-drawn pen and ink illustrations that bring the adventure to life. It starts with the cover, a great scene from the book!"
                   },
                   {
-                    title: "Perfect for Family Sharing",
-                    description: "Great for family book clubs and Bible Study Groups. It brings joy and adrenalin to kids, young and old!"
+                    title: "Perfect for Family Reading",
+                    description: "Great for bedtime stories or family book clubs and Bible Study Groups. It brings joy and adrenalin to kids, young and old!"
                   },
                   {
                     title: "Audiobook with Sound Effects",
@@ -272,12 +247,13 @@ export default function YouthDirectorPage() {
                   </motion.div>
                 ))}
               </motion.div>
+
               <div className="text-center mt-12">
                 <a 
                   href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-primary py-3 px-8 text-lg hover:bg-primary/90 transition-colors"
+                  className="btn-primary py-3 px-8 text-lg"
                 >
                   Order Now
                 </a>
@@ -300,10 +276,10 @@ export default function YouthDirectorPage() {
                     Listen to Cat Luker in a Whole New Way
                   </h2>
                   <p className="mb-4">
-                    Transform the adventure into a full experience with our dramatized audiobook! With sound effects, music, and professional narration by Grammy-winning Monroe Jones, your youth group will be transported into a world of fantasy and faith.
+                    Transform the adventure into a full experience with our dramatized audiobook! With sound effects, music, and professional narration by Grammy-winning Monroe Jones, your child will be transported into a world of fantasy and faith.
                   </p>
-                  <p className="mb-6 font-display italic text-lg">
-                    Believe me, it is absolutely enchanting!
+                  <p className="mb-4">
+                    Perfect for road trips, quiet afternoons, or just when you need a break from reading aloud. Believe me, it is absolutely enchanting!
                   </p>
                   <p className="mb-4">
                     Click below to hear an exclusive preview of the audiobook! This segment is a scene depicted on the book cover.
@@ -341,7 +317,7 @@ export default function YouthDirectorPage() {
 
               <div className="text-center mt-12">
                 <a 
-                  href="https://a.co/d/akN6kcS" 
+                  href="https://www.amazon.com/Dark-Clock-Luker-Swamp-Chronicles/dp/B0DFD1X33T/ref=tmm_aud_swatch_0"
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="bg-secondary text-primary-dark px-8 py-3 rounded-full font-bold hover:bg-secondary-light transition-colors"
@@ -383,18 +359,18 @@ export default function YouthDirectorPage() {
                       </li>
                       <li className="flex items-start gap-3">
                         <span className="text-secondary mt-1"><CheckCircle /></span>
-                        <p className="text-primary-dark">And get the companion Bible Study Guide – A Journey to the Light (downloadable PDF), for FREE! (A $9.95 value when purchased as a print book on Amazon)</p>
+                        <p className="text-primary-dark">And get the companion Bible Study Guide – A Journey to the Light (downloadable PDF), for FREE! (A $9.95 value when purchased as a print book on Amazon) Please accept this as complimentary gift, regardless of Duo purchase.</p>
                       </li>
                     </ul>
                     
                     <div className="mt-6">
-                      <p className="font-display text-lg text-primary font-bold">Why settle for one format when you can enjoy both? Get the printed book and audiobook together and enjoy Cat Luker in the way that works best for your youth group.</p>
+                      <p className="font-display text-lg text-primary font-bold">Why settle for one format when you can enjoy both? Get the printed book and audiobook together and enjoy Cat Luker in the way that works best for your family—whether reading or listening on-the-go!</p>
                     </div>
 
                     <div className="mt-6 space-y-4">
                       <div className="flex items-start gap-3">
                         <span className="text-secondary font-bold">o</span>
-                        <p className="text-primary-dark"><span className="font-bold">Printed Book:</span> Full of stunning illustrations, it&apos;s also perfect for reading aloud or in book clubs.</p>
+                        <p className="text-primary-dark"><span className="font-bold">Printed Book:</span> Full of stunning illustrations, it&apos;s perfect for reading together at bedtime or in family book clubs.</p>
                       </div>
                       <div className="flex items-start gap-3">
                         <span className="text-secondary font-bold">o</span>
@@ -424,7 +400,7 @@ export default function YouthDirectorPage() {
                 
                 <div className="mt-8 text-center">
                   <a 
-                    href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0" 
+                    href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="btn-primary py-4 px-8 text-xl font-bold"
@@ -463,14 +439,14 @@ export default function YouthDirectorPage() {
                     author: "Lucy"
                   },
                   {
-                    title: "Elementary School Educator",
-                    quote: "I really, really hope there will be a sequel to Cat Luker. It was fantastic and I loved it. I plan to do a read aloud with my 4th and 5th grade library kids",
-                    author: "Celise"
-                  },
-                  {
                     title: "A Mother's Feedback",
                     quote: "I enjoyed talking to my daughter about this story as she shared bits and pieces of the adventures. It has sparked questions about God and creation, and good versus evil. She loves Cat!",
                     author: "Whitney"
+                  },
+                  {
+                    title: "Elementary School Educator",
+                    quote: "I really, really hope there will be a sequel to Cat Luker. It was fantastic and I loved it. I plan to do a read aloud with my 4th and 5th grade library kids",
+                    author: "Celise"
                   }
                 ].map((testimonial, index) => (
                   <motion.div 
@@ -530,10 +506,10 @@ export default function YouthDirectorPage() {
                 variants={fadeIn}
               >
                 <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                  Want to See if Cat Luker is Right for Your Youth Group?
+                  Want to See if Cat Luker is Right for Your Family?
                 </h2>
                 <p className="mb-6">
-                  Download the First Chapter for FREE and get our Companion Bible Study Guide to start your youth group adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
+                  Download the First 22 Pages (FOREWORD, PROLOGUE, AND CHAPTER ONE) for FREE and get our Companion Bible Study Guide, A Journey to the Light (INTRODUCTION AND LESSON #1) for FREE, to start your family&apos;s adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
                 </p>
                 <p className="mb-8">
                   Also! Enter to win our Box of Books Give-away, that includes 5 copies of Cat Luker and 5 copies of A Journey to the Light (Print Version of the Companion Bible Study Guide). Perfect for hosting neighborhood Book Club/Bible Study get-togethers ($125.00 Value).
@@ -547,44 +523,44 @@ export default function YouthDirectorPage() {
               </motion.div>
             </div>
           </section>
-        </main>
 
-        {/* Custom footer just for the funnel page */}
-        <footer className="bg-primary text-white py-8">
-          <div className="container-custom">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-display font-bold mb-4">G.B. Sollie</h3>
-                <p className="text-white/80 max-w-md">
-                  Children&apos;s fantasy author bringing magical adventures to young readers, 
-                  where imagination knows no bounds.
-                </p>
-              </div>
-              <div className="flex flex-col md:items-end">
-                <h4 className="text-lg font-bold mb-4">Quick Links</h4>
-                <div className="flex flex-wrap gap-4">
-                  <Link href="/" className="text-white/80 hover:text-white">Home</Link>
-                  <Link href="/books" className="text-white/80 hover:text-white">Books</Link>
-                  <Link href="/about" className="text-white/80 hover:text-white">About</Link>
-                  <Link href="/contact" className="text-white/80 hover:text-white">Contact</Link>
+          {/* Custom footer just for the funnel page */}
+          <footer className="bg-primary text-white py-8">
+            <div className="container-custom">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <h3 className="text-xl font-display font-bold mb-4">G.B. Sollie</h3>
+                  <p className="text-white/80 max-w-md">
+                    Children&apos;s fantasy author bringing magical adventures to young readers, 
+                    where imagination knows no bounds.
+                  </p>
+                </div>
+                <div className="flex flex-col md:items-end">
+                  <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+                  <div className="flex flex-wrap gap-4">
+                    <Link href="/" className="text-white/80 hover:text-white">Home</Link>
+                    <Link href="/books" className="text-white/80 hover:text-white">Books</Link>
+                    <Link href="/about" className="text-white/80 hover:text-white">About</Link>
+                    <Link href="/contact" className="text-white/80 hover:text-white">Contact</Link>
+                  </div>
                 </div>
               </div>
+              <div className="mt-8 pt-4 border-t border-white/20 text-center">
+                <p className="text-sm text-white/60">
+                  &copy; {new Date().getFullYear()} G.B. Sollie. All rights reserved.
+                </p>
+              </div>
             </div>
-            <div className="mt-8 pt-4 border-t border-white/20 text-center">
-              <p className="text-sm text-white/60">
-                &copy; {new Date().getFullYear()} G.B. Sollie. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </footer>
+          </footer>
+        </main>
       </div>
       
       {/* Newsletter Modal */}
       <NewsletterModal 
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        title="Download Your Free Chapter + Bible Study Guide" 
-        description="Sign up to receive the first 22 pages of Cat Luker plus the matching Bible Study Guide lesson as a PDF, perfect for introducing the series to your youth group."
+        title="Download Your Free Sample and Study Guide"
+        description="Sign up to receive the first 22 pages of Cat Luker plus the matching Bible Study Guide lesson as a PDF, perfect for introducing the series to your family."
         downloadText="Download Combined PDFs"
         apiEndpoint="/api/subscribe-catluker"
       />
