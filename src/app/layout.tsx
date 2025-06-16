@@ -3,6 +3,7 @@ import "./globals.css";
 import { Metadata } from "next";
 
 import ClientLayout from "@/components/layout/ClientLayout";
+import StructuredData from "@/components/seo/StructuredData";
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -96,6 +97,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <StructuredData type="homepage" />
+      </head>
       <body
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >

@@ -88,7 +88,7 @@ export default function AudioBookPage() {
               <div className="relative w-[300px] h-[450px] mx-auto drop-shadow-2xl">
                 <Image 
                   src="/images/audiocover.png" 
-                  alt="Cat Luker: The Audio Experience Cover" 
+                  alt="Cat Luker: The Audio Experience audiobook cover with headphones and Cat Luker book design, narrated by Grammy award-winning producer Monroe Jones" 
                   fill
                   className="object-cover rounded-lg"
                   priority
@@ -147,7 +147,7 @@ export default function AudioBookPage() {
           <div className="md:hidden relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
             <Image 
               src="/images/audiocover.png" 
-              alt="Cat Luker: The Audio Experience Cover" 
+              alt="Cat Luker: The Audio Experience audiobook cover with headphones and Cat Luker book design, narrated by Grammy award-winning producer Monroe Jones" 
               fill
               className="object-cover"
             />
@@ -195,7 +195,7 @@ export default function AudioBookPage() {
           <div className="hidden md:block relative h-[500px] w-full rounded-whimsical overflow-hidden shadow-xl">
             <Image 
               src="/images/drama.png" 
-              alt="Dramatic audio experience" 
+              alt="Professional recording studio setup with microphones and audio equipment used to create the Cat Luker audio experience" 
               fill
               className="object-cover"
             />
@@ -260,7 +260,7 @@ export default function AudioBookPage() {
               <div className="relative w-[250px] h-[375px] mx-auto transform rotate-6 transition-all hover:rotate-0 duration-300">
                 <Image 
                   src="/images/audiocover.png" 
-                  alt="Cat Luker: The Audio Experience Cover" 
+                  alt="Cat Luker: The Audio Experience audiobook cover with headphones and Cat Luker book design, narrated by Grammy award-winning producer Monroe Jones" 
                   fill
                   className="object-cover rounded-lg shadow-2xl"
                 />

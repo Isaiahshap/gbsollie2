@@ -491,7 +491,7 @@ export default function AboutPage() {
                 >
                   <Image 
                     src="/images/gregwkids.jpg" 
-                    alt="G.B. Sollie with family" 
+                    alt="G.B. Sollie, author of Cat Luker series, sitting outdoors with his loving family including children and grandchildren" 
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
@@ -555,9 +555,10 @@ export default function AboutPage() {
           <div className="absolute opacity-10" style={{ top: '-35%', right: '0%', width: '100%', height: '100%' }}>
             <Image 
               src="/images/illustrations/book.png" 
-              alt="Background decoration" 
+              alt="" 
               fill
               className="object-contain"
+              aria-hidden="true"
             />
           </div>
           
@@ -646,7 +647,7 @@ export default function AboutPage() {
                   {/* Grandkids image with NO color overlay */}
                   <Image 
                     src="/images/grandkids.jpg" 
-                    alt="G.B. Sollie with grandkids" 
+                    alt="G.B. Sollie storytelling with his granddaughters Mary Evelyn and Lucy, the inspiration for the original Cat Luker carpool stories" 
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 280px, (max-width: 768px) 320px, 400px"

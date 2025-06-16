@@ -101,7 +101,7 @@ export default function CatLukerDarkClockPage() {
                 </div>
                 <Image 
                   src="/images/Catlukercover.png" 
-                  alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
+                  alt="Cat Luker: The Swamp Witch Chronicles book cover featuring three children standing in a mystical swamp with magical elements and vintage 1930s styling" 
                   fill
                   className="object-cover rounded-lg"
                   priority
@@ -181,7 +181,7 @@ export default function CatLukerDarkClockPage() {
           <div className="md:hidden relative w-full aspect-[2/3] rounded-whimsical overflow-hidden shadow-lg">
             <Image 
               src="/images/Catlukercover.png" 
-              alt="Cat Luker: The Swamp Witch Chronicles Book Cover" 
+              alt="Cat Luker: The Swamp Witch Chronicles book cover featuring three children standing in a mystical swamp with magical elements and vintage 1930s styling" 
               fill
               className="object-cover"
             />
@@ -228,7 +228,7 @@ export default function CatLukerDarkClockPage() {
           <div className="hidden md:block relative h-[500px] w-full rounded-whimsical overflow-hidden shadow-xl">
             <Image 
               src="/images/alabama.jpg" 
-              alt="Rural Alabama in the 1930s" 
+              alt="Historical photograph of rural Alabama landscape in the 1930s Great Depression era, showing dirt roads, wooden buildings and countryside that inspired Cat Luker's setting" 
               fill
               className="object-cover"
             />

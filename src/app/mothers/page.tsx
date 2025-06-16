@@ -105,7 +105,7 @@ export default function MothersPage() {
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto">
                   <Image 
                     src="/images/Catlukercover.png"
-                    alt="Cat Luker: The Swamp Witch Chronicles Book Cover"
+                    alt="Cat Luker: The Swamp Witch Chronicles book cover featuring three children standing in a mystical swamp with magical elements and vintage 1930s styling"
                     width={180}
                     height={250}
                     className="rounded-lg shadow-lg book-card-glow"

@@ -540,7 +540,7 @@ export default function ContactPage() {
                 <div className="relative flex justify-center items-center min-h-[280px]">
                   <Image
                     src="/images/illustrations/book.png"
-                    alt="Magical Book"
+                    alt="Illustrated magical book glowing with golden light, representing the enchanting stories of G.B. Sollie"
                     width={240}
                     height={240}
                     quality={100}

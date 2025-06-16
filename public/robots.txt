@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Allow specific AI crawlers
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+# Block admin/development paths
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+Disallow: /.well-known/
+
+# Allow everything else
+Allow: /images/
+Allow: /books/
+Allow: /about/
+Allow: /contact/
+Allow: /blog/
+
+# Sitemap location
+Sitemap: https://gbsollie.com/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1 

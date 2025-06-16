@@ -300,7 +300,7 @@ export default function Home() {
                 </div>
                 <Image
                   src="/images/journeycover.jpg"
-                  alt="A Journey to the Light"
+                  alt="A Journey to the Light Bible Study Guide book cover featuring spiritual themes and adventure"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -346,7 +346,7 @@ export default function Home() {
               <div className="relative w-full aspect-[2/3] mb-3 md:mb-4 rounded-whimsical overflow-hidden shadow-lg group-hover:shadow-xl transition-all">
                 <Image
                   src="/images/Catlukercover.png"
-                  alt="Cat Luker: The Swamp Witch Chronicles"
+                  alt="Cat Luker: The Swamp Witch Chronicles book cover showing three children in a mysterious swamp setting"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -386,7 +386,7 @@ export default function Home() {
                 </div>
                 <Image
                   src="/images/audiocover.png"
-                  alt="Cat Luker Audio Book"
+                  alt="Cat Luker audiobook cover with headphones graphic, narrated by Grammy award-winning producer Monroe Jones"
                   fill
                   className="object-fill group-hover:scale-105 transition-transform duration-500"
                 />
@@ -493,7 +493,7 @@ export default function Home() {
             <div className="relative rounded-whimsical overflow-hidden aspect-square shadow-xl book-card-glow">
               <Image
                 src="/images/gregwkids.jpg"
-                alt="G.B. Sollie - Author Portrait"
+                alt="G.B. Sollie, author of Cat Luker series, smiling with his family members including grandchildren"
                 fill
                 className="object-cover"
               />
@@ -514,9 +514,10 @@ export default function Home() {
             >
               <Image 
                 src="/images/illustrations/hat-color.png"
-                alt="Decorative hat"
+                alt=""
                 fill
                 className="object-contain"
+                aria-hidden="true"
               />
             </motion.div>
           </div>
