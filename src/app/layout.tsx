@@ -105,13 +105,19 @@ export default function RootLayout({
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >
         {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-S3XRD45CDY" />
-        <Script id="google-analytics">
+        <Script 
+          src="https://www.googletagmanager.com/gtag/js?id=G-S3XRD45CDY" 
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-S3XRD45CDY');
+            gtag('config', 'G-S3XRD45CDY', {
+              page_title: document.title,
+              page_location: window.location.href
+            });
           `}
         </Script>
         
