@@ -519,27 +519,40 @@ export default function LibrarianPage() {
           <section className="py-12 bg-accent text-white">
             <div className="container-custom">
               <motion.div 
-                className="max-w-3xl mx-auto text-center"
+                className="max-w-4xl mx-auto"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={fadeIn}
               >
-                <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
-                  Want to See if Cat Luker is Right for Your Students?
-                </h2>
-                <p className="mb-6">
-                  Download the first 22 pages of Cat Luker (FOREWORD, PROLOGUE, and CHAPTER ONE) and the matching LESSON #1 and INTRODUCTION from A Journey to the Light (Bible Study Guide and Companion) as a single PDF to start your students adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
-                </p>
-                <p className="mb-8">
-                  Also! Enter to win our Box of Books Give-away, that includes 5 copies of Cat Luker and 5 copies of A Journey to the Light (Print Version of the Companion Bible Study Guide). Perfect for hosting neighborhood Book Club/Bible Study get-togethers ($125.00 Value).
-                </p>
-                <button 
-                  onClick={() => setIsModalOpen(true)}
-                  className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto hover:bg-secondary-light transition-colors"
-                >
-                  <Download /> Download the Combined PDFs Now for Free
-                </button>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                  <div className="text-center md:text-left">
+                    <h2 className="text-2xl md:text-3xl font-display font-bold mb-4">
+                      Want to See if Cat Luker is Right for Your Students?
+                    </h2>
+                    <p className="mb-6">
+                      Download the first 22 pages of Cat Luker (FOREWORD, PROLOGUE, and CHAPTER ONE) and the matching LESSON #1 and INTRODUCTION from A Journey to the Light (Bible Study Guide and Companion) as a single PDF to start your students adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
+                    </p>
+                    <p className="mb-8">
+                      Also! Enter to win our Box of Books Give-away, that includes 5 copies of Cat Luker and 5 copies of A Journey to the Light (Print Version of the Companion Bible Study Guide). Perfect for hosting neighborhood Book Club/Bible Study get-togethers ($125.00 Value).
+                    </p>
+                    <button 
+                      onClick={() => setIsModalOpen(true)}
+                      className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto md:mx-0 hover:bg-secondary-light transition-colors"
+                    >
+                      <Download /> Download the Combined PDFs Now for Free
+                    </button>
+                  </div>
+                  <div className="flex justify-center">
+                    <Image
+                      src="/images/biblegroup.webp"
+                      alt="Children's Bible Study Group"
+                      width={400}
+                      height={300}
+                      className="rounded-lg shadow-lg"
+                    />
+                  </div>
+                </div>
               </motion.div>
             </div>
           </section>
