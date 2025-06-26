@@ -533,9 +533,6 @@ export default function LibrarianPage() {
                     <p className="mb-6">
                       Download the first 22 pages of Cat Luker (FOREWORD, PROLOGUE, and CHAPTER ONE) and the matching LESSON #1 and INTRODUCTION from A Journey to the Light (Bible Study Guide and Companion) as a single PDF to start your students adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
                     </p>
-                    <p className="mb-8">
-                      Also! Enter to win our Box of Books Give-away, that includes 5 copies of Cat Luker and 5 copies of A Journey to the Light (Print Version of the Companion Bible Study Guide). Perfect for hosting neighborhood Book Club/Bible Study get-togethers ($125.00 Value).
-                    </p>
                     <button 
                       onClick={() => setIsModalOpen(true)}
                       className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto md:mx-0 hover:bg-secondary-light transition-colors"

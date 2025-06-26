@@ -19,6 +19,7 @@ const nextConfig: NextConfig = {
               "img-src 'self' data: https: https://www.google-analytics.com https://www.googletagmanager.com https://ssl.google-analytics.com https://*.google-analytics.com https://*.googletagmanager.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
+              "media-src 'self' https://yeshayas.sg-host.com",
               "frame-src 'self' https://a.co https://docs.google.com",
               "object-src 'none'",
               "base-uri 'self'",

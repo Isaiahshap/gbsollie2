@@ -135,7 +135,6 @@ export default function MothersPage() {
               >
                 <motion.div variants={fadeIn} className="order-2 md:order-1">
                   <h2 className="text-2xl md:text-3xl font-display font-bold text-primary mb-4">A Story Born from Carpool Rides</h2>
-                  <p className="text-lg text-accent font-medium mb-4">Rest assured it is kid-tested and age appropriate!</p>
                   <div className="prose text-primary-light">
                     <p className="mb-4"><span className="font-bold text-accent">Cat Luker:</span> The Swamp Witch Chronicles began as stories I told my grandkids during our daily school carpools. These tall-tales, filled with excitement and important lessons, have evolved into a Christian fantasy adventure series that you and your child can now enjoy.</p>
                     <p className="mb-4">The story is packed with heart, faith, and biblical themes that will speak to your child&apos;s imagination and guide their spiritual growth.</p>
@@ -512,9 +511,6 @@ export default function MothersPage() {
                     </h2>
                     <p className="mb-6">
                       Download the First 22 Pages (FOREWORD, PROLOGUE, AND CHAPTER ONE) for FREE and get our Companion Bible Study Guide, A Journey to the Light (INTRODUCTION AND LESSON #1) for FREE, to start your family&apos;s adventure with Cat Luker. It&apos;s perfect for reading together and guiding discussions on faith, courage, and friendship.
-                    </p>
-                    <p className="mb-8">
-                      Also! Enter to win our Box of Books Give-away, that includes 5 copies of Cat Luker and 5 copies of A Journey to the Light (Print Version of the Companion Bible Study Guide). Perfect for hosting neighborhood Book Club/Bible Study get-togethers ($125.00 Value).
                     </p>
                     <button 
                       onClick={() => setIsModalOpen(true)}
