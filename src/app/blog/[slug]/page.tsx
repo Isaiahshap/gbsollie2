@@ -2,15 +2,95 @@ import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { Metadata } from 'next';
 import Section from '@/components/ui/Section';
 import { 
   getPostBySlug,
   getPostImage,
   getPostCategories, 
   getPostTags, 
-  getReadTime
+  getReadTime,
+  stripHtmlTags
 } from '@/lib/wordpress';
 import ClientAudio from '@/components/blog/ClientAudio';
+
+// Generate dynamic metadata for each blog post
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }>; 
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  
+  if (!post) {
+    return {
+      title: 'Blog Post Not Found | G.B. Sollie',
+      description: 'The requested blog post could not be found.',
+    };
+  }
+
+  const cleanTitle = stripHtmlTags(post.title.rendered);
+  const cleanExcerpt = stripHtmlTags(post.excerpt.rendered);
+  const featuredImage = getPostImage(post);
+  
+  // Create a compelling meta description from excerpt or content
+  let description = cleanExcerpt;
+  if (!description || description.length < 50) {
+    const cleanContent = stripHtmlTags(post.content.rendered);
+    description = cleanContent.substring(0, 160) + (cleanContent.length > 160 ? '...' : '');
+  }
+  
+  // Ensure description is not too long
+  if (description.length > 160) {
+    description = description.substring(0, 157) + '...';
+  }
+
+  const categories = getPostCategories(post);
+  const tags = getPostTags(post);
+  
+  return {
+    title: `${cleanTitle} | G.B. Sollie`,
+    description,
+    keywords: [
+      ...tags.map(tag => tag.name.toLowerCase()),
+      ...categories.map(cat => cat.name.toLowerCase()),
+      'G.B. Sollie',
+      'christian children books',
+      'faith-based literature',
+      'children fantasy author'
+    ],
+    authors: [{ name: 'G.B. Sollie' }],
+    openGraph: {
+      title: cleanTitle,
+      description,
+      type: 'article',
+      url: `https://www.gbsollie.com/blog/${slug}`,
+      images: [
+        {
+          url: featuredImage.startsWith('http') ? featuredImage : `https://www.gbsollie.com${featuredImage}`,
+          width: 1200,
+          height: 630,
+          alt: cleanTitle,
+        },
+      ],
+      publishedTime: post.date,
+      authors: ['G.B. Sollie'],
+      section: categories[0]?.name || 'Blog',
+      tags: tags.map(tag => tag.name),
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: cleanTitle,
+      description,
+      images: [featuredImage.startsWith('http') ? featuredImage : `https://www.gbsollie.com${featuredImage}`],
+      creator: '@gbsollie',
+    },
+    alternates: {
+      canonical: `https://www.gbsollie.com/blog/${slug}`,
+    },
+  };
+}
 
 // Define the props type according to Next.js 15 conventions
 export default async function BlogPostPage({ 
@@ -143,7 +223,7 @@ export default async function BlogPostPage({
               )}
               
               {/* Content */}
-              <article className="prose prose-lg max-w-none mx-auto prose-headings:text-[#0A1128] prose-a:text-primary hover:prose-a:text-[#FFD700] text-black prose-p:text-black prose-li:text-black">
+              <article className="blog-content max-w-none mx-auto">
                 <div dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
               </article>
               

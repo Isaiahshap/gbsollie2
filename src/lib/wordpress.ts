@@ -77,7 +77,7 @@ export async function getPosts() {
   try {
     // This URL explicitly requests ACF fields
     const response = await fetch(
-      `${API_URL}/posts?_embed&per_page=50&_fields=id,slug,title,excerpt,content,date,_embedded,acf`,
+      `${API_URL}/posts?_embed&per_page=50`,
       { 
         cache: 'no-store',
         next: { revalidate: 0 } // Don't cache to ensure fresh data
@@ -100,7 +100,7 @@ export async function getPosts() {
 export async function getPostBySlug(slug: string) {
   try {
     const response = await fetch(
-      `${API_URL}/posts?slug=${slug}&_embed&_fields=id,slug,title,excerpt,content,date,_embedded,acf`,
+      `${API_URL}/posts?slug=${slug}&_embed`,
       { 
         cache: 'no-store',
         next: { revalidate: 0 } // Don't cache to ensure fresh data

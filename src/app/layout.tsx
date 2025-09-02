@@ -29,6 +29,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.gbsollie.com'),
   title: {
     template: '%s | G.B. Sollie',
     default: 'G.B. Sollie | Best Christian Books for Kids | Children\'s Fantasy Author',
@@ -59,7 +60,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://gbsollie.com',
+    url: 'https://www.gbsollie.com',
     siteName: 'G.B. Sollie - Best Christian Books for Kids',
     title: 'G.B. Sollie | Best Christian Books for Kids | Children\'s Fantasy Author',
     description: 'Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination for children ages 9-13.',

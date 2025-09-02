@@ -19,13 +19,13 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
 
   const authorData = {
     "@type": "Person",
-    "@id": "https://gbsollie.com/#author",
+    "@id": "https://www.gbsollie.com/#author",
     "name": "G.B. Sollie",
     "alternateName": "Gregory B. Sollie",
     "jobTitle": "Children's Author",
-    "description": "Award-winning Christian children's book author specializing in fantasy adventure stories that strengthen faith and spark imagination for young readers ages 9-13.",
-    "url": "https://gbsollie.com",
-    "image": "https://gbsollie.com/images/author/gb-sollie.jpg",
+    "description": "Christian children's book author specializing in fantasy adventure stories that strengthen faith and spark imagination for young readers ages 9-13.",
+    "url": "https://www.gbsollie.com",
+    "image": "https://www.gbsollie.com/images/author/gb-sollie.jpg",
     "sameAs": [
       "https://www.amazon.com/author/gbsollie",
       "https://www.goodreads.com/author/gbsollie"
@@ -56,13 +56,13 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
 
   const organizationData = {
     "@type": "Organization",
-    "@id": "https://gbsollie.com/#organization",
+    "@id": "https://www.gbsollie.com/#organization",
     "name": "G.B. Sollie Books",
-    "url": "https://gbsollie.com",
-    "logo": "https://gbsollie.com/images/logo.png",
+    "url": "https://www.gbsollie.com",
+    "logo": "https://www.gbsollie.com/images/logo.png",
     "description": "Publisher of the best Christian books for kids, featuring the enchanting Cat Luker series and other faith-based children's literature.",
     "founder": {
-      "@id": "https://gbsollie.com/#author"
+      "@id": "https://www.gbsollie.com/#author"
     },
     "contactPoint": {
       "@type": "ContactPoint",
@@ -79,17 +79,17 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
 
   const websiteData = {
     "@type": "WebSite",
-    "@id": "https://gbsollie.com/#website",
-    "url": "https://gbsollie.com",
+    "@id": "https://www.gbsollie.com/#website",
+    "url": "https://www.gbsollie.com",
     "name": "G.B. Sollie - Best Christian Books for Kids",
     "description": "Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination for children ages 9-13.",
     "inLanguage": "en-US",
     "publisher": {
-      "@id": "https://gbsollie.com/#organization"
+      "@id": "https://www.gbsollie.com/#organization"
     },
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://gbsollie.com/search?q={search_term_string}",
+      "target": "https://www.gbsollie.com/search?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -105,8 +105,8 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
     case 'homepage':
       structuredData["@graph"].push({
         "@type": "WebPage",
-        "@id": "https://gbsollie.com/#webpage",
-        "url": "https://gbsollie.com",
+        "@id": "https://www.gbsollie.com/#webpage",
+        "url": "https://www.gbsollie.com",
         "name": "G.B. Sollie | Best Christian Books for Kids | Children's Fantasy Author",
         "description": "Discover the best Christian books for kids by G.B. Sollie. Enchanting fantasy adventures that strengthen faith and spark imagination for children ages 9-13.",
         "breadcrumb": {
@@ -116,13 +116,13 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
             "position": 1,
             "item": {
               "@type": "WebPage",
-              "@id": "https://gbsollie.com",
+              "@id": "https://www.gbsollie.com",
               "name": "Home"
             }
           }]
         },
         "mainEntity": {
-          "@id": "https://gbsollie.com/#author"
+          "@id": "https://www.gbsollie.com/#author"
         }
       });
       break;
@@ -134,10 +134,10 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
           "name": bookData.title,
           "description": bookData.description,
           "author": {
-            "@id": "https://gbsollie.com/#author"
+            "@id": "https://www.gbsollie.com/#author"
           },
           "publisher": {
-            "@id": "https://gbsollie.com/#organization"
+            "@id": "https://www.gbsollie.com/#organization"
           },
           "image": bookData.image,
           "genre": bookData.genre,
@@ -164,12 +164,12 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
     case 'about':
       structuredData["@graph"].push({
         "@type": "AboutPage",
-        "@id": `https://gbsollie.com${pathname}#webpage`,
-        "url": `https://gbsollie.com${pathname}`,
+        "@id": `https://www.gbsollie.com${pathname}#webpage`,
+        "url": `https://www.gbsollie.com${pathname}`,
         "name": "About G.B. Sollie - Christian Children's Book Author",
         "description": "Learn about G.B. Sollie, award-winning author of the best Christian books for kids, including the popular Cat Luker fantasy series.",
         "mainEntity": {
-          "@id": "https://gbsollie.com/#author"
+          "@id": "https://www.gbsollie.com/#author"
         }
       });
       break;
@@ -177,8 +177,8 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
     case 'contact':
       structuredData["@graph"].push({
         "@type": "ContactPage",
-        "@id": `https://gbsollie.com${pathname}#webpage`,
-        "url": `https://gbsollie.com${pathname}`,
+        "@id": `https://www.gbsollie.com${pathname}#webpage`,
+        "url": `https://www.gbsollie.com${pathname}`,
         "name": "Contact G.B. Sollie - Author Visits & Inquiries",
         "description": "Contact G.B. Sollie for author visits, book inquiries, speaking engagements, and general questions about his Christian children's books."
       });

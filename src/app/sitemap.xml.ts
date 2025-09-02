@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { getPosts, type WordPressPost } from '@/lib/wordpress';
 
 // Revalidate this route every 24 hours
 export const revalidate = 86400;
@@ -8,6 +7,7 @@ export const revalidate = 86400;
 // Determine the base URL from env vars or default to localhost
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.VERCEL_ENV === 'production' ? 'https://www.gbsollie.com' :
   (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000');
 
 // Dynamically gather all routes, including blog slugs
@@ -26,17 +26,21 @@ async function getAllPaths(): Promise<string[]> {
     'cookie-policy',
     'terms-of-service',
     'blog',
+    'mothers',
+    'youthdirectors',
+    'librarian',
   ];
-  const blogDir = path.join(process.cwd(), 'src', 'app', 'blog');
+  
+  // Get dynamic blog posts from WordPress
   let blogSlugs: string[] = [];
   try {
-    const entries = await fs.promises.readdir(blogDir, { withFileTypes: true });
-    blogSlugs = entries
-      .filter((e) => e.isDirectory())
-      .map((e) => `blog/${e.name}`);
-  } catch {
-    // ignore if no blog directory
+    const posts = await getPosts();
+    blogSlugs = posts.map((post: WordPressPost) => `blog/${post.slug}`);
+  } catch (error) {
+    console.error('Error fetching blog posts for sitemap:', error);
+    // Continue without blog posts if WordPress is unavailable
   }
+  
   return [...basePaths, ...blogSlugs];
 }
 
