@@ -1,6 +1,6 @@
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import "./globals.css";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 import Script from "next/script";
 
 import ClientLayout from "@/components/layout/ClientLayout";
@@ -56,7 +56,6 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  themeColor: '#122848',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -90,6 +89,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#122848',
 };
 
 export default function RootLayout({

@@ -25,7 +25,7 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
     "jobTitle": "Children's Author",
     "description": "Christian children's book author specializing in fantasy adventure stories that strengthen faith and spark imagination for young readers ages 9-13.",
     "url": "https://www.gbsollie.com",
-    "image": "https://www.gbsollie.com/images/author/gb-sollie.jpg",
+    "image": "https://www.gbsollie.com/images/greg3.jpg",
     "sameAs": [
       "https://www.amazon.com/author/gbsollie",
       "https://www.goodreads.com/author/gbsollie"
@@ -59,7 +59,7 @@ export default function StructuredData({ type = 'homepage', bookData }: Structur
     "@id": "https://www.gbsollie.com/#organization",
     "name": "G.B. Sollie Books",
     "url": "https://www.gbsollie.com",
-    "logo": "https://www.gbsollie.com/images/logo.png",
+    "logo": "https://www.gbsollie.com/images/Catlukercover.png",
     "description": "Publisher of the best Christian books for kids, featuring the enchanting Cat Luker series and other faith-based children's literature.",
     "founder": {
       "@id": "https://www.gbsollie.com/#author"

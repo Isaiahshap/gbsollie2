@@ -80,8 +80,7 @@ export async function getPosts() {
     const response = await fetch(
       `${API_URL}/posts?_embed&per_page=50`,
       { 
-        cache: 'no-store',
-        next: { revalidate: 0 } // Don't cache to ensure fresh data
+        next: { revalidate: 3600 } // Cache for 1 hour
       }
     );
     
@@ -110,8 +109,7 @@ export async function getAllPosts(): Promise<WordPressPost[]> {
     const firstResponse = await fetch(
       `${API_URL}/posts?_embed&per_page=${perPage}&page=${page}`,
       {
-        cache: 'no-store',
-        next: { revalidate: 0 }
+        next: { revalidate: 3600 }
       }
     );
 
@@ -153,8 +151,7 @@ export async function getPostBySlug(slug: string) {
     const response = await fetch(
       `${API_URL}/posts?slug=${slug}&_embed`,
       { 
-        cache: 'no-store',
-        next: { revalidate: 0 } // Don't cache to ensure fresh data
+        next: { revalidate: 3600 } // Cache for 1 hour
       }
     );
     
