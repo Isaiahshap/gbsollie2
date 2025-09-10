@@ -11,6 +11,7 @@ export interface WordPressPost {
     rendered: string;
   };
   date: string;
+  modified?: string;
   _embedded?: {
     'wp:featuredmedia'?: Array<{
       source_url: string;
@@ -94,6 +95,56 @@ export async function getPosts() {
   } catch (error) {
     console.error('Error fetching WordPress posts:', error);
     return [];
+  }
+}
+
+// Fetch all posts with pagination for comprehensive tasks like sitemap generation
+export async function getAllPosts(): Promise<WordPressPost[]> {
+  const perPage = 100; // WordPress max is typically 100
+  const allPosts: WordPressPost[] = [];
+  try {
+    const page = 1;
+    let totalPages = 1;
+
+    // Initial request to determine total pages
+    const firstResponse = await fetch(
+      `${API_URL}/posts?_embed&per_page=${perPage}&page=${page}`,
+      {
+        cache: 'no-store',
+        next: { revalidate: 0 }
+      }
+    );
+
+    if (!firstResponse.ok) {
+      throw new Error(`Failed to fetch posts page 1: ${firstResponse.status}`);
+    }
+
+    const firstBatch: WordPressPost[] = await firstResponse.json();
+    allPosts.push(...firstBatch);
+
+    const totalPagesHeader = firstResponse.headers.get('X-WP-TotalPages') || firstResponse.headers.get('x-wp-totalpages');
+    totalPages = totalPagesHeader ? parseInt(totalPagesHeader, 10) || 1 : 1;
+
+    // Fetch remaining pages in parallel
+    const fetchPromises: Array<Promise<WordPressPost[]>> = [];
+    for (let p = 2; p <= totalPages; p++) {
+      fetchPromises.push(
+        fetch(`${API_URL}/posts?_embed&per_page=${perPage}&page=${p}`, {
+          cache: 'no-store',
+          next: { revalidate: 0 }
+        }).then(async (res) => (res.ok ? (await res.json()) as WordPressPost[] : []))
+      );
+    }
+
+    const remainingBatches = await Promise.all(fetchPromises);
+    for (const batch of remainingBatches) {
+      allPosts.push(...batch);
+    }
+
+    return allPosts;
+  } catch (error) {
+    console.error('Error fetching all WordPress posts:', error);
+    return allPosts;
   }
 }
 
