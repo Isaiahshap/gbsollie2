@@ -80,7 +80,7 @@ export async function getPosts() {
     const response = await fetch(
       `${API_URL}/posts?_embed&per_page=50`,
       { 
-        next: { revalidate: 3600 } // Cache for 1 hour
+        next: { revalidate: 300 } // Cache for 5 minutes
       }
     );
     
@@ -151,7 +151,7 @@ export async function getPostBySlug(slug: string) {
     const response = await fetch(
       `${API_URL}/posts?slug=${slug}&_embed`,
       { 
-        next: { revalidate: 3600 } // Cache for 1 hour
+        next: { revalidate: 300 } // Cache for 5 minutes
       }
     );
     
