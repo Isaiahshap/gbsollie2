@@ -232,6 +232,23 @@ export default function Home() {
             />
           </motion.div>
         </motion.div>
+        
+        {/* Lexile Logo - Desktop Only, Bottom Right */}
+        <motion.div
+          className="hidden md:block absolute bottom-6 right-6 z-10"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 2 }}
+        >
+          <div className="relative w-24 h-24 lg:w-28 lg:h-28">
+            <Image
+              src="/images/lexile.png"
+              alt="Lexile Reading Level Certified"
+              fill
+              className="object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+            />
+          </div>
+        </motion.div>
       </div>
       
       {/* Featured Books Section */}
@@ -419,6 +436,147 @@ export default function Home() {
         </div>
       </Section>
       
+      {/* Lexile Reading Level Section */}
+      <Section 
+        className="night-gradient relative overflow-hidden py-6 md:py-8"
+        id="lexile-level"
+        animate={false}
+      >
+        {/* Magical starry background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Twinkling stars */}
+          {[...Array(35)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 2 + 1}px`,
+                height: `${Math.random() * 2 + 1}px`,
+                backgroundColor: '#fff',
+                opacity: Math.random() * 0.7 + 0.3,
+                animation: `twinkle ${Math.random() * 4 + 3}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+          
+          {/* Golden glowing stars */}
+          {[...Array(12)].map((_, i) => (
+            <div 
+              key={i + 100}
+              className="absolute rounded-full glow"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 3 + 2}px`,
+                height: `${Math.random() * 3 + 2}px`,
+                backgroundColor: '#F9D56E',
+                boxShadow: `0 0 ${Math.random() * 4 + 2}px #F9D56E`,
+                opacity: Math.random() * 0.5 + 0.5,
+                animation: `twinkle ${Math.random() * 5 + 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="container-custom relative z-10">
+          {/* Title with magical styling */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+             className="text-center mb-6"
+          >
+            <h2 className="text-3xl md:text-4xl font-display text-secondary mb-2 text-shadow-magical">
+              Reading Level Certified
+            </h2>
+            <div className="w-16 h-1 bg-secondary mx-auto rounded-full glow"></div>
+          </motion.div>
+
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            {/* Lexile Logo with magical frame */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex justify-center"
+            >
+              <div className="relative w-32 h-32 md:w-40 md:h-40">
+                <Image
+                  src="/images/lexile.png"
+                  alt="Lexile Reading Level Logo"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </motion.div>
+            
+            {/* Content with magical styling */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center"
+            >
+              <h3 className="text-2xl md:text-3xl font-display text-secondary mb-4 text-shadow-magical">
+                880L Reading Level
+              </h3>
+              <div className="bg-white/10 backdrop-blur-sm rounded-whimsical p-4 border border-secondary/20">
+                <p className="text-white/90 mb-3 text-sm md:text-base leading-relaxed">
+                  The Lexile System helps match readers to books at their perfect skill level. 
+                  <strong className="text-secondary"> Cat Luker: The Dark Clock</strong> is designed for developing readers, 
+                  ensuring an engaging experience that builds confidence.
+                </p>
+              </div>
+            </motion.div>
+            
+            {/* Magical 3D Book */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotateY: 5 }}
+              whileInView={{ 
+                opacity: 1, 
+                scale: 1,
+                rotateY: 0
+              }}
+              viewport={{ once: true }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 100, 
+                damping: 20,
+                delay: 0.6,
+                duration: 1.2
+              }}
+              whileHover={{ 
+                scale: 1.05,
+                rotateY: -5,
+                transition: { 
+                  duration: 0.4,
+                  type: "spring",
+                  stiffness: 300
+                } 
+              }}
+              className="flex justify-center relative book-wrapper"
+            >
+              {isClient && (
+                <Book3D 
+                  imageSrc="/images/lexilebook.png"
+                  alt="Cat Luker book with Lexile certification"
+                   className="h-[350px] w-[200px] mx-auto"
+                />
+              )}
+              
+       
+            </motion.div>
+          </div>
+        </div>
+      </Section>
+      
       {/* About the Author */}
       <Section 
         className="night-gradient relative overflow-hidden"
@@ -559,6 +717,149 @@ export default function Home() {
             0% { transform: scale(0.8); opacity: 0.6; }
             50% { transform: scale(1.1); opacity: 0.9; }
             100% { transform: scale(0.9); opacity: 0.7; }
+          }
+        `}</style>
+      </Section>
+      
+      {/* YouTube Video Section */}
+      <Section 
+        className="purple-night-gradient relative overflow-hidden"
+        id="youtube-video"
+        animate={false}
+      >
+        {/* Magical floating stars background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Small twinkling stars */}
+          {[...Array(40)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 2 + 1}px`,
+                height: `${Math.random() * 2 + 1}px`,
+                backgroundColor: '#fff',
+                opacity: Math.random() * 0.7 + 0.3,
+                animation: `twinkle ${Math.random() * 4 + 3}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+              }}
+            />
+          ))}
+          
+          {/* Medium glowing stars */}
+          {[...Array(15)].map((_, i) => (
+            <div 
+              key={i + 100}
+              className="absolute rounded-full glow"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                width: `${Math.random() * 3 + 2}px`,
+                height: `${Math.random() * 3 + 2}px`,
+                backgroundColor: i % 3 === 0 ? '#F9D56E' : i % 3 === 1 ? '#fff' : '#B4E4FF',
+                boxShadow: `0 0 ${Math.random() * 4 + 2}px ${i % 3 === 0 ? '#F9D56E' : i % 3 === 1 ? '#fff' : '#B4E4FF'}`,
+                opacity: Math.random() * 0.5 + 0.5,
+                animation: `twinkle ${Math.random() * 5 + 4}s ease-in-out infinite alternate`,
+                animationDelay: `${Math.random() * 5}s`,
+                pointerEvents: 'none',
+                willChange: 'opacity, box-shadow',
+                transform: 'translateZ(0)'
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="relative z-10">
+          <div className="text-center mb-12">
+            <motion.h2 
+              className="text-3xl md:text-5xl font-display text-secondary mb-4 text-shadow-magical"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Watch My Latest YouTube Video
+            </motion.h2>
+            <motion.div 
+              className="w-20 h-1 bg-secondary mx-auto rounded-full glow"
+              initial={{ opacity: 0, width: 0 }}
+              whileInView={{ opacity: 1, width: 80 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            />
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="relative rounded-whimsical overflow-hidden shadow-xl book-card-glow bg-white/5 backdrop-blur-sm p-6 border-2 border-secondary/30">
+              <div className="relative aspect-video rounded-whimsical overflow-hidden">
+                <iframe
+                  src="https://www.youtube.com/embed/JBg2c5LzfzU"
+                  title="G.B. Sollie YouTube Video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full"
+                />
+              </div>
+              
+              {/* Magical decorative elements around the video */}
+              <motion.div 
+                className="absolute -top-4 -left-4 w-16 h-16"
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
+                <Image 
+                  src="/images/illustrations/steeple.png"
+                  alt=""
+                  fill
+                  className="object-contain filter drop-shadow-glow"
+                  aria-hidden="true"
+                />
+              </motion.div>
+
+              <motion.div 
+                className="absolute -bottom-4 -right-4 w-16 h-16"
+                animate={{ 
+                  rotate: [0, -360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ 
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear",
+                  delay: 1
+                }}
+              >
+                <Image 
+                  src="/images/illustrations/book.png"
+                  alt=""
+                  fill
+                  className="object-contain filter drop-shadow-glow"
+                  aria-hidden="true"
+                />
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Additional magical sparkles */}
+        <style jsx global>{`
+          @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
           }
         `}</style>
       </Section>
