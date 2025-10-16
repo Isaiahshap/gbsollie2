@@ -30,6 +30,7 @@ export default function Footer() {
     { name: 'About', href: '/about' },
     { name: 'Books', href: '/books' },
     { name: 'Blog', href: '/blog' },
+    { name: 'Media Kit', href: '/media-kit' },
     { name: 'Contact', href: '/contact' },
   ];
 
