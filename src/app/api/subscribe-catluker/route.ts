@@ -103,6 +103,31 @@ export async function POST(req: NextRequest) {
         throw new Error(`Resend API error: ${result.error.message}`);
       }
       
+      // In production mode, also send a notification email to Greg with the user's info
+      if (isDomainVerified) {
+        const notificationResult = await resend.emails.send({
+          from: fromEmail,
+          to: [ACCOUNT_EMAIL],
+          subject: `New Cat Luker Sample Request from ${name}`,
+          text: `New signup from: ${name} (${email}) in ${city}`,
+          html: `
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+              <h1 style="color: #1e40af;">New Cat Luker Sample Request</h1>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>City:</strong> ${city}</p>
+              <hr>
+              <p>This person has been sent the Cat Luker sample chapter and Bible Study Guide automatically.</p>
+            </div>
+          `,
+        });
+        
+        // Log if notification fails, but don't fail the main request
+        if (notificationResult.error) {
+          console.error('Failed to send notification to site owner:', notificationResult.error);
+        }
+      }
+      
       // Return success response
       return NextResponse.json({ 
         success: true, 
