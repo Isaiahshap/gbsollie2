@@ -9,7 +9,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   const pathname = usePathname();
   
   // Check if we're on a funnel page
-  const isFunnelPage = pathname === '/youthdirectors' || pathname === '/librarian' || pathname === '/mothers';
+  const isFunnelPage = pathname === '/youthdirectors' || pathname === '/librarian' || pathname === '/mothers' || pathname === '/grandparents';
   
   // Don't show header/footer on funnel pages
   return (
