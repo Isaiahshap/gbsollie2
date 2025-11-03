@@ -492,7 +492,7 @@ export default function GrandparentsPage() {
                   &quot;I wrote Cat Luker for my own grandchildren during our car rides to school. Those stories became this book—now families everywhere are creating the same special memories I share with my grandkids.&quot;
                 </p>
                 <p className="font-bold text-primary text-xl">— G.B. Sollie</p>
-                <p className="text-primary-light">Author, Grandfather & Former Educator</p>
+                <p className="text-primary-light">Author and Grandfather</p>
               </div>
             </motion.div>
 
