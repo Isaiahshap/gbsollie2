@@ -216,7 +216,7 @@ export default function GrandparentsPage() {
               variants={fadeIn}
               className="text-xl md:text-2xl text-center text-primary-light mb-12 max-w-3xl mx-auto"
             >
-              Real reviews from grandparents just like you
+              Reviews from grandparents just like you
             </motion.p>
 
             <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
@@ -263,7 +263,7 @@ export default function GrandparentsPage() {
                   </div>
                   <div>
                     <p className="font-bold text-primary text-lg">Dorothy R.</p>
-                    <p className="text-primary-light text-sm">Proud Grandmother</p>
+                    <p className="text-primary-light text-sm">Proud Grandmomma</p>
                   </div>
                 </div>
               </motion.div>
@@ -375,7 +375,7 @@ export default function GrandparentsPage() {
                 <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-secondary/10 flex items-center justify-center shadow-lg">
                   <CheckCircle className="text-secondary" size={48} />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4">They&apos;ll Actually Finish It</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-primary mb-4">Page-Turner</h3>
                 <p className="text-lg md:text-xl text-primary-dark leading-relaxed">
                   An exciting adventure that keeps kids turning pages! Time-travel, mystery, and heroes they&apos;ll root for from start to finish.
                 </p>
