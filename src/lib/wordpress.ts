@@ -214,5 +214,34 @@ export function getPostImage(post: WordPressPost): string {
 }
 
 export function stripHtmlTags(html: string): string {
-  return html.replace(/<[^>]*>/g, '');
+  // Remove HTML tags
+  let text = html.replace(/<[^>]*>/g, '');
+  
+  // Decode common HTML entities
+  const htmlEntities: Record<string, string> = {
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&apos;': "'",
+    '&nbsp;': ' ',
+    '&hellip;': '\u2026', // …
+    '&#8217;': '\u2019', // '
+    '&#8216;': '\u2018', // '
+    '&#8220;': '\u201C', // "
+    '&#8221;': '\u201D', // "
+    '&#8211;': '\u2013', // –
+    '&#8212;': '\u2014', // —
+  };
+  
+  // Replace named entities
+  Object.keys(htmlEntities).forEach(entity => {
+    text = text.replace(new RegExp(entity, 'g'), htmlEntities[entity]);
+  });
+  
+  // Decode numeric entities (&#123; or &#xAB;)
+  text = text.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+  text = text.replace(/&#x([0-9a-f]+);/gi, (match, hex) => String.fromCharCode(parseInt(hex, 16)));
+  
+  return text;
 } 
