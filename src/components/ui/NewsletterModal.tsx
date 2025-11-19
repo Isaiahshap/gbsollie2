@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
@@ -25,6 +25,14 @@ export default function NewsletterModal({
 }: NewsletterModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [formOpenedAt, setFormOpenedAt] = useState<number>(0);
+  
+  // Track when form was opened for time-based bot detection
+  useEffect(() => {
+    if (isOpen) {
+      setFormOpenedAt(Date.now());
+    }
+  }, [isOpen]);
   
   if (!isOpen) return null;
 
@@ -39,6 +47,24 @@ export default function NewsletterModal({
     const email = formData.get('email') as string;
     const city = formData.get('city') as string;
     
+    // Honeypot validation - if filled, it's a bot
+    const honeypot = formData.get('website') as string;
+    if (honeypot) {
+      // Silently fail for bots
+      setIsLoading(false);
+      alert("Thank you! Your download will be sent to your email shortly.");
+      onClose();
+      return;
+    }
+    
+    // Time-based validation - real users take at least 2 seconds to fill form
+    const timeSpent = Date.now() - formOpenedAt;
+    if (timeSpent < 2000) {
+      setError('Please take a moment to review your information.');
+      setIsLoading(false);
+      return;
+    }
+    
     try {
       // Call the onSubmit handler if provided
       if (onSubmit) {
@@ -50,7 +76,13 @@ export default function NewsletterModal({
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name, email, city }),
+          body: JSON.stringify({ 
+            name, 
+            email, 
+            city,
+            timestamp: formOpenedAt,
+            submitTime: Date.now()
+          }),
         });
         
         const data = await response.json();
@@ -108,6 +140,22 @@ export default function NewsletterModal({
         )}
         
         <form onSubmit={handleSubmit}>
+          {/* Honeypot field - hidden from real users, but bots will fill it */}
+          <input
+            type="text"
+            name="website"
+            autoComplete="off"
+            tabIndex={-1}
+            style={{
+              position: 'absolute',
+              left: '-9999px',
+              width: '1px',
+              height: '1px',
+              overflow: 'hidden',
+            }}
+            aria-hidden="true"
+          />
+          
           <div className="space-y-4">
             <div>
               <label htmlFor="modal-name" className="block text-sm font-medium text-black mb-1">

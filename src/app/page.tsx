@@ -27,10 +27,13 @@ export default function Home() {
   // Add state for form submission
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+  const [formOpenedAt, setFormOpenedAt] = useState<number>(0);
   
   // Set isClient to true when the component mounts
   useEffect(() => {
     setIsClient(true);
+    // Track when form was loaded for time-based bot detection
+    setFormOpenedAt(Date.now());
   }, []);
 
   // Stagger animation for book list
@@ -81,8 +84,65 @@ export default function Home() {
     const email = formData.get('email') as string;
     const city = formData.get('city') as string;
     
-    // Submit using the same handler
-    await handleNewsletterSubmit({ name, email, city });
+    // Honeypot validation - if filled, it's a bot
+    const honeypot = formData.get('website') as string;
+    if (honeypot) {
+      // Silently fail for bots
+      alert("Thank you! Your Bible guide has been sent to your email.");
+      if (e.currentTarget) {
+        e.currentTarget.reset();
+      }
+      return;
+    }
+    
+    // Time-based validation - real users take at least 2 seconds to fill form
+    const timeSpent = Date.now() - formOpenedAt;
+    if (timeSpent < 2000) {
+      setFormError('Please take a moment to review your information.');
+      return;
+    }
+    
+    // Submit with timing data
+    try {
+      setIsSubmitting(true);
+      setFormError(null);
+      
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          city,
+          timestamp: formOpenedAt,
+          submitTime: Date.now()
+        }),
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok && !data.sandboxMode) {
+        throw new Error(data.error || `Failed to subscribe: ${response.status} ${response.statusText}`);
+      }
+      
+      // Success - check if we're in sandbox mode
+      if (data.sandboxMode) {
+        alert(data.message || "Your information has been submitted. During development, the website owner will be notified of your request.");
+      } else {
+        alert("Thank you! Your Bible guide has been sent to your email.");
+      }
+      
+      // Reset form
+      if (e.currentTarget) {
+        e.currentTarget.reset();
+      }
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   return (
@@ -1080,6 +1140,22 @@ export default function Home() {
             onSubmit={handleNewsletterFormSubmit}
           >
             <h3 className="text-2xl font-bold text-primary mb-6">Sign Up Today</h3>
+            
+            {/* Honeypot field - hidden from real users, but bots will fill it */}
+            <input
+              type="text"
+              name="website"
+              autoComplete="off"
+              tabIndex={-1}
+              style={{
+                position: 'absolute',
+                left: '-9999px',
+                width: '1px',
+                height: '1px',
+                overflow: 'hidden',
+              }}
+              aria-hidden="true"
+            />
             
             {formError && (
               <div className="bg-red-50 text-red-700 p-3 rounded-md mb-4 text-sm">

@@ -2,6 +2,8 @@ import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
+import { isRateLimited } from '@/lib/rateLimit';
+import { checkIfBot } from '@/lib/botDetection';
 
 // Initialize Resend with the API key
 const apiKey = process.env.RESEND_API_KEY || 're_YZ8QpvdE_Q4EofEwxWvyMq6kMSzDTAjau';
@@ -17,12 +19,67 @@ const isDomainVerified = !!VERIFIED_DOMAIN;
 export async function POST(req: NextRequest) {
   try {
     // Parse the request body
-    const { name, email, city } = await req.json();
+    const { name, email, city, timestamp, submitTime } = await req.json();
 
-    // Validation
+    // Basic validation
     if (!name || !email || !city) {
       return NextResponse.json(
         { error: 'Name, email, and city are required' },
+        { status: 400 }
+      );
+    }
+
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get('x-forwarded-for')?.split(',')[0] || 
+                     req.headers.get('x-real-ip') || 
+                     'unknown';
+
+    // Rate limiting check - 3 submissions per IP per minute
+    if (isRateLimited(`ip:${clientIP}`, { maxRequests: 3, windowMs: 60 * 1000 })) {
+      return NextResponse.json(
+        { error: 'Too many requests. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    // Rate limiting by email - 2 submissions per email per 5 minutes
+    if (isRateLimited(`email:${email.toLowerCase()}`, { maxRequests: 2, windowMs: 5 * 60 * 1000 })) {
+      return NextResponse.json(
+        { error: 'You have already subscribed. Please check your email.' },
+        { status: 429 }
+      );
+    }
+
+    // Bot detection
+    const botCheck = checkIfBot({
+      request: req,
+      name,
+      email,
+      timestamp,
+      submitTime,
+    });
+
+    if (botCheck.isBot) {
+      // Log bot attempt for monitoring
+      console.warn('Bot submission blocked (Cat Luker):', {
+        reason: botCheck.reason,
+        confidence: botCheck.confidence,
+        email,
+        ip: clientIP,
+        userAgent: req.headers.get('user-agent'),
+      });
+
+      // For high confidence bot detection, silently accept but don't process
+      if (botCheck.confidence === 'high') {
+        return NextResponse.json({
+          success: true,
+          message: 'Thank you! Your download will be sent to your email shortly.',
+        });
+      }
+
+      // For medium confidence, return error
+      return NextResponse.json(
+        { error: 'Your submission could not be processed. Please try again or contact support.' },
         { status: 400 }
       );
     }
