@@ -368,8 +368,8 @@ export default function ChristmasGiftPage() {
               },
               {
                 icon: <Star size={48} />,
-                title: 'Award-Winning',
-                description: 'Acclaimed by parents, teachers, and young readers nationwide.',
+                title: 'Highly Rated',
+                description: 'Loved by parents, teachers, and young readers nationwide.',
                 color: 'from-yellow-500 to-yellow-600',
               },
             ].map((feature, index) => (
