@@ -32,6 +32,7 @@ export default function Footer() {
     { name: 'Blog', href: '/blog' },
     { name: 'Media Kit', href: '/media-kit' },
     { name: 'Contact', href: '/contact' },
+    { name: '🎄 Christmas Gifts', href: '/christmas-gift', special: true },
   ];
 
   const containerVariants = {
@@ -174,7 +175,12 @@ export default function Footer() {
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 20 }}
                   >
-                    <Link href={link.href} className="hover:text-secondary transition-colors hover:text-shadow-sm text-sm">
+                    <Link 
+                      href={link.href} 
+                      className={`hover:text-secondary transition-colors hover:text-shadow-sm text-sm ${
+                        link.special ? 'text-red-400 font-bold' : ''
+                      }`}
+                    >
                       {link.name}
                     </Link>
                   </motion.div>
