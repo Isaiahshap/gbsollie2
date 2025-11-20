@@ -476,7 +476,7 @@ export default function ChristmasGiftPage() {
               <div className="space-y-4 mb-8">
                 {[
                   '✨ Magical time-travel adventure',
-                  '📖 Lexile 790L - Perfect for young readers',
+                  '📖 880L Reading Level - Perfect for young readers',
                   '🎨 Stunning illustrations throughout',
                   '✝️ Biblical themes of faith and courage',
                   '🎯 Ideal for ages 9-13',
