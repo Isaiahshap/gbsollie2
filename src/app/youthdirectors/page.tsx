@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Play, CheckCircle, Download, Pause } from 'lucide-react';
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import NewsletterModal from '@/components/ui/NewsletterModal';
+import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -41,6 +42,22 @@ export default function YouthDirectorPage() {
   
   // State for newsletter modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Track page view and setup analytics
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    trackFunnelPageView('Youth Directors', 'Landing Page', 1);
+    trackTrafficSource();
+    
+    const cleanupScroll = initScrollTracking();
+    const cleanupEngagement = initEngagementTracking();
+
+    return () => {
+      cleanupScroll?.();
+      cleanupEngagement?.();
+    };
+  }, []);
   
   // Function to toggle audio play/pause
   const toggleAudio = () => {
@@ -139,6 +156,7 @@ export default function YouthDirectorPage() {
                     href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Youth Directors Hero CTA')}
                     className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto hover:bg-primary/90 transition-colors"
                   >
                     Get Your Copy Today
@@ -539,7 +557,10 @@ export default function YouthDirectorPage() {
                     </p>
 
                     <button 
-                      onClick={() => setIsModalOpen(true)}
+                      onClick={() => {
+                        trackModalOpen('Free Preview', 'Youth Directors Page');
+                        setIsModalOpen(true);
+                      }}
                       className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto md:mx-0 hover:bg-secondary-light transition-colors"
                     >
                       <Download /> Download Both PDFs Now for Free

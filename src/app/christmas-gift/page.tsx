@@ -5,11 +5,10 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Gift, ShoppingBag, Star, Sparkles, Heart, Book, ArrowRight, Clock } from 'lucide-react';
 import NewsletterModal from '@/components/ui/NewsletterModal';
+import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
 
 // Optimized Snowflake component with GPU acceleration
-const Snowflake = ({ delay, duration, left, size }: { delay: number; duration: number; left: string; size: number }) => {
-  const xOffset = Math.random() * 30 - 15;
-  
+const Snowflake = ({ delay, duration, left, size, xOffset }: { delay: number; duration: number; left: string; size: number; xOffset: number }) => {
   return (
     <motion.div
       style={{
@@ -80,6 +79,26 @@ export default function ChristmasGiftPage() {
     seconds: 0,
   });
 
+  // Track page view and setup analytics
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
+    // Track funnel page view
+    trackFunnelPageView('Christmas Gift', 'Landing Page', 1);
+    
+    // Track traffic source
+    trackTrafficSource();
+    
+    // Initialize scroll and engagement tracking
+    const cleanupScroll = initScrollTracking();
+    const cleanupEngagement = initEngagementTracking();
+
+    return () => {
+      cleanupScroll?.();
+      cleanupEngagement?.();
+    };
+  }, []);
+
   // Delay snow start for better initial performance
   useEffect(() => {
     const snowTimer = setTimeout(() => {
@@ -124,6 +143,7 @@ export default function ChristmasGiftPage() {
               duration={10 + (i % 3) * 2}
               left={`${(i * 7) % 100}%`}
               size={14 + (i % 3) * 4}
+              xOffset={(i * 3) % 30 - 15}
             />
           ))}
         </div>
@@ -235,6 +255,7 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Hero CTA - Primary')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -265,7 +286,10 @@ export default function ChristmasGiftPage() {
               </motion.a>
 
               <motion.button
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {
+                  trackModalOpen('Free Preview', 'Hero CTA - Secondary');
+                  setIsModalOpen(true);
+                }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -500,6 +524,7 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Book Showcase CTA')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -588,7 +613,10 @@ export default function ChristmasGiftPage() {
                 </ul>
 
                 <motion.button
-                  onClick={() => setIsModalOpen(true)}
+                  onClick={() => {
+                    trackModalOpen('Free Preview', 'Bible Study Bonus');
+                    setIsModalOpen(true);
+                  }}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -657,6 +685,7 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Final CTA - Bottom')}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

@@ -1,10 +1,11 @@
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import "./globals.css";
 import { Metadata, Viewport } from "next";
-import Script from "next/script";
+import { Suspense } from "react";
 
 import ClientLayout from "@/components/layout/ClientLayout";
 import StructuredData from "@/components/seo/StructuredData";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -108,22 +109,9 @@ export default function RootLayout({
       <body
         className={`${playfairDisplay.variable} ${quicksand.variable} ${nunito.variable} min-h-screen flex flex-col`}
       >
-        {/* Google Analytics */}
-        <Script 
-          src="https://www.googletagmanager.com/gtag/js?id=G-S3XRD45CDY" 
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-S3XRD45CDY', {
-              page_title: document.title,
-              page_location: window.location.href
-            });
-          `}
-        </Script>
+        <Suspense fallback={null}>
+          <GoogleAnalytics />
+        </Suspense>
         
         <ClientLayout>
           {children}
