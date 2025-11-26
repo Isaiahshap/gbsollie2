@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 import { Play, CheckCircle, Download, Pause } from 'lucide-react';
 import NewsletterModal from '@/components/ui/NewsletterModal';
 import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
+import { trackMetaFunnelView, trackMetaAmazonClick, trackMetaModalOpen } from '@/lib/metaPixel';
 
 export default function LibrarianPage() {
   // State for audio player
@@ -26,6 +27,7 @@ export default function LibrarianPage() {
     
     trackFunnelPageView('Librarian', 'Landing Page', 1);
     trackTrafficSource();
+    trackMetaFunnelView('Librarian', 'Landing Page');
     
     const cleanupScroll = initScrollTracking();
     const cleanupEngagement = initEngagementTracking();
@@ -151,7 +153,10 @@ export default function LibrarianPage() {
                     href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X/ref=tmm_pap_swatch_0"
                     target="_blank"
                     rel="noopener noreferrer" 
-                    onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Librarian Hero CTA')}
+                    onClick={() => {
+                      trackAmazonClick('Cat Luker: The Dark Clock', 'Librarian Hero CTA');
+                      trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Librarian Hero CTA');
+                    }}
                     className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto"
                   >
                     Get Your Copy Today
@@ -554,6 +559,7 @@ export default function LibrarianPage() {
                     <button 
                       onClick={() => {
                         trackModalOpen('Free Preview', 'Librarian Page');
+                        trackMetaModalOpen('Free Preview', 'Librarian Page');
                         setIsModalOpen(true);
                       }}
                       className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto md:mx-0 hover:bg-secondary-light transition-colors"

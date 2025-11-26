@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import ClientLayout from "@/components/layout/ClientLayout";
 import StructuredData from "@/components/seo/StructuredData";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics";
+import MetaPixel from "@/components/analytics/MetaPixel";
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -111,6 +112,7 @@ export default function RootLayout({
       >
         <Suspense fallback={null}>
           <GoogleAnalytics />
+          <MetaPixel />
         </Suspense>
         
         <ClientLayout>

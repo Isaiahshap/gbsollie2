@@ -8,6 +8,7 @@ import { Play, CheckCircle, Download, Pause } from 'lucide-react';
 import { Playfair_Display, Quicksand, Nunito } from "next/font/google";
 import NewsletterModal from '@/components/ui/NewsletterModal';
 import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
+import { trackMetaFunnelView, trackMetaAmazonClick, trackMetaModalOpen } from '@/lib/metaPixel';
 
 // Font configurations
 const playfairDisplay = Playfair_Display({
@@ -49,6 +50,7 @@ export default function YouthDirectorPage() {
     
     trackFunnelPageView('Youth Directors', 'Landing Page', 1);
     trackTrafficSource();
+    trackMetaFunnelView('Youth Directors', 'Landing Page');
     
     const cleanupScroll = initScrollTracking();
     const cleanupEngagement = initEngagementTracking();
@@ -156,7 +158,10 @@ export default function YouthDirectorPage() {
                     href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X" 
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Youth Directors Hero CTA')}
+                    onClick={() => {
+                      trackAmazonClick('Cat Luker: The Dark Clock', 'Youth Directors Hero CTA');
+                      trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Youth Directors Hero CTA');
+                    }}
                     className="btn-primary py-3 px-6 text-lg font-bold w-full sm:w-auto hover:bg-primary/90 transition-colors"
                   >
                     Get Your Copy Today
@@ -559,6 +564,7 @@ export default function YouthDirectorPage() {
                     <button 
                       onClick={() => {
                         trackModalOpen('Free Preview', 'Youth Directors Page');
+                        trackMetaModalOpen('Free Preview', 'Youth Directors Page');
                         setIsModalOpen(true);
                       }}
                       className="flex items-center justify-center gap-2 bg-secondary text-primary-dark px-8 py-4 rounded-full font-bold mx-auto md:mx-0 hover:bg-secondary-light transition-colors"

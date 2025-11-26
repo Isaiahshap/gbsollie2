@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Gift, ShoppingBag, Star, Sparkles, Heart, Book, ArrowRight, Clock } from 'lucide-react';
 import NewsletterModal from '@/components/ui/NewsletterModal';
 import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
+import { trackMetaFunnelView, trackMetaAmazonClick, trackMetaModalOpen } from '@/lib/metaPixel';
 
 // Optimized Snowflake component with GPU acceleration
 const Snowflake = ({ delay, duration, left, size, xOffset }: { delay: number; duration: number; left: string; size: number; xOffset: number }) => {
@@ -83,11 +84,12 @@ export default function ChristmasGiftPage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
-    // Track funnel page view
+    // Google Analytics tracking
     trackFunnelPageView('Christmas Gift', 'Landing Page', 1);
-    
-    // Track traffic source
     trackTrafficSource();
+    
+    // Meta Pixel tracking
+    trackMetaFunnelView('Christmas Gift', 'Landing Page');
     
     // Initialize scroll and engagement tracking
     const cleanupScroll = initScrollTracking();
@@ -255,7 +257,10 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Hero CTA - Primary')}
+                onClick={() => {
+                  trackAmazonClick('Cat Luker: The Dark Clock', 'Hero CTA - Primary');
+                  trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Hero CTA - Primary');
+                }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -288,6 +293,7 @@ export default function ChristmasGiftPage() {
               <motion.button
                 onClick={() => {
                   trackModalOpen('Free Preview', 'Hero CTA - Secondary');
+                  trackMetaModalOpen('Free Preview', 'Hero CTA - Secondary');
                   setIsModalOpen(true);
                 }}
                 style={{
@@ -524,7 +530,10 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Book Showcase CTA')}
+                onClick={() => {
+                  trackAmazonClick('Cat Luker: The Dark Clock', 'Book Showcase CTA');
+                  trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Book Showcase CTA');
+                }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -615,6 +624,7 @@ export default function ChristmasGiftPage() {
                 <motion.button
                   onClick={() => {
                     trackModalOpen('Free Preview', 'Bible Study Bonus');
+                    trackMetaModalOpen('Free Preview', 'Bible Study Bonus');
                     setIsModalOpen(true);
                   }}
                   style={{
@@ -685,7 +695,10 @@ export default function ChristmasGiftPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Final CTA - Bottom')}
+                onClick={() => {
+                  trackAmazonClick('Cat Luker: The Dark Clock', 'Final CTA - Bottom');
+                  trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Final CTA - Bottom');
+                }}
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

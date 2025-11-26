@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Download } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { trackFormStart, trackFormSubmit, trackNewsletterSignup } from '@/lib/analytics';
+import { trackMetaFormStart, trackMetaLead } from '@/lib/metaPixel';
 
 interface NewsletterModalProps {
   isOpen: boolean;
@@ -73,6 +74,7 @@ export default function NewsletterModal({
         // Track successful signup
         trackFormSubmit('Newsletter Modal', true);
         trackNewsletterSignup(title);
+        trackMetaLead('newsletter', title);
       } else {
         // Default behavior - submit to API endpoint
         const response = await fetch(apiEndpoint, {
@@ -101,6 +103,7 @@ export default function NewsletterModal({
         // Success - track conversion
         trackFormSubmit('Newsletter Modal', true);
         trackNewsletterSignup(title);
+        trackMetaLead('newsletter', title);
         
         // Success - check if we're in sandbox mode
         if (data.sandboxMode) {
@@ -180,7 +183,10 @@ export default function NewsletterModal({
                 className="w-full px-4 py-2 rounded-whimsical border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-black"
                 placeholder="John Doe"
                 disabled={isLoading}
-                onFocus={() => trackFormStart('Newsletter Modal')}
+                onFocus={() => {
+                  trackFormStart('Newsletter Modal');
+                  trackMetaFormStart('Newsletter Modal');
+                }}
               />
             </div>
             

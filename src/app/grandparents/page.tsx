@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Star, Heart, Book, Award, CheckCircle, ShoppingBag, FileText, Gift, Sparkles, Clock } from 'lucide-react';
 import NewsletterModal from '@/components/ui/NewsletterModal';
 import { trackAmazonClick, trackModalOpen, trackFunnelPageView, initScrollTracking, initEngagementTracking, trackTrafficSource } from '@/lib/analytics';
+import { trackMetaFunnelView, trackMetaAmazonClick, trackMetaModalOpen } from '@/lib/metaPixel';
 
 export default function GrandparentsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -14,8 +15,12 @@ export default function GrandparentsPage() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     
+    // Google Analytics
     trackFunnelPageView('Grandparents', 'Landing Page', 1);
     trackTrafficSource();
+    
+    // Meta Pixel
+    trackMetaFunnelView('Grandparents', 'Landing Page');
     
     const cleanupScroll = initScrollTracking();
     const cleanupEngagement = initEngagementTracking();
@@ -137,7 +142,10 @@ export default function GrandparentsPage() {
                   href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Grandparents Hero CTA')}
+                  onClick={() => {
+                    trackAmazonClick('Cat Luker: The Dark Clock', 'Grandparents Hero CTA');
+                    trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Grandparents Hero CTA');
+                  }}
                   className="inline-flex items-center justify-center gap-3 bg-secondary text-primary-dark px-8 md:px-10 py-5 md:py-6 rounded-full text-xl md:text-2xl font-bold shadow-2xl hover:bg-secondary-light transition-all duration-300 hover:scale-105"
                 >
                   <ShoppingBag size={28} />
@@ -147,6 +155,7 @@ export default function GrandparentsPage() {
                 <button 
                   onClick={() => {
                     trackModalOpen('Free Preview', 'Grandparents Hero CTA');
+                    trackMetaModalOpen('Free Preview', 'Grandparents Hero CTA');
                     setIsModalOpen(true);
                   }}
                   className="inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm border-2 border-white text-white px-8 md:px-10 py-5 md:py-6 rounded-full text-xl md:text-2xl font-bold hover:bg-white/20 transition-all duration-300 hover:scale-105"
@@ -320,7 +329,10 @@ export default function GrandparentsPage() {
                 href="https://www.amazon.com/Dark-Clock-Luker-SWAMP-CHRONICLES/dp/173535967X"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => trackAmazonClick('Cat Luker: The Dark Clock', 'Grandparents After Social Proof')}
+                onClick={() => {
+                  trackAmazonClick('Cat Luker: The Dark Clock', 'Grandparents After Social Proof');
+                  trackMetaAmazonClick('Cat Luker: The Dark Clock', 'Grandparents After Social Proof');
+                }}
                 className="inline-flex items-center justify-center gap-3 bg-accent text-white px-10 py-5 rounded-full text-xl md:text-2xl font-bold shadow-2xl hover:bg-accent/90 transition-all duration-300 hover:scale-105"
               >
                 <ShoppingBag size={28} />
